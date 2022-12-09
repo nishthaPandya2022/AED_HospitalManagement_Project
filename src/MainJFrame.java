@@ -19,9 +19,7 @@ public class MainJFrame extends javax.swing.JFrame {
     static Statement statement;
 
     private static String CREATE_LOGIN_TABLE_SQL = "CREATE TABLE IF NOT EXISTS login ("
-            + "root VARCHAR(300) NOT NULL," + "directory VARCHAR(300) NOT NULL," + "path VARCHAR(300) NOT NULL,"
-            + "added INT NOT NULL," + "removed INT NOT NULL," + "modified INT NOT NULL," + "hash VARCHAR(300) NOT NULL,"
-            + "dateModified VARCHAR(300) NOT NULL)";
+            + "username VARCHAR(200) NOT NULL," + "password VARCHAR(200) NOT NULL)";
 
     private static String CREATE_TEMP_TABLE_SQL = "CREATE TABLE IF NOT EXISTS temp (" + "root VARCHAR(300) NOT NULL,"
             + "directory VARCHAR(300) NOT NULL," + "path VARCHAR(300) NOT NULL," + "added INT NOT NULL,"
@@ -133,14 +131,14 @@ public class MainJFrame extends javax.swing.JFrame {
         try {
             String userDirectory = System.getProperty("user.dir");
             System.out.println(userDirectory);
-            userDirectory = userDirectory + "/indexing.db";
+            userDirectory = userDirectory + "/hospManagement.db";
             File dbFile = new File(userDirectory);
             
             ds = new SQLiteDataSource();
 
             if (dbFile.exists()) {
                 System.out.println("dbFile exists");
-                ds.setUrl("jdbc:sqlite:indexing.db");
+                ds.setUrl("jdbc:sqlite:hospManagement.db");
                 sqliteConnection = ds.getConnection();
                 statement = sqliteConnection.createStatement();
 //			getDirectoriesForHash("/home/nishthapandya/Pictures");
@@ -148,7 +146,7 @@ public class MainJFrame extends javax.swing.JFrame {
             } else {
                 System.out.println("dbFile doesn't exist");
 
-                ds.setUrl("jdbc:sqlite:indexing.db");
+                ds.setUrl("jdbc:sqlite:hospManagement.db");
                 sqliteConnection = ds.getConnection();
                 statement = sqliteConnection.createStatement();
 
