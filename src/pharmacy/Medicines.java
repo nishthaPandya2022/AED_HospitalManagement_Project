@@ -26,7 +26,7 @@ public class Medicines extends javax.swing.JFrame {
      */
     public Medicines() {
         initComponents();
-        GetAllMedicines();
+        
     }
 
      static Connection sqliteConnection;
@@ -37,6 +37,8 @@ public class Medicines extends javax.swing.JFrame {
      ResultSet rs = null;
      Integer MedId;
      static String MedName;
+     java.util.Date fabDate,expDate;
+     java.util.Date myFabDate, myExpDate;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -406,8 +408,8 @@ public class Medicines extends javax.swing.JFrame {
             p2p.setString(2, txtFieldMedName.getText());
             p2p.setDouble(3, Double.valueOf(txtFieldPrice.getText()));
             p2p.setInt(4, Integer.valueOf(txtFieldQuantity.getText()));
-            p2p.setDate(5, (java.sql.Date) myFabDate);
-            p2p.setDate(6, (java.sql.Date) myExpDate);
+            p2p.setDate(5, (java.sql.Date) (Date) myFabDate);
+            p2p.setDate(6, (java.sql.Date) (Date) myExpDate);
             p2p.setString(7, comboBoxCompany.getSelectedItem().toString());
             
             
@@ -460,13 +462,18 @@ public class Medicines extends javax.swing.JFrame {
         else
         {
             try {
-                conn = DriverManager.getConnection("jdbc:derby://localhost:1527/pharmacy","user1","User123!");
+                ps = new SQLiteDataSource();
+            
+                ps.setUrl("jdbc:sqlite:hospManagement.db");
+                sqliteConnection = ps.getConnection();
                 String id = textFieldId.getText();
-                String query = "Delete from user1.medicines where id = " + id;
-                Statement st = conn.createStatement();
-                st.executeUpdate(query);
+                String query = "Delete from medicine where MedId = " + id;
+                
+                PreparedStatement p2p = sqliteConnection.prepareStatement(query);
+                boolean output = p2p.execute();
 
-                GetAllMedicines();
+
+                
                 JOptionPane.showMessageDialog(this, "Medicine Successfully Deleted!");
 
             } catch (SQLException ex) {
@@ -570,17 +577,5 @@ public class Medicines extends javax.swing.JFrame {
     private javax.swing.JTextField txtFieldQuantity;
     // End of variables declaration//GEN-END:variables
 
-    private void GetAllMedicines() {
-        try {
-           conn = DriverManager.getConnection("jdbc:sqlite:hospManagement.db");
-           st = conn.createStatement();
-//           rs = st.executeQuery("Select * from user1.medicines");
-//           MedicineTable.setModel(DbUtils.resultSetToTableModel(rs));
-           
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }
+   
 }
