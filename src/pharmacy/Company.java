@@ -4,11 +4,15 @@
  */
 package pharmacy;
 
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import org.sqlite.SQLiteDataSource;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 import static pharmacy.Medicines.ps;
 import static pharmacy.Medicines.sqliteConnection;
 
@@ -23,6 +27,7 @@ public class Company extends javax.swing.JFrame {
      */
     public Company() {
         initComponents();
+        GetAllCompanies();
     }
 
     /**
@@ -355,6 +360,7 @@ public class Company extends javax.swing.JFrame {
             boolean output = p2p.execute();
             JOptionPane.showMessageDialog(this, "Company Successfully Added!");
             sqliteConnection.close();
+            GetAllCompanies();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -379,6 +385,8 @@ public class Company extends javax.swing.JFrame {
 
                 PreparedStatement p2p = sqliteConnection.prepareStatement(queryUpdate);
                 boolean output = p2p.execute();
+                
+                GetAllCompanies();
                 JOptionPane.showMessageDialog(this, "Company Successfully Updated!");
 
             } catch (SQLException ex) {
@@ -405,6 +413,8 @@ public class Company extends javax.swing.JFrame {
                 
                 PreparedStatement p2p = sqliteConnection.prepareStatement(query);
                 boolean output = p2p.execute();
+                
+                GetAllCompanies();
                 JOptionPane.showMessageDialog(this, "Company Successfully Deleted!");
 
             } catch (SQLException ex) {
@@ -510,4 +520,22 @@ public class Company extends javax.swing.JFrame {
     private javax.swing.JTextField txtFieldCompanyId;
     private javax.swing.JTextField txtFieldExp;
     // End of variables declaration//GEN-END:variables
+
+    private void GetAllCompanies() {
+         try {
+           ps = new SQLiteDataSource();
+            
+           ps.setUrl("jdbc:sqlite:hospManagement.db");
+           sqliteConnection = ps.getConnection();
+        
+           String command = "Select * from company";
+           Statement p2p = sqliteConnection.createStatement();
+           ResultSet rs = p2p.executeQuery(command);
+           CompanyJTable.setModel(DbUtils.resultSetToTableModel(rs));
+    
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
 }
