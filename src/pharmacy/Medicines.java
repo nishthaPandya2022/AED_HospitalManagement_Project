@@ -14,7 +14,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.sqlite.SQLiteDataSource;
 import java.sql.PreparedStatement;
-//import net.proteanit.sql.DbUtils;
+import javax.swing.table.TableModel;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author ADMIN
@@ -26,7 +28,8 @@ public class Medicines extends javax.swing.JFrame {
      */
     public Medicines() {
         initComponents();
-        
+        GetAllMedicines();
+        GetCompany();
     }
 
      static Connection sqliteConnection;
@@ -35,10 +38,9 @@ public class Medicines extends javax.swing.JFrame {
      Connection conn = null;
      Statement st = null;
      ResultSet rs = null;
-     Integer MedId;
      static String MedName;
-     java.util.Date fabDate,expDate;
-     java.util.Date myFabDate, myExpDate;
+     java.sql.Date fabDate,expDate;
+     java.sql.Date myFabDate, myExpDate;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -383,8 +385,8 @@ public class Medicines extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblSellingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSellingMouseClicked
-//        new Selling().setVisible(true);
-//        this.dispose();
+        new Selling().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_lblSellingMouseClicked
 
     private void btnAddMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMedicineMouseClicked
@@ -408,14 +410,15 @@ public class Medicines extends javax.swing.JFrame {
             p2p.setString(2, txtFieldMedName.getText());
             p2p.setDouble(3, Double.valueOf(txtFieldPrice.getText()));
             p2p.setInt(4, Integer.valueOf(txtFieldQuantity.getText()));
-            p2p.setDate(5, (java.sql.Date) (Date) myFabDate);
-            p2p.setDate(6, (java.sql.Date) (Date) myExpDate);
+            p2p.setDate(5, myFabDate);
+            p2p.setDate(6, myExpDate);
             p2p.setString(7, comboBoxCompany.getSelectedItem().toString());
             
             
             boolean output = p2p.execute();
             JOptionPane.showMessageDialog(this, "Medicine Successfully Added!");
             sqliteConnection.close();
+            GetAllMedicines();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -445,6 +448,8 @@ public class Medicines extends javax.swing.JFrame {
                 boolean output = p2p.execute();
 
                 JOptionPane.showMessageDialog(this, "Medicine Successfully Updated!");
+                sqliteConnection.close();
+                GetAllMedicines();
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -473,7 +478,7 @@ public class Medicines extends javax.swing.JFrame {
                 boolean output = p2p.execute();
 
 
-                
+                GetAllMedicines();
                 JOptionPane.showMessageDialog(this, "Medicine Successfully Deleted!");
 
             } catch (SQLException ex) {
@@ -489,10 +494,11 @@ public class Medicines extends javax.swing.JFrame {
         int myIndex = MedicineTable.getSelectedRow();
         textFieldId.setText(model.getValueAt(myIndex, 0).toString());
         txtFieldMedName.setText(model.getValueAt(myIndex, 1).toString());
-        txtFieldQuantity.setText(model.getValueAt(myIndex, 2).toString());
-        dateFab.setDate((Date)model.getValueAt(myIndex, 3));
-        dateExp.setDate((Date)model.getValueAt(myIndex, 4));
-        txtFieldPrice.setText(model.getValueAt(myIndex, 6).toString());
+        txtFieldPrice.setText(model.getValueAt(myIndex, 2).toString());
+        txtFieldQuantity.setText(model.getValueAt(myIndex, 3).toString());
+        dateFab.setDate((Date) myFabDate);
+        dateExp.setDate((Date) myExpDate );
+        
     }//GEN-LAST:event_MedicineTableMouseClicked
 
     private void lblCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCompanyMouseClicked
@@ -576,6 +582,50 @@ public class Medicines extends javax.swing.JFrame {
     private javax.swing.JTextField txtFieldPrice;
     private javax.swing.JTextField txtFieldQuantity;
     // End of variables declaration//GEN-END:variables
+
+    private void GetAllMedicines() {
+         try {
+           ps = new SQLiteDataSource();
+            
+           ps.setUrl("jdbc:sqlite:hospManagement.db");
+           sqliteConnection = ps.getConnection();
+        
+           String command = "Select * from medicine";
+           Statement p2p = sqliteConnection.createStatement();
+           ResultSet rs = p2p.executeQuery(command);
+           MedicineTable.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+
+    private void GetCompany() {
+        try {
+              
+           ps = new SQLiteDataSource();
+            
+           ps.setUrl("jdbc:sqlite:hospManagement.db");
+           sqliteConnection = ps.getConnection();
+           String command = "Select * from company";
+           Statement p2p = sqliteConnection.createStatement();
+           ResultSet rs = p2p.executeQuery(command);
+           
+           while(rs.next())
+           {
+               String myCompany = rs.getString("CompName");
+               comboBoxCompany.addItem(myCompany);
+           }
+            
+        } catch (SQLException ex) {
+            
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+
+    
 
    
 }

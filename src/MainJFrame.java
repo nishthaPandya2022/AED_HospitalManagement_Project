@@ -3,6 +3,7 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.io.File;
 import org.sqlite.SQLiteDataSource;
+import pharmacy.Medicines;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -122,7 +123,8 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_mainLaboratoryActionPerformed
 
     private void mainPharmacyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainPharmacyActionPerformed
-        // TODO add your handling code here:
+        new Medicines().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_mainPharmacyActionPerformed
 
     /**

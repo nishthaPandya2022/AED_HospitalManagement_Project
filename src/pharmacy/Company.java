@@ -446,8 +446,8 @@ public class Company extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMedicinesMouseClicked
 
     private void lblSellingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSellingMouseClicked
-//        new Selling().setVisible(true);
-//        this.dispose();
+        new Selling().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_lblSellingMouseClicked
 
     /**
