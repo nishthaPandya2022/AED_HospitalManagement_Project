@@ -25,6 +25,10 @@ public class MainJFrame extends javax.swing.JFrame {
             + "MedId INTEGER(3) PRIMARY KEY NOT NULL," + "MedName VARCHAR(50) NOT NULL,"
             + "MedPrice INTEGER(7) NOT NULL," + "MedQty INTEGER(7) NOT NULL," + "MedFab DATE NOT NULL,"
             + "MedExp DATE NOT NULL," + "MedComp VARCHAR(50) NOT NULL)";
+    
+    private static String CREATE_AGENT_TABLE_SQL = "CREATE TABLE IF NOT EXISTS agent ("
+            + "AgeId INTEGER(3) PRIMARY KEY NOT NULL," + "AgeName VARCHAR(50) NOT NULL," + "AgeAge INTEGER(3) NOT NULL,"
+            + "AgePhone INTEGER(11) NOT NULL," + "AgePass VARCHAR(50) NOT NULL," + "AgeGend VARCHAR(50) NOT NULL)";
 
     private static String CREATE_TEMP_TABLE_SQL = "CREATE TABLE IF NOT EXISTS temp (" + "root VARCHAR(300) NOT NULL,"
             + "directory VARCHAR(300) NOT NULL," + "path VARCHAR(300) NOT NULL," + "added INT NOT NULL,"
@@ -165,8 +169,13 @@ public class MainJFrame extends javax.swing.JFrame {
                 statement = sqliteConnection.createStatement();
 
                 statement.executeUpdate(CREATE_LOGIN_TABLE_SQL);
+//              statement.executeUpdate(CREATE_TEMP_TABLE_SQL);
+                
+//              PHARMACY TABLES
                 statement.executeUpdate(CREATE_MEDICINE_TABLE_SQL);
-//            statement.executeUpdate(CREATE_TEMP_TABLE_SQL);
+                statement.executeUpdate(CREATE_AGENT_TABLE_SQL);
+                
+//            
             }
         } catch (Exception e) {
             e.printStackTrace();

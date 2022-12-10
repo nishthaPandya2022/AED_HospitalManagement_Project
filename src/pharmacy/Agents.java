@@ -4,6 +4,14 @@
  */
 package pharmacy;
 
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+import org.sqlite.SQLiteDataSource;
+import static pharmacy.Medicines.ps;
+import static pharmacy.Medicines.sqliteConnection;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ADMIN
@@ -46,7 +54,7 @@ public class Agents extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         AgentsJTable = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
-        tbAgentPhone = new javax.swing.JTextField();
+        textFieldAgentPhone = new javax.swing.JTextField();
         btnClear = new javax.swing.JButton();
         lblCompany = new javax.swing.JLabel();
         lblMedicines = new javax.swing.JLabel();
@@ -157,8 +165,8 @@ public class Agents extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(51, 153, 0));
         jLabel12.setText("AGENTS LIST");
 
-        tbAgentPhone.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        tbAgentPhone.setForeground(new java.awt.Color(0, 153, 0));
+        textFieldAgentPhone.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        textFieldAgentPhone.setForeground(new java.awt.Color(0, 153, 0));
 
         btnClear.setBackground(new java.awt.Color(51, 204, 0));
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -212,7 +220,7 @@ public class Agents extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(agentJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtFieldAgentPass, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tbAgentPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textFieldAgentPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboGender, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, agentJPanelLayout.createSequentialGroup()
@@ -235,7 +243,7 @@ public class Agents extends javax.swing.JFrame {
                     .addComponent(textFieldAgeId, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblId)
                     .addComponent(lblPhone)
-                    .addComponent(tbAgentPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldAgentPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(agentJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblName)
@@ -348,20 +356,26 @@ public class Agents extends javax.swing.JFrame {
     private void btnAddAgentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddAgentMouseClicked
 
         try {
-            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/pharmacy","user1","User123!");
-            PreparedStatement ps = conn.prepareStatement("insert into agents values(?,?,?,?,?,?)");
+            ps = new SQLiteDataSource();
+            
+            ps.setUrl("jdbc:sqlite:hospManagement.db");
+            sqliteConnection = ps.getConnection();
+            String commandagent = "insert into agent (AgeId, AgeName, AgePhone, AgeAge, AgePass, AgeGend ) values (?,?,?,?,?,?)";
 
-            ps.setInt(1, Integer.valueOf(textFieldAgeId.getText()));
-            ps.setString(2, textFieldAgentName.getText());
-            ps.setInt(3, Integer.valueOf(textFieldAgentAge.getText()));
-            ps.setString(4, tbAgentPhone.getText());
-            ps.setString(5, txtFieldAgentPass.getText());
-            ps.setString(6, comboGender.getSelectedItem().toString());
+            PreparedStatement p2p = sqliteConnection.prepareStatement(commandagent);
 
-            int row =  ps.executeUpdate();
+            p2p.setInt(1, Integer.valueOf(textFieldAgeId.getText()));
+            p2p.setString(2, textFieldAgentName.getText());
+            p2p.setInt(3, Integer.valueOf(textFieldAgentAge.getText()));
+            p2p.setString(4, textFieldAgentPhone.getText());
+            p2p.setString(5, txtFieldAgentPass.getText());
+            p2p.setString(6, comboGender.getSelectedItem().toString());
+
+            boolean output = p2p.execute();
+            
             JOptionPane.showMessageDialog(this, "Agent Successfully Added!");
-            conn.close();
-            GetAllAgents();
+            sqliteConnection.close();
+            
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -372,25 +386,23 @@ public class Agents extends javax.swing.JFrame {
 
     private void btnUpdateAgentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateAgentMouseClicked
 
-        if (textFieldAgeId.getText().isEmpty() || textFieldAgentName.getText().isEmpty() || textFieldAgentAge.getText().isEmpty() || tbAgentPhone.getText().isEmpty() || txtFieldAgentPass.getText().isEmpty()) {
+        if (textFieldAgeId.getText().isEmpty() || textFieldAgentName.getText().isEmpty() || textFieldAgentAge.getText().isEmpty() || textFieldAgentPhone.getText().isEmpty() || txtFieldAgentPass.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Missing Information about Agent");
         }
         else
         {
             try {
-                conn = DriverManager.getConnection("jdbc:derby://localhost:1527/pharmacy","user1","User123!");
-                PreparedStatement ps = conn.prepareStatement("update agents set name=?, age=?, phone=?, password=?, gender=? where id=?");
+                ps = new SQLiteDataSource();
+            
+                ps.setUrl("jdbc:sqlite:hospManagement.db");
+                sqliteConnection = ps.getConnection();
+                String id = textFieldAgeId.getText();
 
-                ps.setString(1, textFieldAgentName.getText());
-                ps.setInt(2, Integer.valueOf(textFieldAgentAge.getText()));
-                ps.setString(3, tbAgentPhone.getText());
-                ps.setString(4, txtFieldAgentPass.getText());
-                ps.setString(5, comboGender.getSelectedItem().toString());
-                ps.setInt(6, Integer.valueOf(textFieldAgeId.getText()));
+                String queryUpdateAgent = "update agent set AgeName = '" + textFieldAgentName.getText() + "'" + ",AgeAge = " + textFieldAgentAge.getText() + "" + ",AgePhone= " + textFieldAgentPhone.getText() + "" + ",AgePass = '" + txtFieldAgentPass.getText() + "'" + ",AgeGend = '" + comboGender.getSelectedItem().toString() + "'" + "where AgeId = " + id;
 
-                ps.executeUpdate();
+                PreparedStatement p2p = sqliteConnection.prepareStatement(queryUpdateAgent);
+                boolean output = p2p.execute();
 
-                GetAllAgents();
                 JOptionPane.showMessageDialog(this, "Agent Successfully Updated!");
 
             } catch (SQLException ex) {
@@ -409,13 +421,15 @@ public class Agents extends javax.swing.JFrame {
         else
         {
             try {
-                conn = DriverManager.getConnection("jdbc:derby://localhost:1527/pharmacy","user1","User123!");
+                ps = new SQLiteDataSource();
+            
+                ps.setUrl("jdbc:sqlite:hospManagement.db");
+                sqliteConnection = ps.getConnection();
                 String id = textFieldAgeId.getText();
-                String query = "Delete from user1.agents where id = " + id;
-                Statement st = conn.createStatement();
-                st.executeUpdate(query);
-
-                GetAllAgents();
+                String queryDeleteAgent = "Delete from agent where AgeId = " + id;
+                
+                PreparedStatement p2p = sqliteConnection.prepareStatement(queryDeleteAgent);
+                boolean output = p2p.execute();
                 JOptionPane.showMessageDialog(this, "Agent Successfully Deleted!");
 
             } catch (SQLException ex) {
@@ -431,7 +445,7 @@ public class Agents extends javax.swing.JFrame {
         textFieldAgeId.setText(model.getValueAt(myIndex, 0).toString());
         textFieldAgentName.setText(model.getValueAt(myIndex, 1).toString());
         textFieldAgentAge.setText(model.getValueAt(myIndex, 2).toString());
-        tbAgentPhone.setText(model.getValueAt(myIndex, 3).toString());
+        textFieldAgentPhone.setText(model.getValueAt(myIndex, 3).toString());
         txtFieldAgentPass.setText(model.getValueAt(myIndex, 4).toString());
     }//GEN-LAST:event_AgentsJTableMouseClicked
 
@@ -440,7 +454,7 @@ public class Agents extends javax.swing.JFrame {
         textFieldAgeId.setText("");
         textFieldAgentName.setText("");
         textFieldAgentAge.setText("");
-        tbAgentPhone.setText("");
+        textFieldAgentPhone.setText("");
         txtFieldAgentPass.setText("");
     }//GEN-LAST:event_btnClearMouseClicked
 
@@ -450,13 +464,13 @@ public class Agents extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCompanyMouseClicked
 
     private void lblMedicinesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMedicinesMouseClicked
-        new Medicine().setVisible(true);
+        new Medicines().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblMedicinesMouseClicked
 
     private void lblSellingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSellingMouseClicked
-        new Selling().setVisible(true);
-        this.dispose();
+//        new Selling().setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_lblSellingMouseClicked
 
     /**
@@ -515,10 +529,10 @@ public class Agents extends javax.swing.JFrame {
     private javax.swing.JLabel lblPhone;
     private javax.swing.JLabel lblSelling;
     private javax.swing.JPanel pharmacyLeftJPanel;
-    private javax.swing.JTextField tbAgentPhone;
     private javax.swing.JTextField textFieldAgeId;
     private javax.swing.JTextField textFieldAgentAge;
     private javax.swing.JTextField textFieldAgentName;
+    private javax.swing.JTextField textFieldAgentPhone;
     private javax.swing.JTextField txtFieldAgentPass;
     // End of variables declaration//GEN-END:variables
 }
