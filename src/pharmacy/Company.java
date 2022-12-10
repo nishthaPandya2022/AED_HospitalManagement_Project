@@ -4,6 +4,14 @@
  */
 package pharmacy;
 
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+import org.sqlite.SQLiteDataSource;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+import static pharmacy.Medicines.ps;
+import static pharmacy.Medicines.sqliteConnection;
+
 /**
  *
  * @author ADMIN
@@ -330,19 +338,23 @@ public class Company extends javax.swing.JFrame {
     private void btnAddCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddCompanyMouseClicked
 
         try {
-            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/pharmacy","user1","User123!");
-            PreparedStatement ps = conn.prepareStatement("insert into companies values(?,?,?,?,?)");
+            ps = new SQLiteDataSource();
+            
+            ps.setUrl("jdbc:sqlite:hospManagement.db");
+            sqliteConnection = ps.getConnection();
+            String commandCompany = "insert into company (CompId, CompName, CompAddress, CompPhone, CompExp ) values (?,?,?,?,?)";
 
-            ps.setInt(1, Integer.valueOf(txtFieldCompanyId.getText()));
-            ps.setString(2, textFieldCompanyName.getText());
-            ps.setString(3, txtFieldCompanyAddress.getText());
-            ps.setInt(4, Integer.valueOf(txtFieldExp.getText()));
-            ps.setString(5, textFieldCompanyPhone.getText());
+            PreparedStatement p2p = sqliteConnection.prepareStatement(commandCompany);
 
-            int row =  ps.executeUpdate();
+            p2p.setInt(1, Integer.valueOf(txtFieldCompanyId.getText()));
+            p2p.setString(2, textFieldCompanyName.getText());
+            p2p.setString(3, txtFieldCompanyAddress.getText());
+            p2p.setInt(4, Integer.valueOf(txtFieldExp.getText()));
+            p2p.setString(5, textFieldCompanyPhone.getText());
+
+            boolean output = p2p.execute();
             JOptionPane.showMessageDialog(this, "Company Successfully Added!");
-            conn.close();
-            GetAllCompanies();
+            sqliteConnection.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -357,18 +369,16 @@ public class Company extends javax.swing.JFrame {
         else
         {
             try {
-                conn = DriverManager.getConnection("jdbc:derby://localhost:1527/pharmacy","user1","User123!");
-                PreparedStatement ps = conn.prepareStatement("update companies set name=?, address=?, companyExp=?, phone=? where id=?");
+                ps = new SQLiteDataSource();
+            
+                ps.setUrl("jdbc:sqlite:hospManagement.db");
+                sqliteConnection = ps.getConnection();
+                String id = txtFieldCompanyId.getText();
+                
+                String queryUpdate = "update company set CompName = '" + textFieldCompanyName.getText() + "'" + ",CompAddress = '" + txtFieldCompanyAddress.getText() + "'" + ",CompPhone = " + textFieldCompanyPhone.getText() + "" + ",CompExp = '" + txtFieldExp.getText() + "'" + "where CompId = " + id;
 
-                ps.setString(1, textFieldCompanyName.getText());
-                ps.setString(2, txtFieldCompanyAddress.getText());
-                ps.setInt(3, Integer.valueOf(txtFieldExp.getText()));
-                ps.setString(4, textFieldCompanyPhone.getText());
-                ps.setInt(5, Integer.valueOf(txtFieldCompanyId.getText()));
-
-                ps.executeUpdate();
-
-                GetAllCompanies();
+                PreparedStatement p2p = sqliteConnection.prepareStatement(queryUpdate);
+                boolean output = p2p.execute();
                 JOptionPane.showMessageDialog(this, "Company Successfully Updated!");
 
             } catch (SQLException ex) {
@@ -386,13 +396,15 @@ public class Company extends javax.swing.JFrame {
         else
         {
             try {
-                conn = DriverManager.getConnection("jdbc:derby://localhost:1527/pharmacy","user1","User123!");
+                ps = new SQLiteDataSource();
+            
+                ps.setUrl("jdbc:sqlite:hospManagement.db");
+                sqliteConnection = ps.getConnection();
                 String id = txtFieldCompanyId.getText();
-                String query = "Delete from user1.companies where id = " + id;
-                Statement st = conn.createStatement();
-                st.executeUpdate(query);
-
-                GetAllCompanies();
+                String query = "Delete from company where CompId = " + id;
+                
+                PreparedStatement p2p = sqliteConnection.prepareStatement(query);
+                boolean output = p2p.execute();
                 JOptionPane.showMessageDialog(this, "Company Successfully Deleted!");
 
             } catch (SQLException ex) {
@@ -429,13 +441,13 @@ public class Company extends javax.swing.JFrame {
     }//GEN-LAST:event_lblAgentsMouseClicked
 
     private void lblMedicinesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMedicinesMouseClicked
-        new Medicine().setVisible(true);
+        new Medicines().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblMedicinesMouseClicked
 
     private void lblSellingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSellingMouseClicked
-        new Selling().setVisible(true);
-        this.dispose();
+//        new Selling().setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_lblSellingMouseClicked
 
     /**

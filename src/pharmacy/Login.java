@@ -163,27 +163,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
 
-        String query = "select * from user1.agents where name = '" + txtFieldEmail.getText() + "' and password = '" + txtFieldPassword.getText() + "'";
-
-        try {
-
-            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/pharmacy","user1","User123!");
-            st = conn.createStatement();
-            rs = st.executeQuery(query);
-
-            if (rs.next()) {
-                new Medicine().setVisible(true);
-                this.dispose();
-            }
-            else{
-                JOptionPane.showMessageDialog(this, "Wrong user ID or password");
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-
-        }
+        
 
     }//GEN-LAST:event_btnLoginMouseClicked
 
