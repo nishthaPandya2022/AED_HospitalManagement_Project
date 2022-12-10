@@ -5,12 +5,17 @@
 package pharmacy;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import org.sqlite.SQLiteDataSource;
 import static pharmacy.Medicines.ps;
 import static pharmacy.Medicines.sqliteConnection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
+import static pharmacy.Medicines.ps;
+import static pharmacy.Medicines.sqliteConnection;
 
 /**
  *
@@ -23,6 +28,7 @@ public class Agents extends javax.swing.JFrame {
      */
     public Agents() {
         initComponents();
+        GetAllAgents();
     }
 
     /**
@@ -375,7 +381,7 @@ public class Agents extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(this, "Agent Successfully Added!");
             sqliteConnection.close();
-            
+            GetAllAgents();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -402,7 +408,8 @@ public class Agents extends javax.swing.JFrame {
 
                 PreparedStatement p2p = sqliteConnection.prepareStatement(queryUpdateAgent);
                 boolean output = p2p.execute();
-
+                
+                GetAllAgents();
                 JOptionPane.showMessageDialog(this, "Agent Successfully Updated!");
 
             } catch (SQLException ex) {
@@ -430,6 +437,8 @@ public class Agents extends javax.swing.JFrame {
                 
                 PreparedStatement p2p = sqliteConnection.prepareStatement(queryDeleteAgent);
                 boolean output = p2p.execute();
+                
+                GetAllAgents();
                 JOptionPane.showMessageDialog(this, "Agent Successfully Deleted!");
 
             } catch (SQLException ex) {
@@ -535,4 +544,24 @@ public class Agents extends javax.swing.JFrame {
     private javax.swing.JTextField textFieldAgentPhone;
     private javax.swing.JTextField txtFieldAgentPass;
     // End of variables declaration//GEN-END:variables
+
+    private void GetAllAgents() {
+        try {
+           ps = new SQLiteDataSource();
+            
+           ps.setUrl("jdbc:sqlite:hospManagement.db");
+           sqliteConnection = ps.getConnection();
+        
+           String command = "Select * from agent";
+           Statement p2p = sqliteConnection.createStatement();
+           ResultSet rs = p2p.executeQuery(command);
+           AgentsJTable.setModel(DbUtils.resultSetToTableModel(rs));
+
+           
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
 }
