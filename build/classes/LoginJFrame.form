@@ -122,11 +122,17 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelPassword">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Password :"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelLogInScreen">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="LogIn Screen"/>
           </Properties>
         </Component>
@@ -137,6 +143,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelUserName">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="UserName :"/>
           </Properties>
         </Component>

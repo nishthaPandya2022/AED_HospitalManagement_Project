@@ -1,14 +1,13 @@
 
+import admin.AdminJFrame;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.io.File;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import org.sqlite.SQLiteDataSource;
 import pharmacy.Medicines;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 /**
  *
  * @author nishthapandya
@@ -19,10 +18,11 @@ public class MainJFrame extends javax.swing.JFrame {
     static Connection sqliteConnection;
     static Statement statement;
 
-    private static String CREATE_LOGIN_TABLE_SQL = "CREATE TABLE IF NOT EXISTS login ("
+    private static final String CREATE_LOGIN_TABLE_SQL = "CREATE TABLE IF NOT EXISTS login ("
+            + "loginID VARCHAR(200) NOT NULL," + "userID VARCHAR(200) NOT NULL,"
             + "username VARCHAR(200) NOT NULL," + "password VARCHAR(200) NOT NULL)";
 
-    private static String CREATE_TEMP_TABLE_SQL = "CREATE TABLE IF NOT EXISTS temp (" + "root VARCHAR(300) NOT NULL,"
+    private static final String CREATE_TEMP_TABLE_SQL = "CREATE TABLE IF NOT EXISTS temp (" + "root VARCHAR(300) NOT NULL,"
             + "directory VARCHAR(300) NOT NULL," + "path VARCHAR(300) NOT NULL," + "added INT NOT NULL,"
             + "removed INT NOT NULL," + "modified INT NOT NULL," + "hash VARCHAR(300) NOT NULL,"
             + "dateModified VARCHAR(300) NOT NULL)";
@@ -42,6 +42,9 @@ public class MainJFrame extends javax.swing.JFrame {
             + "CompId INTEGER(3) PRIMARY KEY NOT NULL," + "CompName VARCHAR(50) NOT NULL,"
             + "CompAddress VARCHAR(200) NOT NULL," + "CompPhone INTEGER(11) NOT NULL," + "CompExp INTEGER(5) NOT NULL)";
 
+    private static final String INSERT_LOGIN_ADMIN = "INSERT INTO login (loginID, userID, username, password)"
+            + " VALUES('" + 1 + "','" + 1 + "','admin'," + "'admin');";
+
     /**
      * Creates new form MainJFrame
      */
@@ -59,19 +62,23 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         mainHospital = new javax.swing.JButton();
-        mainPharmacy = new javax.swing.JButton();
         mainLaboratory = new javax.swing.JButton();
+        mainPharmacy = new javax.swing.JButton();
         mainBloodBank = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(67, 103, 72));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jPanel1.setBackground(new java.awt.Color(53, 85, 53));
+        jPanel1.setForeground(new java.awt.Color(51, 102, 0));
 
         mainHospital.setText("Hospital");
-
-        mainPharmacy.setText("Pharmacy");
-        mainPharmacy.addActionListener(new java.awt.event.ActionListener() {
+        mainHospital.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mainPharmacyActionPerformed(evt);
+                mainHospitalActionPerformed(evt);
             }
         });
 
@@ -82,50 +89,92 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        mainPharmacy.setText("Pharmacy");
+        mainPharmacy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainPharmacyActionPerformed(evt);
+            }
+        });
+
         mainBloodBank.setText("Blood Bank");
+        mainBloodBank.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainBloodBankActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(248, 248, 248)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(mainLaboratory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mainHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 386, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(mainBloodBank, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mainPharmacy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(176, 176, 176))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(171, 171, 171)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mainHospital)
+                    .addComponent(mainPharmacy))
+                .addGap(160, 160, 160)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mainLaboratory)
+                    .addComponent(mainBloodBank))
+                .addContainerGap(423, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(172, 172, 172)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(mainLaboratory)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 388, Short.MAX_VALUE)
-                        .addComponent(mainBloodBank))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(mainHospital)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(mainPharmacy)))
-                .addGap(250, 250, 250))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(148, 148, 148)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mainHospital)
-                    .addComponent(mainPharmacy))
-                .addGap(153, 153, 153)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mainLaboratory)
-                    .addComponent(mainBloodBank))
-                .addContainerGap(453, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mainLaboratoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainLaboratoryActionPerformed
+    private void mainHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainHospitalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_mainLaboratoryActionPerformed
+        dispose();
+        LoginJFrame loginFrame = new LoginJFrame();
+        loginFrame.setVisible(true);
+    }//GEN-LAST:event_mainHospitalActionPerformed
 
     private void mainPharmacyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainPharmacyActionPerformed
+        // TODO add your handling code here:
+        dispose();
         new Medicines().setVisible(true);
         this.dispose();
+        LoginJFrame loginFrame = new LoginJFrame();
+        loginFrame.setVisible(true);
     }//GEN-LAST:event_mainPharmacyActionPerformed
+
+    private void mainLaboratoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainLaboratoryActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        LoginJFrame loginFrame = new LoginJFrame();
+        loginFrame.setVisible(true);
+    }//GEN-LAST:event_mainLaboratoryActionPerformed
+
+    private void mainBloodBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainBloodBankActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        LoginJFrame loginFrame = new LoginJFrame();
+        loginFrame.setVisible(true);
+    }//GEN-LAST:event_mainBloodBankActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,7 +208,7 @@ public class MainJFrame extends javax.swing.JFrame {
             System.out.println(userDirectory);
             userDirectory = userDirectory + "/hospManagement.db";
             File dbFile = new File(userDirectory);
-            
+
             ds = new SQLiteDataSource();
 
             if (dbFile.exists()) {
@@ -184,8 +233,11 @@ public class MainJFrame extends javax.swing.JFrame {
                 statement.executeUpdate(CREATE_AGENT_TABLE_SQL);
                 statement.executeUpdate(CREATE_COMPANY_TABLE_SQL);
 //            
+                boolean insertDone = statement.execute(INSERT_LOGIN_ADMIN);
+                System.out.println("insertDone : " + insertDone);
+//            statement.executeUpdate(CREATE_TEMP_TABLE_SQL);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -198,6 +250,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton mainBloodBank;
     private javax.swing.JButton mainHospital;
     private javax.swing.JButton mainLaboratory;

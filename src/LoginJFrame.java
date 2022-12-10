@@ -65,8 +65,10 @@ public class LoginJFrame extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(31, 65, 31));
         jPanel1.setForeground(new java.awt.Color(40, 76, 40));
 
+        labelPassword.setForeground(new java.awt.Color(255, 255, 255));
         labelPassword.setText("Password :");
 
+        labelLogInScreen.setForeground(new java.awt.Color(255, 255, 255));
         labelLogInScreen.setText("LogIn Screen");
 
         textUserName.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +77,7 @@ public class LoginJFrame extends javax.swing.JFrame {
             }
         });
 
+        labelUserName.setForeground(new java.awt.Color(255, 255, 255));
         labelUserName.setText("UserName :");
 
         buttonLogin.setText("LOGIN");
