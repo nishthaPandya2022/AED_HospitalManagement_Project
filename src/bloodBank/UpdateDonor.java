@@ -4,6 +4,15 @@
  */
 package bloodBank;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import org.sqlite.SQLiteDataSource;
+import java.sql.ResultSet;
+import javax.swing.JTextField;
+
 /**
  *
  * @author ADMIN
@@ -16,6 +25,10 @@ public class UpdateDonor extends javax.swing.JFrame {
     public UpdateDonor() {
         initComponents();
     }
+    
+    static Connection sqliteConnection;
+    static Statement statement;
+    static SQLiteDataSource ps = null;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,15 +52,12 @@ public class UpdateDonor extends javax.swing.JFrame {
         txtFieldName = new javax.swing.JTextField();
         txtFieldFatName = new javax.swing.JTextField();
         txtFieldMotName = new javax.swing.JTextField();
-        txtFieldDob = new com.toedter.calendar.JDateChooser();
-        txtFieldGend = new javax.swing.JComboBox<>();
         txtFieldMob = new javax.swing.JTextField();
         lblDonEmail = new javax.swing.JLabel();
         lblBlood = new javax.swing.JLabel();
         lblDonCities = new javax.swing.JLabel();
         lblDonAddress = new javax.swing.JLabel();
         txtFieldEmail = new javax.swing.JTextField();
-        txtFieldBlood = new javax.swing.JComboBox<>();
         txtFieldCity = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtFieldAddress = new javax.swing.JTextArea();
@@ -58,6 +68,9 @@ public class UpdateDonor extends javax.swing.JFrame {
         txtFieldDonId = new javax.swing.JTextField();
         btnDonSearch = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
+        txtFieldDob = new javax.swing.JTextField();
+        txtFieldGend = new javax.swing.JTextField();
+        txtFieldBlood = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,7 +93,7 @@ public class UpdateDonor extends javax.swing.JFrame {
 
         lblDonFieldId.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblDonFieldId.setForeground(new java.awt.Color(255, 51, 51));
-        getContentPane().add(lblDonFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 85, 55, 20));
+        getContentPane().add(lblDonFieldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 55, 20));
 
         lblDonName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblDonName.setText("Full Name:");
@@ -119,11 +132,6 @@ public class UpdateDonor extends javax.swing.JFrame {
 
         txtFieldMotName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(txtFieldMotName, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 210, 195, -1));
-        getContentPane().add(txtFieldDob, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 251, 195, -1));
-
-        txtFieldGend.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtFieldGend.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "select", "Male", "Female", "Others" }));
-        getContentPane().add(txtFieldGend, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 332, 195, -1));
 
         txtFieldMob.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(txtFieldMob, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 291, 195, -1));
@@ -152,12 +160,8 @@ public class UpdateDonor extends javax.swing.JFrame {
         });
         getContentPane().add(txtFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 210, -1));
 
-        txtFieldBlood.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtFieldBlood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "select", "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-" }));
-        getContentPane().add(txtFieldBlood, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, -1, -1));
-
         txtFieldCity.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        getContentPane().add(txtFieldCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, 220, -1));
+        getContentPane().add(txtFieldCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, 210, -1));
 
         txtFieldAddress.setColumns(20);
         txtFieldAddress.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -196,8 +200,22 @@ public class UpdateDonor extends javax.swing.JFrame {
         getContentPane().add(txtFieldDonId, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 84, -1));
 
         btnDonSearch.setText("Search");
+        btnDonSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDonSearchActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnDonSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, -1, -1));
         getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 113, 692, 10));
+
+        txtFieldDob.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(txtFieldDob, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 190, -1));
+
+        txtFieldGend.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(txtFieldGend, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 190, -1));
+
+        txtFieldBlood.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(txtFieldBlood, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 210, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bloodBank/all page background image.png"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -223,27 +241,15 @@ public class UpdateDonor extends javax.swing.JFrame {
         try {
 
             ps = new SQLiteDataSource();
-
+            String id = txtFieldDonId.getText();
             ps.setUrl("jdbc:sqlite:hospManagement.db");
             sqliteConnection = ps.getConnection();
-            String command = "insert into donor (DonId, DonName, DonFather, DonMother, DonDob, DonMobile, DonGend, DonEmail, DonBlood, DonAddress, DonCity ) values (?,?,?,?,?,?,?,?,?,?,?)";
+            String queryUpdate = "update donor set DonName = '" + txtFieldName.getText() + "'" + ",DonFather = '" + txtFieldFatName.getText() + "'" + ",DonMother= '" + txtFieldMotName.getText() + "'" + ",Dondob = '" + txtFieldDob.getText() + "'" + ",DonMobile = '" + txtFieldMob.getText() + "'" + ",DonGend = '" + txtFieldGend.getText() + "'" + ",DonEmail = '" + txtFieldEmail.getText() + "'" + ",DonBlood = '" + txtFieldBlood.getText() + "'" +  ",DonCity = '" + txtFieldCity.getText() + "'" + ",DonAddress = '" + txtFieldAddress.getText() + "'" + "where DonId = " + id;
 
-            PreparedStatement p2p = sqliteConnection.prepareStatement(command);
-
-            p2p.setString(1, lblDonFieldId.getText());
-            p2p.setString(2, txtFieldName.getText());
-            p2p.setString(3, txtFieldFatName.getText());
-            p2p.setString(4, txtFieldMotName.getText());
-            p2p.setString(5,  ((JTextField)txtFieldDob.getDateEditor().getUiComponent()).getText());
-            p2p.setInt(6, Integer.valueOf(txtFieldMob.getText()));
-            p2p.setString(7, txtFieldGend.getSelectedItem().toString());
-            p2p.setString(8, txtFieldEmail.getText());
-            p2p.setString(9, txtFieldBlood.getSelectedItem().toString());
-            p2p.setString(10, txtFieldCity.getText());
-            p2p.setString(11, txtFieldAddress.getText());
-
+            PreparedStatement p2p = sqliteConnection.prepareStatement(queryUpdate);
             boolean output = p2p.execute();
-            JOptionPane.showMessageDialog(this, "Donor Successfully Added!");
+
+            JOptionPane.showMessageDialog(this, "Donor Successfully Updated!");
             sqliteConnection.close();
 
         } catch (SQLException ex) {
@@ -254,12 +260,61 @@ public class UpdateDonor extends javax.swing.JFrame {
 
     private void btnDonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonResetActionPerformed
         setVisible(false);
-        new AddDonor().setVisible(true);
+        new UpdateDonor().setVisible(true);
     }//GEN-LAST:event_btnDonResetActionPerformed
 
     private void btnDonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonCloseActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnDonCloseActionPerformed
+
+    private void btnDonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonSearchActionPerformed
+       if (txtFieldDonId.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Enter ID of The Donor To Be Searched....");
+        }
+        else
+        {
+            
+            String id = txtFieldDonId.getText();
+            
+            try {
+            
+                ps = new SQLiteDataSource();
+            
+                ps.setUrl("jdbc:sqlite:hospManagement.db");
+                sqliteConnection = ps.getConnection();
+
+                String command = "Select * from donor where DonId =" + id;
+                Statement p2p = sqliteConnection.createStatement();
+                ResultSet rs = p2p.executeQuery(command);
+
+                if(rs.next())
+                {
+                    txtFieldName.setText(rs.getString(2));
+                    txtFieldFatName.setText(rs.getString(3));
+                    txtFieldMotName.setText(rs.getString(4));
+                    txtFieldDob.setText(rs.getString(5));
+                    txtFieldMob.setText(rs.getString(6));
+                    txtFieldGend.setText(rs.getString(7));
+                    txtFieldEmail.setText(rs.getString(8));
+                    txtFieldBlood.setText(rs.getString(9));
+                    txtFieldCity.setText(rs.getString(10));
+                    txtFieldAddress.setText(rs.getString(11));
+                    txtFieldDonId.setEditable(false);
+
+                }
+                else 
+                {
+
+                    JOptionPane.showMessageDialog(null,"Donor Id doesn't exist");
+                }
+
+                sqliteConnection.close();
+
+        } catch (SQLException ex) {}
+        }
+       
+    }//GEN-LAST:event_btnDonSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,13 +375,13 @@ public class UpdateDonor extends javax.swing.JFrame {
     private javax.swing.JLabel lblDonMotName;
     private javax.swing.JLabel lblDonName;
     private javax.swing.JTextArea txtFieldAddress;
-    private javax.swing.JComboBox<String> txtFieldBlood;
+    private javax.swing.JTextField txtFieldBlood;
     private javax.swing.JTextField txtFieldCity;
-    private com.toedter.calendar.JDateChooser txtFieldDob;
+    private javax.swing.JTextField txtFieldDob;
     private javax.swing.JTextField txtFieldDonId;
     private javax.swing.JTextField txtFieldEmail;
     private javax.swing.JTextField txtFieldFatName;
-    private javax.swing.JComboBox<String> txtFieldGend;
+    private javax.swing.JTextField txtFieldGend;
     private javax.swing.JTextField txtFieldMob;
     private javax.swing.JTextField txtFieldMotName;
     private javax.swing.JTextField txtFieldName;
