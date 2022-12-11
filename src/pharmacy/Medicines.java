@@ -4,12 +4,13 @@
  */
 package pharmacy;
 
+import static java.lang.System.console;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.sqlite.SQLiteDataSource;
@@ -39,7 +40,7 @@ public class Medicines extends javax.swing.JFrame {
      Statement st = null;
      ResultSet rs = null;
      static String MedName;
-     java.sql.Date fabDate,expDate;
+     java.util.Date fabDate,expDate;
      java.sql.Date myFabDate, myExpDate;
     /**
      * This method is called from within the constructor to initialize the form.
@@ -401,10 +402,12 @@ public class Medicines extends javax.swing.JFrame {
 
     private void btnAddMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMedicineMouseClicked
 
-        Date fabDate = dateFab.getDate();
-        java.sql.Date myFabDate = new java.sql.Date(fabDate.getTime());
-        Date expDate = dateExp.getDate();
-        java.sql.Date myExpDate = new java.sql.Date(expDate.getTime());
+        fabDate = dateFab.getDate();
+        System.out.print(fabDate);
+        myFabDate = new java.sql.Date(fabDate.getTime());
+        System.out.print(myFabDate);
+        expDate = dateExp.getDate();
+        myExpDate = new java.sql.Date(expDate.getTime());
 
         try {
             
@@ -421,7 +424,7 @@ public class Medicines extends javax.swing.JFrame {
             p2p.setDouble(3, Double.valueOf(txtFieldPrice.getText()));
             p2p.setInt(4, Integer.valueOf(txtFieldQuantity.getText()));
             p2p.setDate(5, myFabDate);
-            p2p.setDate(6, myExpDate);
+            p2p.setDate(6,myExpDate);
             p2p.setString(7, comboBoxCompany.getSelectedItem().toString());
             
             
@@ -448,10 +451,10 @@ public class Medicines extends javax.swing.JFrame {
                 ps.setUrl("jdbc:sqlite:hospManagement.db");
                 sqliteConnection = ps.getConnection();
                 String id = textFieldId.getText();
-                Date fabDate = dateFab.getDate();
-                java.sql.Date myFabDate = new java.sql.Date(fabDate.getTime());
-                Date expDate = dateExp.getDate();
-                java.sql.Date myExpDate = new java.sql.Date(expDate.getTime());
+                fabDate =  dateFab.getDate();
+                myFabDate = new java.sql.Date(fabDate.getTime());
+                expDate = dateExp.getDate();
+                myExpDate = new java.sql.Date(expDate.getTime());
                 String queryUpdate = "update medicine set MedName = '" + txtFieldMedName.getText() + "'" + ",MedPrice = " + txtFieldPrice.getText() + "" + ",MedQty= " + txtFieldQuantity.getText() + "" + ",MedFab = '" + myFabDate + "'" + ",MedExp = '" + myExpDate + "'" + ",MedComp = '" + comboBoxCompany.getSelectedItem().toString() + "'" + "where MedId = " + id;
 
                 PreparedStatement p2p = sqliteConnection.prepareStatement(queryUpdate);
@@ -534,6 +537,7 @@ public class Medicines extends javax.swing.JFrame {
         txtFieldMedName.setText("");
         txtFieldPrice.setText("");
         txtFieldQuantity.setText("");
+       
     }//GEN-LAST:event_btnDeleteMedicine1MouseClicked
 
     /**
