@@ -513,8 +513,14 @@
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="dateFab">
+              <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+              </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="dateExp">
+              <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="comboBoxCompany">
               <Properties>

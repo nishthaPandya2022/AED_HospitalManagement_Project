@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.sqlite.SQLiteDataSource;
 import java.sql.PreparedStatement;
+import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 
@@ -223,6 +224,10 @@ public class Medicines extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(51, 153, 0));
         jLabel12.setText("MEDICINES LIST");
 
+        dateFab.setDateFormatString("yyyy-MM-dd");
+
+        dateExp.setDateFormatString("yyyy-MM-dd");
+
         comboBoxCompany.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "select" }));
         comboBoxCompany.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -402,11 +407,11 @@ public class Medicines extends javax.swing.JFrame {
 
     private void btnAddMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMedicineMouseClicked
 
-        fabDate = dateFab.getDate();
+        fabDate =  dateFab.getDate();
         System.out.print(fabDate);
         myFabDate = new java.sql.Date(fabDate.getTime());
         System.out.print(myFabDate);
-        expDate = dateExp.getDate();
+        expDate =  dateExp.getDate();
         myExpDate = new java.sql.Date(expDate.getTime());
 
         try {
@@ -423,8 +428,8 @@ public class Medicines extends javax.swing.JFrame {
             p2p.setString(2, txtFieldMedName.getText());
             p2p.setDouble(3, Double.valueOf(txtFieldPrice.getText()));
             p2p.setInt(4, Integer.valueOf(txtFieldQuantity.getText()));
-            p2p.setDate(5, myFabDate);
-            p2p.setDate(6,myExpDate);
+            p2p.setString(5,  ((JTextField)dateFab.getDateEditor().getUiComponent()).getText());
+            p2p.setString(6,  ((JTextField)dateExp.getDateEditor().getUiComponent()).getText());
             p2p.setString(7, comboBoxCompany.getSelectedItem().toString());
             
             
@@ -451,9 +456,9 @@ public class Medicines extends javax.swing.JFrame {
                 ps.setUrl("jdbc:sqlite:hospManagement.db");
                 sqliteConnection = ps.getConnection();
                 String id = textFieldId.getText();
-                fabDate =  dateFab.getDate();
+                fabDate =   dateFab.getDate();
                 myFabDate = new java.sql.Date(fabDate.getTime());
-                expDate = dateExp.getDate();
+                expDate =  dateExp.getDate();
                 myExpDate = new java.sql.Date(expDate.getTime());
                 String queryUpdate = "update medicine set MedName = '" + txtFieldMedName.getText() + "'" + ",MedPrice = " + txtFieldPrice.getText() + "" + ",MedQty= " + txtFieldQuantity.getText() + "" + ",MedFab = '" + myFabDate + "'" + ",MedExp = '" + myExpDate + "'" + ",MedComp = '" + comboBoxCompany.getSelectedItem().toString() + "'" + "where MedId = " + id;
 
