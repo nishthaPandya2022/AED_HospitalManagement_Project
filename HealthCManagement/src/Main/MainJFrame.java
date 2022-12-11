@@ -47,10 +47,15 @@ public class MainJFrame extends javax.swing.JFrame {
      
 //   CREATING TABLES FOR Laboratory
      private static String CREATE_LABTEST_TABLE_SQL = "CREATE TABLE IF NOT EXISTS LABTEST ("
-            + "PateintId INTEGER(3) PRIMARY KEY NOT NULL," + "DoctorName VARCHAR(50) NOT NULL,"
-            + "PatientName NOT NULL," + "Age INTEGER(3) NOT NULL," + "gender VARCHAR(6) NOT NULL,"
-            + "BloodGroup VARCHAR(3) NOT NULL," + "Specimen VARCHAR(20) NOT NULL," +
+            + "Pateint_ID INTEGER(3) PRIMARY KEY NOT NULL," + "DoctorName VARCHAR(50) NOT NULL,"
+            + "Name VARCHAR(20) NOT NULL," + "Age INTEGER(3) NOT NULL," + "gender VARCHAR(6) NOT NULL,"
+            + "Blood_Group VARCHAR(3) NOT NULL," + "Tests VARCHAR(20) NOT NULL," +
              "Department VARCHAR(50) NOT NULL)";
+             
+     private static String CREATE_DUMMY_TABLE_SQL =  "CREATE TABLE IF NOT EXISTS dummy ("
+     + "Pateint_ID INTEGER(3) PRIMARY KEY NOT NULL," + "Name VARCHAR(20) NOT NULL," + "Doctor_name VARCHAR(20) NOT NULL);";
+     
+     String command = "insert into dummy (Pateint_ID, Name, Doctor_name ) values (3, Shubhda, Subhash)";
 
     /**
      * Creates new form MainJFrame
