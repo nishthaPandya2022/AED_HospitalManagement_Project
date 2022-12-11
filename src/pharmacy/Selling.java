@@ -5,9 +5,14 @@
 package pharmacy;
 
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 import org.sqlite.SQLiteDataSource;
 import static pharmacy.Medicines.ps;
 import static pharmacy.Medicines.sqliteConnection;
@@ -23,6 +28,8 @@ public class Selling extends javax.swing.JFrame {
      */
     public Selling() {
         initComponents();
+        GetAllMedicines();
+        ShowDate();
     }
 
     /**
@@ -37,16 +44,16 @@ public class Selling extends javax.swing.JFrame {
         int newQty;
         newQty = oldQty - Integer.valueOf(tbQty.getText());
         try {
-                 ps = new SQLiteDataSource();
+                ps = new SQLiteDataSource();
             
                 ps.setUrl("jdbc:sqlite:hospManagement.db");
                 sqliteConnection = ps.getConnection();
                 
-                String queryUpdate = "Update medicine set quantity = " + newQty + "" + "where id = " + medId;
+                String queryUpdate = "Update medicine set MedQty = '" + newQty + "'" + "where MedId = " + medId;
                 Statement st = sqliteConnection.createStatement();
                 st.executeUpdate(queryUpdate);
                 
-//                GetAllMedicines();
+                GetAllMedicines();
                 JOptionPane.showMessageDialog(this, "Quantity of medicine Successfully Updated!");
                 
             } catch (SQLException ex) {
@@ -396,8 +403,8 @@ public class Selling extends javax.swing.JFrame {
         int myIndex = MedicineTable.getSelectedRow();
         medId = Integer.valueOf(model.getValueAt(myIndex, 0).toString());
         tbMedicine.setText(model.getValueAt(myIndex, 1).toString());
-        oldQty = Integer.valueOf(model.getValueAt(myIndex, 2).toString());
-        price = Double.valueOf(model.getValueAt(myIndex, 6).toString());
+        oldQty = Integer.valueOf(model.getValueAt(myIndex, 3).toString());
+        price = Double.valueOf(model.getValueAt(myIndex,2 ).toString());
     }//GEN-LAST:event_MedicineTableMouseClicked
 
     private void lblAgentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAgentsMouseClicked
@@ -406,7 +413,7 @@ public class Selling extends javax.swing.JFrame {
     }//GEN-LAST:event_lblAgentsMouseClicked
 
     private void lblMedicinesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMedicinesMouseClicked
-        new Medicine().setVisible(true);
+        new Medicines().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblMedicinesMouseClicked
 
@@ -473,4 +480,30 @@ public class Selling extends javax.swing.JFrame {
     private javax.swing.JTextField tbMedicine;
     private javax.swing.JTextField tbQty;
     // End of variables declaration//GEN-END:variables
+
+    private void GetAllMedicines() {
+        try {
+          ps = new SQLiteDataSource();
+            
+           ps.setUrl("jdbc:sqlite:hospManagement.db");
+           sqliteConnection = ps.getConnection();
+        
+           String command = "Select * from medicine";
+           Statement p2p = sqliteConnection.createStatement();
+           ResultSet rs = p2p.executeQuery(command);
+           MedicineTable.setModel(DbUtils.resultSetToTableModel(rs));
+
+           
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+    }
+    }
+
+    private void ShowDate() {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        lblDate.setText(sdf.format(date));
+    }
 }
