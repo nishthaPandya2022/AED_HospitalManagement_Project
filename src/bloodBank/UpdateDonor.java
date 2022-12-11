@@ -301,6 +301,7 @@ public class UpdateDonor extends javax.swing.JFrame {
                     txtFieldCity.setText(rs.getString(10));
                     txtFieldAddress.setText(rs.getString(11));
                     txtFieldDonId.setEditable(false);
+                    
 
                 }
                 else 
