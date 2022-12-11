@@ -1,5 +1,7 @@
+package ui;
 
-import admin.AdminJFrame;
+
+import ui.admin.AdminJFrame;
 import java.sql.Connection;
 import java.sql.SQLException;
 import org.sqlite.SQLiteDataSource;

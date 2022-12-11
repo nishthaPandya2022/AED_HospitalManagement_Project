@@ -1,5 +1,7 @@
+package ui;
 
-import admin.AdminJFrame;
+
+import ui.admin.AdminJFrame;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.io.File;
@@ -20,11 +22,14 @@ public class MainJFrame extends javax.swing.JFrame {
     private static final String CREATE_LOGIN_TABLE_SQL = "CREATE TABLE IF NOT EXISTS login ("
             + "loginID VARCHAR(200) NOT NULL," + "userID VARCHAR(200) NOT NULL,"
             + "username VARCHAR(200) NOT NULL," + "password VARCHAR(200) NOT NULL)";
-
-    private static final String CREATE_TEMP_TABLE_SQL = "CREATE TABLE IF NOT EXISTS temp (" + "root VARCHAR(300) NOT NULL,"
-            + "directory VARCHAR(300) NOT NULL," + "path VARCHAR(300) NOT NULL," + "added INT NOT NULL,"
-            + "removed INT NOT NULL," + "modified INT NOT NULL," + "hash VARCHAR(300) NOT NULL,"
-            + "dateModified VARCHAR(300) NOT NULL)";
+    
+    private static final String CREATE_HOSPITAL_TABLE_SQL = "CREATE TABLE IF NOT EXISTS hospital ("
+            + "userID VARCHAR(200) NOT NULL," + "name VARCHAR(200) NOT NULL,"
+            + "DOB VARCHAR(200) NOT NULL," + "age VARCHAR(200) NOT NULL,"
+            + "organization VARCHAR(200) NOT NULL," + "phoneNumber VARCHAR(200) NOT NULL,"
+            + "address VARCHAR(200) NOT NULL," + "community VARCHAR(200) NOT NULL,"
+            + "state VARCHAR(200) NOT NULL," + "zipcode VARCHAR(200) NOT NULL,"
+            + "role VARCHAR(200) NOT NULL);";
 
     private static final String INSERT_LOGIN_ADMIN = "INSERT INTO login (loginID, userID, username, password)"
             + " VALUES('" + 1 + "','" + 1 + "','admin'," + "'admin');";
@@ -59,20 +64,29 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(53, 85, 53));
         jPanel1.setForeground(new java.awt.Color(51, 102, 0));
 
+        mainHospital.setFont(new java.awt.Font("Oriya MN", 0, 18)); // NOI18N
         mainHospital.setText("Hospital");
+        mainHospital.setMaximumSize(new java.awt.Dimension(100, 30));
+        mainHospital.setMinimumSize(new java.awt.Dimension(100, 30));
+        mainHospital.setPreferredSize(new java.awt.Dimension(100, 30));
         mainHospital.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mainHospitalActionPerformed(evt);
             }
         });
 
+        mainLaboratory.setFont(new java.awt.Font("Oriya MN", 0, 18)); // NOI18N
         mainLaboratory.setText("Laboratory");
+        mainLaboratory.setMaximumSize(new java.awt.Dimension(100, 30));
+        mainLaboratory.setMinimumSize(new java.awt.Dimension(100, 30));
+        mainLaboratory.setPreferredSize(new java.awt.Dimension(100, 30));
         mainLaboratory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mainLaboratoryActionPerformed(evt);
             }
         });
 
+        mainPharmacy.setFont(new java.awt.Font("Oriya MN", 0, 18)); // NOI18N
         mainPharmacy.setText("Pharmacy");
         mainPharmacy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,6 +94,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        mainBloodBank.setFont(new java.awt.Font("Oriya MN", 0, 18)); // NOI18N
         mainBloodBank.setText("Blood Bank");
         mainBloodBank.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,26 +109,26 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(248, 248, 248)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(mainLaboratory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mainHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 386, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(mainBloodBank, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mainPharmacy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(176, 176, 176))
+                    .addComponent(mainHospital, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(mainLaboratory, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                .addGap(192, 192, 192)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mainPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mainBloodBank, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(171, 171, 171)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mainHospital)
-                    .addComponent(mainPharmacy))
+                    .addComponent(mainHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mainPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(160, 160, 160)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mainLaboratory)
-                    .addComponent(mainBloodBank))
-                .addContainerGap(423, Short.MAX_VALUE))
+                    .addComponent(mainLaboratory, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mainBloodBank, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -208,6 +223,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 statement = sqliteConnection.createStatement();
 
                 statement.executeUpdate(CREATE_LOGIN_TABLE_SQL);
+                statement.executeUpdate(CREATE_HOSPITAL_TABLE_SQL);
                 boolean insertDone = statement.execute(INSERT_LOGIN_ADMIN);
                 System.out.println("insertDone : " + insertDone);
 //            statement.executeUpdate(CREATE_TEMP_TABLE_SQL);

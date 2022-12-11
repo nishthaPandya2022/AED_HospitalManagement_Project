@@ -3,16 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 
-package admin;
+package ui.admin;
 
 /**
  *
  * @author nishthapandya
  */
-public class AllReceptionstJPanel extends javax.swing.JPanel {
+public class AllDoctorsJPanel extends javax.swing.JPanel {
 
-    /** Creates new form AllReceptionstJPanel */
-    public AllReceptionstJPanel() {
+    /** Creates new form AllDoctorsJPanel */
+    public AllDoctorsJPanel() {
         initComponents();
     }
 
@@ -29,11 +29,11 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
