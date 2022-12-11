@@ -69,13 +69,14 @@ public class Medicines extends javax.swing.JFrame {
         txtFieldQuantity = new javax.swing.JTextField();
         btnAddMedicine = new javax.swing.JButton();
         btnUpdateMedicine = new javax.swing.JButton();
-        btnDeleteMedicine = new javax.swing.JButton();
+        btnClearMedicine = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         MedicineTable = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         dateFab = new com.toedter.calendar.JDateChooser();
         dateExp = new com.toedter.calendar.JDateChooser();
         comboBoxCompany = new javax.swing.JComboBox<>();
+        btnDeleteMedicine1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -187,13 +188,13 @@ public class Medicines extends javax.swing.JFrame {
             }
         });
 
-        btnDeleteMedicine.setBackground(new java.awt.Color(51, 204, 0));
-        btnDeleteMedicine.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnDeleteMedicine.setForeground(new java.awt.Color(255, 255, 255));
-        btnDeleteMedicine.setText("DELETE");
-        btnDeleteMedicine.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnClearMedicine.setBackground(new java.awt.Color(51, 204, 0));
+        btnClearMedicine.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnClearMedicine.setForeground(new java.awt.Color(255, 255, 255));
+        btnClearMedicine.setText("DELETE");
+        btnClearMedicine.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDeleteMedicineMouseClicked(evt);
+                btnClearMedicineMouseClicked(evt);
             }
         });
 
@@ -221,10 +222,20 @@ public class Medicines extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(51, 153, 0));
         jLabel12.setText("MEDICINES LIST");
 
-        comboBoxCompany.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxCompany.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "select" }));
         comboBoxCompany.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxCompanyActionPerformed(evt);
+            }
+        });
+
+        btnDeleteMedicine1.setBackground(new java.awt.Color(51, 204, 0));
+        btnDeleteMedicine1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnDeleteMedicine1.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeleteMedicine1.setText("CLEAR");
+        btnDeleteMedicine1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteMedicine1MouseClicked(evt);
             }
         });
 
@@ -233,49 +244,12 @@ public class Medicines extends javax.swing.JFrame {
         medicineRightJPanelLayout.setHorizontalGroup(
             medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, medicineRightJPanelLayout.createSequentialGroup()
-                .addGroup(medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(medicineRightJPanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(medicineRightJPanelLayout.createSequentialGroup()
-                                .addGroup(medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblMedName)
-                                    .addComponent(lblPrice))
-                                .addGap(242, 242, 242))
-                            .addGroup(medicineRightJPanelLayout.createSequentialGroup()
-                                .addGroup(medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblId)
-                                    .addComponent(lblQuantity))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFieldQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFieldMedName, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(92, 92, 92)))
-                        .addGroup(medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(medicineRightJPanelLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(lblComp))
-                            .addComponent(lblFabDate)
-                            .addComponent(lblExpDate))
-                        .addGap(31, 31, 31))
-                    .addGroup(medicineRightJPanelLayout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addGroup(medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel12)
-                            .addGroup(medicineRightJPanelLayout.createSequentialGroup()
-                                .addComponent(btnAddMedicine)
-                                .addGap(32, 32, 32)
-                                .addComponent(btnUpdateMedicine)
-                                .addGap(12, 12, 12)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(269, 269, 269)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(dateFab, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                     .addComponent(dateExp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(medicineRightJPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(btnDeleteMedicine))
                     .addComponent(comboBoxCompany, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(255, 255, 255))
             .addGroup(medicineRightJPanelLayout.createSequentialGroup()
@@ -287,6 +261,41 @@ public class Medicines extends javax.swing.JFrame {
                         .addGap(213, 213, 213)
                         .addComponent(jLabel1)))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(medicineRightJPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(medicineRightJPanelLayout.createSequentialGroup()
+                        .addGroup(medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMedName)
+                            .addComponent(lblPrice))
+                        .addGap(242, 242, 242))
+                    .addGroup(medicineRightJPanelLayout.createSequentialGroup()
+                        .addGroup(medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblId)
+                            .addComponent(lblQuantity))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFieldQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFieldMedName, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(medicineRightJPanelLayout.createSequentialGroup()
+                                .addComponent(btnAddMedicine)
+                                .addGap(46, 46, 46)
+                                .addComponent(btnUpdateMedicine)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(medicineRightJPanelLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(lblComp))
+                    .addComponent(lblFabDate)
+                    .addComponent(lblExpDate)
+                    .addGroup(medicineRightJPanelLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(btnClearMedicine)
+                        .addGap(45, 45, 45)
+                        .addComponent(btnDeleteMedicine1)))
+                .addGap(230, 230, 230))
         );
         medicineRightJPanelLayout.setVerticalGroup(
             medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,9 +336,10 @@ public class Medicines extends javax.swing.JFrame {
                             .addComponent(comboBoxCompany, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
                         .addGroup(medicineRightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnDeleteMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnClearMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnUpdateMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAddMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnAddMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDeleteMedicine1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel12)
                 .addGap(18, 18, 18)
@@ -458,7 +468,7 @@ public class Medicines extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnUpdateMedicineMouseClicked
 
-    private void btnDeleteMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMedicineMouseClicked
+    private void btnClearMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearMedicineMouseClicked
 
         if (textFieldId.getText().isEmpty())
         {
@@ -486,7 +496,7 @@ public class Medicines extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
         }
-    }//GEN-LAST:event_btnDeleteMedicineMouseClicked
+    }//GEN-LAST:event_btnClearMedicineMouseClicked
 
     private void MedicineTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MedicineTableMouseClicked
 
@@ -518,6 +528,13 @@ public class Medicines extends javax.swing.JFrame {
     private void btnAddMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMedicineActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddMedicineActionPerformed
+
+    private void btnDeleteMedicine1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMedicine1MouseClicked
+        textFieldId.setText("");
+        txtFieldMedName.setText("");
+        txtFieldPrice.setText("");
+        txtFieldQuantity.setText("");
+    }//GEN-LAST:event_btnDeleteMedicine1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -557,7 +574,8 @@ public class Medicines extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable MedicineTable;
     private javax.swing.JButton btnAddMedicine;
-    private javax.swing.JButton btnDeleteMedicine;
+    private javax.swing.JButton btnClearMedicine;
+    private javax.swing.JButton btnDeleteMedicine1;
     private javax.swing.JButton btnUpdateMedicine;
     private javax.swing.JComboBox<String> comboBoxCompany;
     private com.toedter.calendar.JDateChooser dateExp;

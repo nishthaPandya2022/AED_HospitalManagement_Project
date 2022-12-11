@@ -369,12 +369,12 @@ public class Selling extends javax.swing.JFrame {
             if (i == 1)
             {
                 taBill.setText(taBill.getText()+"                 ********************************PharmaCentar********************************\n\n  "
-                    + "\t      ID     MEDICINE  QUANTITY   PRICE         TOTAL\n\t"
-                    + "      "+i+"        "+tbMedicine.getText()+"         "+tbQty.getText()+"          "+price+"      "+ Integer.valueOf(tbQty.getText())*price);
+                    + "\t ID               MEDICINE     QUANTITY      PRICE       TOTAL\n\t"
+                    + " "+i+"              "+tbMedicine.getText()+"           "+tbQty.getText()+"                "+price+"           "+ Integer.valueOf(tbQty.getText())*price);
             }
             else
             {
-                taBill.setText(taBill.getText()+"\n  \t      "+i+"        "+tbMedicine.getText()+"        "+tbQty.getText()+"          "+price+"        "+ Integer.valueOf(tbQty.getText())*price);
+                taBill.setText(taBill.getText()+"\n  \t "+i+"              "+tbMedicine.getText()+"           "+tbQty.getText()+"                "+price+"           "+ Integer.valueOf(tbQty.getText())*price);
             }
         }
     }//GEN-LAST:event_btnAddBillMouseClicked
