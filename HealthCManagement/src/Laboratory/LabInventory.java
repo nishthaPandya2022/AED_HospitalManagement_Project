@@ -22,8 +22,8 @@ public class LabInventory {
     static Connection sqliteConnection;
     static Statement statement;
     
-     private static String CREATE_ADDTEST_TABLE_SQL = "CREATE TABLE IF NOT EXISTS addtest ("
-            + "PateintId INTEGER(3) NOT NULL," + "DoctorName VARCHAR(50) NOT NULL,"
+     private static String CREATE_LABTEST_TABLE_SQL = "CREATE TABLE IF NOT EXISTS LABTEST ("
+            + "PateintId INTEGER(3) PRIMARY KEY NOT NULL," + "DoctorName VARCHAR(50) NOT NULL,"
             + "PatientName NOT NULL," + "Age INTEGER(3) NOT NULL," + "gender VARCHAR(6) NOT NULL,"
             + "BloodGroup VARCHAR(3) NOT NULL," + "Specimen VARCHAR(20) NOT NULL," +
              "Department VARCHAR(50) NOT NULL)";
