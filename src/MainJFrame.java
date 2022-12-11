@@ -42,6 +42,14 @@ public class MainJFrame extends javax.swing.JFrame {
             + "CompId INTEGER(3) PRIMARY KEY NOT NULL," + "CompName VARCHAR(50) NOT NULL,"
             + "CompAddress VARCHAR(200) NOT NULL," + "CompPhone INTEGER(11) NOT NULL," + "CompExp INTEGER(5) NOT NULL)";
 
+//     CREATING TABLES FOR BLOODBANK
+     
+     private static String CREATE_DONOR_TABLE_SQL = "CREATE TABLE IF NOT EXISTS donor ("
+            + "DonId INTEGER(3) PRIMARY KEY NOT NULL," + "DonName VARCHAR(50) NOT NULL,"
+            + "DonFather VARCHAR(200) NOT NULL," + "DonMother VARCHAR(200) NOT NULL," + "DonDob DATE NOT NULL,"
+            + "DonMobile INTEGER(11) NOT NULL," + "DonGend VARCHAR(50) NOT NULL," + "DonEmail VARCHAR(100) NOT NULL,"
+            + "DonBlood VARCHAR(10) NOT NULL," + "DonCity VARCHAR(200) NOT NULL," + "DonAddress VARCHAR(100) NOT NULL)";
+     
     /**
      * Creates new form MainJFrame
      */
@@ -184,6 +192,9 @@ public class MainJFrame extends javax.swing.JFrame {
                 statement.executeUpdate(CREATE_AGENT_TABLE_SQL);
                 statement.executeUpdate(CREATE_COMPANY_TABLE_SQL);
 //            
+//              BLOODBANK TABLES
+                statement.executeUpdate(CREATE_DONOR_TABLE_SQL);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
