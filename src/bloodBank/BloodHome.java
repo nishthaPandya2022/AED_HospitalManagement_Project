@@ -6,6 +6,7 @@ package bloodBank;
 
 import java.awt.Point;
 import javax.swing.JFrame;
+import ui.MainJFrame;
 
 /**
  *
@@ -132,13 +133,19 @@ public class BloodHome extends javax.swing.JFrame {
         jMenu4.setText("Exit");
 
         jMenuItem1.setText("Log Out");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem1);
 
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
-        pack();
+        setSize(new java.awt.Dimension(715, 603));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -159,7 +166,7 @@ public class BloodHome extends javax.swing.JFrame {
         JFrame ViewDonorFrame = new ViewDonor();
         ViewDonorFrame.setVisible(true);
         Point p = this.getLocationOnScreen();
-        ViewDonorFrame.setLocation(p.x + 50, p.y + 110);
+        ViewDonorFrame.setLocation(p.x + 60, p.y + 90);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -182,6 +189,16 @@ public class BloodHome extends javax.swing.JFrame {
         Point p = this.getLocationOnScreen();
         AddBloodFrame.setLocation(p.x + 80, p.y + 130);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       dispose();
+        MainJFrame mainFrame = new MainJFrame();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                mainFrame.setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments

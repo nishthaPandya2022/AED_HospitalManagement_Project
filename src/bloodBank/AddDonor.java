@@ -12,6 +12,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import org.sqlite.SQLiteDataSource;
+import ui.MainJFrame;
 
 /**
  *
@@ -414,7 +415,7 @@ public class AddDonor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddDonor().setVisible(true);
+                new MainJFrame().setVisible(true);
             }
         });
     }

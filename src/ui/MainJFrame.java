@@ -181,7 +181,8 @@ public class MainJFrame extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1114, 795));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void mainHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainHospitalActionPerformed
@@ -284,10 +285,8 @@ public class MainJFrame extends javax.swing.JFrame {
         }
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainJFrame().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MainJFrame().setVisible(true);
         });
     }
 
