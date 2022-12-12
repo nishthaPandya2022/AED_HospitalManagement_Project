@@ -32,7 +32,7 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
     static SQLiteDataSource ds = null;
     static Connection sqliteConnection;
 
-    String GET_ALL_PATIENTS_FROM_HOSPITAL = "SELECT userID, name, DOB, age, organization, phoneNumber, address, community, state, zipcode, role from hospital WHERE role=\"Patient\"";
+    String GET_ALL_PATIENTS_FROM_HOSPITAL = "SELECT userID, name, DOB, age, organization, email, address, community, state, zipcode, role from hospital WHERE role=\"Patient\"";
 
     private static final String GET_DATA_COUNT_FROM_HOSPITAL = "SELECT count(*) from hospital";
 
@@ -355,7 +355,7 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
                 int age = calculateAge(localDOB);
                 hospUser.setAge(String.valueOf(age));
                 hospUser.setOrganization("Null");
-                hospUser.setPhoneNumber(editRegPatientPhoneNumber);
+                hospUser.setEmail(editRegPatientPhoneNumber);
                 hospUser.setAddress(editRegPatientAddress);
                 hospUser.setCommunity(editRegPatientCommunity);
                 hospUser.setState(editRegPatientState);
@@ -429,7 +429,7 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
                     + "(userID, name, DOB, age, organization, phoneNumber, address, community, state, zipcode, role)"
                     + "VALUES ('" + hospUser.getUserID() + "','" + hospUser.getName()
                     + "','" + hospUser.getDOB() + "','" + hospUser.getAge()
-                    + "','" + hospUser.getOrganization() + "','" + hospUser.getPhoneNumber()
+                    + "','" + hospUser.getOrganization() + "','" + hospUser.getEmail()
                     + "','" + hospUser.getAddress() + "','" + hospUser.getCommunity()
                     + "','" + hospUser.getState() + "','" + hospUser.getZipcode()
                     + "','" + hospUser.getRole() + "');";
