@@ -50,6 +50,9 @@ public class MainJFrame extends javax.swing.JFrame {
             + "DonMobile INTEGER(11) NOT NULL," + "DonGend VARCHAR(50) NOT NULL," + "DonEmail VARCHAR(100) NOT NULL,"
             + "DonBlood VARCHAR(10) NOT NULL," + "DonCity VARCHAR(200) NOT NULL," + "DonAddress VARCHAR(100) NOT NULL)";
      
+     private static String CREATE_STOCK_TABLE_SQL = "CREATE TABLE IF NOT EXISTS stock ("
+            + "BloodGroup VARCHAR(20) NOT NULL," + "BloodUnits INTEGER(100) NOT NULL)";
+     
     /**
      * Creates new form MainJFrame
      */
@@ -194,6 +197,7 @@ public class MainJFrame extends javax.swing.JFrame {
 //            
 //              BLOODBANK TABLES
                 statement.executeUpdate(CREATE_DONOR_TABLE_SQL);
+                statement.executeUpdate(CREATE_STOCK_TABLE_SQL);
 
             }
         } catch (Exception e) {

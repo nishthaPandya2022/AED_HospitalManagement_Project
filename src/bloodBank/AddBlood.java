@@ -4,6 +4,16 @@
  */
 package bloodBank;
 
+import static bloodBank.AddDonor.sqliteConnection;
+import static bloodBank.ViewDonor.ps;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+import org.sqlite.SQLiteDataSource;
+
 /**
  *
  * @author ADMIN
@@ -15,6 +25,7 @@ public class AddBlood extends javax.swing.JFrame {
      */
     public AddBlood() {
         initComponents();
+        GetAllStocks();
     }
 
     /**
@@ -35,10 +46,16 @@ public class AddBlood extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        StockTable = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Algerian", 1, 36)); // NOI18N
@@ -71,7 +88,7 @@ public class AddBlood extends javax.swing.JFrame {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 97, -1, -1));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 133, 528, 10));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        StockTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -82,20 +99,70 @@ public class AddBlood extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(StockTable);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 149, -1, 209));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, 209));
+
+        jButton2.setText("Close");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bloodBank/all page background image.png"))); // NOI18N
         jLabel4.setText("jLabel4");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 380));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 410));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       String bloodgroup = (String) jComboBox1.getSelectedItem();
+       String unit = jTextField1.getText();
+       int unit1 = Integer.parseInt(unit);
+       
+       try {
+           ps = new SQLiteDataSource();
+           
+           ps.setUrl("jdbc:sqlite:hospManagement.db");
+           sqliteConnection = ps.getConnection();
+        
+           String command = "update stock set BloodUnits=BloodUnits + '"+unit1+"' where BloodGroup='"+bloodgroup+"'" ;
+           PreparedStatement p2p = sqliteConnection.prepareStatement(command);
+           boolean output = p2p.execute();
+           JOptionPane.showMessageDialog(this, "Units Successfully Added!");
+           GetAllStocks();
+           sqliteConnection.close();
+           
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        setVisible(false); 
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+       try {
+           ps = new SQLiteDataSource();
+            
+           ps.setUrl("jdbc:sqlite:hospManagement.db");
+           sqliteConnection = ps.getConnection();
+        
+           String command = "Select * from stock";
+           Statement p2p = sqliteConnection.createStatement();
+           ResultSet rs = p2p.executeQuery(command);
+           StockTable.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments
@@ -133,7 +200,9 @@ public class AddBlood extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable StockTable;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -142,7 +211,24 @@ public class AddBlood extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    private void GetAllStocks() {
+        try {
+           ps = new SQLiteDataSource();
+            
+           ps.setUrl("jdbc:sqlite:hospManagement.db");
+           sqliteConnection = ps.getConnection();
+        
+           String command = "Select * from stock";
+           Statement p2p = sqliteConnection.createStatement();
+           ResultSet rs = p2p.executeQuery(command);
+           StockTable.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
 }
