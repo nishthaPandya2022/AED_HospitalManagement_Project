@@ -53,6 +53,7 @@ public class MainJFrame extends javax.swing.JFrame {
      private static String CREATE_STOCK_TABLE_SQL = "CREATE TABLE IF NOT EXISTS stock ("
             + "BloodGroup VARCHAR(20) NOT NULL," + "BloodUnits INTEGER(100) NOT NULL)";
      
+     
     /**
      * Creates new form MainJFrame
      */
@@ -198,7 +199,14 @@ public class MainJFrame extends javax.swing.JFrame {
 //              BLOODBANK TABLES
                 statement.executeUpdate(CREATE_DONOR_TABLE_SQL);
                 statement.executeUpdate(CREATE_STOCK_TABLE_SQL);
-
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('A+',0)");
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('A-',0)");
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('B+',0)");
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('B-',0)");
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('0+',0)");
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('O-',0)");
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('AB+',0)");
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('AB-',0)");
             }
         } catch (Exception e) {
             e.printStackTrace();
