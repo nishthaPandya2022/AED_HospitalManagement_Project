@@ -21,6 +21,7 @@ import java.sql.Date;
  * @author nishthapandya
  */
 public class AddMembersJPanel extends javax.swing.JPanel {
+
     private static final String GET_DATA_FROM_HOSPITAL = "SELECT * FROM hospital";
 
     private static final String GET_DATA_COUNT_FROM_HOSPITAL = "SELECT count(*) from hospital";
@@ -260,6 +261,20 @@ public class AddMembersJPanel extends javax.swing.JPanel {
             hospUser.setState(txtFieldState.getText());
             hospUser.setZipcode(txtFieldZipCode.getText());
             hospUser.setRole(comboBoxRole.getSelectedItem().toString());
+
+//            
+//            try {
+//                if (service.checkDuplicateUser(user.getUserName())) {
+//                    showMessage(Message.MessageType.ERROR, "User name already exit");
+//                } else if (service.checkDuplicateEmail(user.getEmail())) {
+//                    showMessage(Message.MessageType.ERROR, "Email already exit");
+//                } else {
+//                    service.insertUser(user);
+//                    sendMain(user);
+//                }
+//            } catch (SQLException e) {
+//                showMessage(Message.MessageType.ERROR, "Error Register");
+//            }
 
             boolean dataInserted = insertDataToDB(hospUser);
             System.out.println("dataInserted : " + dataInserted);

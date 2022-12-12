@@ -251,14 +251,9 @@ public class AdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_bAllNursesActionPerformed
 
     private void bLabAssistantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLabAssistantActionPerformed
-        // TODO add your handling code here:
-//        dispose();
-//        MainJFrame mainFrame = new MainJFrame(listOfCredentials);
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                mainFrame.setVisible(true);
-//            }
-//        });
+        
+        AllLabAssistantJPanel labAssistant = new AllLabAssistantJPanel(ds, sqliteConnection);
+        jSplitPane.setRightComponent(labAssistant);
     }//GEN-LAST:event_bLabAssistantActionPerformed
 
     private void bInternDoctorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInternDoctorsActionPerformed
