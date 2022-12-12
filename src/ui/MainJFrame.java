@@ -27,7 +27,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private static final String CREATE_HOSPITAL_TABLE_SQL = "CREATE TABLE IF NOT EXISTS hospital ("
             + "userID VARCHAR(200) NOT NULL," + "name VARCHAR(200) NOT NULL,"
             + "DOB VARCHAR(200) NOT NULL," + "age VARCHAR(200) NOT NULL,"
-            + "organization VARCHAR(200) NOT NULL," + "phoneNumber VARCHAR(200) NOT NULL,"
+            + "organization VARCHAR(200) NOT NULL," + "email VARCHAR(200) NOT NULL,"
             + "address VARCHAR(200) NOT NULL," + "community VARCHAR(200) NOT NULL,"
             + "state VARCHAR(200) NOT NULL," + "zipcode VARCHAR(200) NOT NULL,"
             + "role VARCHAR(200) NOT NULL);";
@@ -57,19 +57,19 @@ public class MainJFrame extends javax.swing.JFrame {
             + "CompId INTEGER(3) PRIMARY KEY NOT NULL," + "CompName VARCHAR(50) NOT NULL,"
             + "CompAddress VARCHAR(200) NOT NULL," + "CompPhone INTEGER(11) NOT NULL," + "CompExp INTEGER(5) NOT NULL)";
     
-    private static String CREATE_LABTEST_TABLE_SQL = "CREATE TABLE IF NOT EXISTS labtest ("
+    private static final String CREATE_LABTEST_TABLE_SQL = "CREATE TABLE IF NOT EXISTS labtest ("
             + "Pateint_ID INTEGER(3) PRIMARY KEY NOT NULL," + "DoctorName VARCHAR(50) NOT NULL,"
             + "Name VARCHAR(20) NOT NULL," + "Age INTEGER(3) NOT NULL," + "gender VARCHAR(6) NOT NULL,"
             + "Blood_Group VARCHAR(3) NOT NULL," + "Tests VARCHAR(20) NOT NULL," +
              "Department VARCHAR(50) NOT NULL)";
     
-    private static String CREATE_DONOR_TABLE_SQL = "CREATE TABLE IF NOT EXISTS donor ("
+    private static final String CREATE_DONOR_TABLE_SQL = "CREATE TABLE IF NOT EXISTS donor ("
             + "DonId INTEGER(3) PRIMARY KEY NOT NULL," + "DonName VARCHAR(50) NOT NULL,"
             + "DonFather VARCHAR(200) NOT NULL," + "DonMother VARCHAR(200) NOT NULL," + "DonDob DATE NOT NULL,"
             + "DonMobile INTEGER(11) NOT NULL," + "DonGend VARCHAR(50) NOT NULL," + "DonEmail VARCHAR(100) NOT NULL,"
             + "DonBlood VARCHAR(10) NOT NULL," + "DonCity VARCHAR(200) NOT NULL," + "DonAddress VARCHAR(100) NOT NULL)";
      
-     private static String CREATE_STOCK_TABLE_SQL = "CREATE TABLE IF NOT EXISTS stock ("
+     private static final String CREATE_STOCK_TABLE_SQL = "CREATE TABLE IF NOT EXISTS stock ("
             + "BloodGroup VARCHAR(20) NOT NULL," + "BloodUnits INTEGER(100) NOT NULL)";
      
      

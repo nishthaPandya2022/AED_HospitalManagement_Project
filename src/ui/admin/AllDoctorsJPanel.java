@@ -31,7 +31,7 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
     static SQLiteDataSource ds = null;
     static Connection sqliteConnection;
 
-    String GET_ALL_DOCTORS_FROM_HOSPITAL = "SELECT userID, name, DOB, age, organization, phoneNumber, address, community, state, zipcode, role from hospital WHERE role=\"Doctor\"";
+    String GET_ALL_DOCTORS_FROM_HOSPITAL = "SELECT userID, name, DOB, age, organization, email, address, community, state, zipcode, role from hospital WHERE role=\"Doctor\"";
 
     //    private static final String INSERT_DATA_INTO_HOSPITAL = "CREATE TABLE IF NOT EXISTS hospital ("
 //            + "userID VARCHAR(200) NOT NULL," + "name VARCHAR(200) NOT NULL,"

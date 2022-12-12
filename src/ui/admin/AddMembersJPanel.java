@@ -21,14 +21,6 @@ import java.sql.Date;
  * @author nishthapandya
  */
 public class AddMembersJPanel extends javax.swing.JPanel {
-
-//    private static final String INSERT_DATA_INTO_HOSPITAL = "CREATE TABLE IF NOT EXISTS hospital ("
-//            + "userID VARCHAR(200) NOT NULL," + "name VARCHAR(200) NOT NULL,"
-//            + "DOB VARCHAR(200) NOT NULL," + "age VARCHAR(200) NOT NULL,"
-//            + "organization VARCHAR(200) NOT NULL," + "phoneNumber VARCHAR(200) NOT NULL,"
-//            + "address VARCHAR(200) NOT NULL," + "community VARCHAR(200) NOT NULL,"
-//            + "state VARCHAR(200) NOT NULL," + "zipcode VARCHAR(200) NOT NULL,"
-//            + "role VARCHAR(200) NOT NULL);";
     private static final String GET_DATA_FROM_HOSPITAL = "SELECT * FROM hospital";
 
     private static final String GET_DATA_COUNT_FROM_HOSPITAL = "SELECT count(*) from hospital";
@@ -67,9 +59,9 @@ public class AddMembersJPanel extends javax.swing.JPanel {
         comboBoxOrganization = new javax.swing.JComboBox<>();
         lblAddMemberAddress = new javax.swing.JLabel();
         lblAddMemberCommunity = new javax.swing.JLabel();
-        lblAddMemberPhoneNumber = new javax.swing.JLabel();
+        lblAddMemberEmail = new javax.swing.JLabel();
         lblAddMemberCity = new javax.swing.JLabel();
-        txtFieldPhoneNumber = new javax.swing.JTextField();
+        txtFieldEmail = new javax.swing.JTextField();
         txtFieldAddress = new javax.swing.JTextField();
         txtFieldCommunity = new javax.swing.JTextField();
         txtFieldCity = new javax.swing.JTextField();
@@ -101,13 +93,13 @@ public class AddMembersJPanel extends javax.swing.JPanel {
 
         lblAddMemberCommunity.setText("Community :");
 
-        lblAddMemberPhoneNumber.setText("Phone Number :");
+        lblAddMemberEmail.setText("Email :");
 
         lblAddMemberCity.setText("City :");
 
-        txtFieldPhoneNumber.addActionListener(new java.awt.event.ActionListener() {
+        txtFieldEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFieldPhoneNumberActionPerformed(evt);
+                txtFieldEmailActionPerformed(evt);
             }
         });
 
@@ -145,12 +137,12 @@ public class AddMembersJPanel extends javax.swing.JPanel {
                     .addComponent(lblAddMemberRole)
                     .addComponent(lblDateOfBirth)
                     .addComponent(lblAddMemberName)
-                    .addComponent(lblAddMemberPhoneNumber)
+                    .addComponent(lblAddMemberEmail)
                     .addComponent(lblAddMemberOrganization))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(comboBoxOrganization, 0, 1, Short.MAX_VALUE)
-                    .addComponent(txtFieldPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                    .addComponent(txtFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                     .addComponent(txtFieldMemberName)
                     .addComponent(comboBoxRole, 0, 1, Short.MAX_VALUE)
                     .addComponent(dateChooserDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -216,8 +208,8 @@ public class AddMembersJPanel extends javax.swing.JPanel {
                     .addComponent(txtFieldState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAddMemberPhoneNumber)
-                    .addComponent(txtFieldPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAddMemberEmail)
+                    .addComponent(txtFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblAddMemberZipCode)
                     .addComponent(txtFieldZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
@@ -226,9 +218,9 @@ public class AddMembersJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFieldPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldPhoneNumberActionPerformed
+    private void txtFieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtFieldPhoneNumberActionPerformed
+    }//GEN-LAST:event_txtFieldEmailActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
@@ -262,7 +254,7 @@ public class AddMembersJPanel extends javax.swing.JPanel {
             hospUser.setDOB(Date.valueOf(((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText()));
             hospUser.setAge(String.valueOf(age));
             hospUser.setOrganization(organization);
-            hospUser.setPhoneNumber(txtFieldPhoneNumber.getText());
+            hospUser.setEmail(txtFieldEmail.getText());
             hospUser.setAddress(txtFieldAddress.getText());
             hospUser.setCommunity(txtFieldCommunity.getText());
             hospUser.setState(txtFieldState.getText());
@@ -299,9 +291,9 @@ public class AddMembersJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblAddMemberAddress;
     private javax.swing.JLabel lblAddMemberCity;
     private javax.swing.JLabel lblAddMemberCommunity;
+    private javax.swing.JLabel lblAddMemberEmail;
     private javax.swing.JLabel lblAddMemberName;
     private javax.swing.JLabel lblAddMemberOrganization;
-    private javax.swing.JLabel lblAddMemberPhoneNumber;
     private javax.swing.JLabel lblAddMemberRole;
     private javax.swing.JLabel lblAddMemberState;
     private javax.swing.JLabel lblAddMemberZipCode;
@@ -309,8 +301,8 @@ public class AddMembersJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtFieldAddress;
     private javax.swing.JTextField txtFieldCity;
     private javax.swing.JTextField txtFieldCommunity;
+    private javax.swing.JTextField txtFieldEmail;
     private javax.swing.JTextField txtFieldMemberName;
-    private javax.swing.JTextField txtFieldPhoneNumber;
     private javax.swing.JTextField txtFieldState;
     private javax.swing.JTextField txtFieldZipCode;
     // End of variables declaration//GEN-END:variables
@@ -319,7 +311,7 @@ public class AddMembersJPanel extends javax.swing.JPanel {
 
         int loginID;
         boolean output;
-        String username = hospUser.getName() + hospUser.getUserID();
+        String username = hospUser.getEmail();
         String password = hospUser.getRole() + hospUser.getUserID() + hospUser.getAge();
         String GET_DATA_COUNT_FROM_LOGIN = "SELECT count(*) from login;";
 
@@ -332,10 +324,10 @@ public class AddMembersJPanel extends javax.swing.JPanel {
             System.out.println("after update loginID : " + loginID);
 
             String INSERT_DATA_INTO_HOSPITAL = "INSERT INTO hospital"
-                    + "(userID, name, DOB, age, organization, phoneNumber, address, community, state, zipcode, role)"
+                    + "(userID, name, DOB, age, organization, email, address, community, state, zipcode, role)"
                     + "VALUES ('" + hospUser.getUserID() + "','" + hospUser.getName()
                     + "','" + hospUser.getDOB() + "','" + hospUser.getAge()
-                    + "','" + hospUser.getOrganization() + "','" + hospUser.getPhoneNumber()
+                    + "','" + hospUser.getOrganization() + "','" + hospUser.getEmail()
                     + "','" + hospUser.getAddress() + "','" + hospUser.getCommunity()
                     + "','" + hospUser.getState() + "','" + hospUser.getZipcode()
                     + "','" + hospUser.getRole() + "');";

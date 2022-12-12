@@ -32,13 +32,13 @@
                   <Component id="lblAddMemberRole" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="lblDateOfBirth" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="lblAddMemberName" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblAddMemberPhoneNumber" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblAddMemberEmail" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="lblAddMemberOrganization" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="comboBoxOrganization" pref="0" max="32767" attributes="0"/>
-                  <Component id="txtFieldPhoneNumber" alignment="0" pref="108" max="32767" attributes="0"/>
+                  <Component id="txtFieldEmail" alignment="0" pref="118" max="32767" attributes="0"/>
                   <Component id="txtFieldMemberName" alignment="0" max="32767" attributes="0"/>
                   <Component id="comboBoxRole" pref="0" max="32767" attributes="0"/>
                   <Component id="dateChooserDOB" pref="0" max="32767" attributes="0"/>
@@ -122,8 +122,8 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblAddMemberPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtFieldPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblAddMemberEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtFieldEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblAddMemberZipCode" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtFieldZipCode" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -198,9 +198,9 @@
         <Property name="text" type="java.lang.String" value="Community :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblAddMemberPhoneNumber">
+    <Component class="javax.swing.JLabel" name="lblAddMemberEmail">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Phone Number :"/>
+        <Property name="text" type="java.lang.String" value="Email :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblAddMemberCity">
@@ -208,9 +208,9 @@
         <Property name="text" type="java.lang.String" value="City :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtFieldPhoneNumber">
+    <Component class="javax.swing.JTextField" name="txtFieldEmail">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFieldPhoneNumberActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFieldEmailActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtFieldAddress">

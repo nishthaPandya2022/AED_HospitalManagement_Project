@@ -29,7 +29,7 @@ public class AllPatientsJPanel extends javax.swing.JPanel {
     static SQLiteDataSource ds = null;
     static Connection sqliteConnection;
 
-    String GET_ALL_PATIENTS_FROM_HOSPITAL = "SELECT userID, name, DOB, age, organization, phoneNumber, address, community, state, zipcode, role from hospital WHERE role=\"Patient\"";
+    String GET_ALL_PATIENTS_FROM_HOSPITAL = "SELECT userID, name, DOB, age, organization, email, address, community, state, zipcode, role from hospital WHERE role=\"Patient\"";
 
     /**
      * Creates new form AllPatientsJPanel
