@@ -132,6 +132,11 @@ public class AdminJFrame extends javax.swing.JFrame {
         });
 
         bPharmacist.setText("Pharmacist");
+        bPharmacist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bPharmacistActionPerformed(evt);
+            }
+        });
 
         bPathologist.setText("Pathologist");
 
@@ -281,6 +286,12 @@ public class AdminJFrame extends javax.swing.JFrame {
         AddMembersJPanel addMembers = new AddMembersJPanel(ds, sqliteConnection);
         jSplitPane.setRightComponent(addMembers);
     }//GEN-LAST:event_bAddMembersActionPerformed
+
+    private void bPharmacistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPharmacistActionPerformed
+        // TODO add your handling code here:
+        AllPharmacistJPanel pharmacist = new AllPharmacistJPanel(ds, sqliteConnection);
+        jSplitPane.setRightComponent(pharmacist);
+    }//GEN-LAST:event_bPharmacistActionPerformed
 
     /**
      * @param args the command line arguments
