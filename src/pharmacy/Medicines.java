@@ -199,6 +199,11 @@ public class Medicines extends javax.swing.JFrame {
                 btnClearMedicineMouseClicked(evt);
             }
         });
+        btnClearMedicine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearMedicineActionPerformed(evt);
+            }
+        });
 
         MedicineTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -544,6 +549,10 @@ public class Medicines extends javax.swing.JFrame {
         txtFieldQuantity.setText("");
        
     }//GEN-LAST:event_btnDeleteMedicine1MouseClicked
+
+    private void btnClearMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearMedicineActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnClearMedicineActionPerformed
 
     /**
      * @param args the command line arguments

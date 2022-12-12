@@ -1,4 +1,5 @@
 
+import bloodBank.BloodHome;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.io.File;
@@ -95,6 +96,11 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         mainBloodBank.setText("Blood Bank");
+        mainBloodBank.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainBloodBankActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,6 +144,11 @@ public class MainJFrame extends javax.swing.JFrame {
         new Medicines().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_mainPharmacyActionPerformed
+
+    private void mainBloodBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainBloodBankActionPerformed
+       new BloodHome().setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_mainBloodBankActionPerformed
 
     /**
      * @param args the command line arguments

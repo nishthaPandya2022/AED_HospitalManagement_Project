@@ -129,7 +129,7 @@ public class SearchDonorLocation extends javax.swing.JFrame {
        String searchBlood = "";
         try {
            ps = new SQLiteDataSource();
-           if (blood != null) 
+           if (!blood.isBlank()) 
            {
                searchBlood = "and DonBlood like '%"+blood+"%'";
            }
@@ -155,14 +155,14 @@ public class SearchDonorLocation extends javax.swing.JFrame {
         String searchAddress = "";
        try {
            ps = new SQLiteDataSource();
-           if (blood != null) 
+           if (!address.isBlank()) 
            {
-               searchAddress = "and DonCity like '%"+address+"%' or DonAddress like '%"+address+"%'";
+               searchAddress = "and (DonCity like '%"+address+"%' or DonAddress like '%"+address+"%')";
            }
            ps.setUrl("jdbc:sqlite:hospManagement.db");
            sqliteConnection = ps.getConnection();
         
-           String command = "Select * from donor where DonBlood like '%"+blood+"%'"  + searchAddress;
+           String command = "Select * from donor where DonBlood like '%"+blood+"%'" + searchAddress;
            Statement p2p = sqliteConnection.createStatement();
            ResultSet rs = p2p.executeQuery(command);
            SearchTable.setAutoResizeMode(SearchTable.AUTO_RESIZE_OFF);

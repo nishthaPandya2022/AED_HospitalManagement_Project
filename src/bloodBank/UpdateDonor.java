@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import org.sqlite.SQLiteDataSource;
 import java.sql.ResultSet;
 import javax.swing.JTextField;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -24,6 +25,7 @@ public class UpdateDonor extends javax.swing.JFrame {
      */
     public UpdateDonor() {
         initComponents();
+        
     }
     
     static Connection sqliteConnection;
@@ -71,7 +73,8 @@ public class UpdateDonor extends javax.swing.JFrame {
         txtFieldDob = new javax.swing.JTextField();
         txtFieldGend = new javax.swing.JTextField();
         txtFieldBlood = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -187,7 +190,7 @@ public class UpdateDonor extends javax.swing.JFrame {
                 btnDonResetActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDonReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, -1, -1));
+        getContentPane().add(btnDonReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, -1, -1));
 
         btnDonClose.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnDonClose.setText("Close");
@@ -196,7 +199,7 @@ public class UpdateDonor extends javax.swing.JFrame {
                 btnDonCloseActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
+        getContentPane().add(btnDonClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, -1, -1));
         getContentPane().add(txtFieldDonId, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 84, -1));
 
         btnDonSearch.setText("Search");
@@ -217,9 +220,18 @@ public class UpdateDonor extends javax.swing.JFrame {
         txtFieldBlood.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(txtFieldBlood, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 210, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bloodBank/all page background image.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 460));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setText("Delete");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bloodBank/all page background image.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -317,6 +329,34 @@ public class UpdateDonor extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnDonSearchActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (txtFieldDonId.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Enter ID of The Donor To Be Deleted....");
+        }
+        else
+        {
+            try {
+                ps = new SQLiteDataSource();
+            
+                ps.setUrl("jdbc:sqlite:hospManagement.db");
+                sqliteConnection = ps.getConnection();
+                String id = txtFieldDonId.getText();
+                String queryDeleteAgent = "Delete from donor where DonId = " + id;
+                
+                PreparedStatement p2p = sqliteConnection.prepareStatement(queryDeleteAgent);
+                boolean output = p2p.execute();
+                
+                
+                JOptionPane.showMessageDialog(this, "Donor Successfully Deleted!");
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -357,8 +397,9 @@ public class UpdateDonor extends javax.swing.JFrame {
     private javax.swing.JButton btnDonReset;
     private javax.swing.JButton btnDonSave;
     private javax.swing.JButton btnDonSearch;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -387,4 +428,6 @@ public class UpdateDonor extends javax.swing.JFrame {
     private javax.swing.JTextField txtFieldMotName;
     private javax.swing.JTextField txtFieldName;
     // End of variables declaration//GEN-END:variables
+
+    
 }
