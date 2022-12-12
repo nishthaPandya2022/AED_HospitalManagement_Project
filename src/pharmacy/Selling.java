@@ -54,7 +54,7 @@ public class Selling extends javax.swing.JFrame {
                 st.executeUpdate(queryUpdate);
                 
                 GetAllMedicines();
-                JOptionPane.showMessageDialog(this, "Quantity of medicine Successfully Updated!");
+                JOptionPane.showMessageDialog(this, "Bill Successfully Added!");
                 
             } catch (SQLException ex) {
                 ex.printStackTrace();
