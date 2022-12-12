@@ -29,6 +29,40 @@ public class Company extends javax.swing.JFrame {
         initComponents();
         GetAllCompanies();
     }
+    
+     public boolean validatedata(){
+        
+        
+        if ("".equals(txtFieldCompanyId.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Id.");
+            return false;
+        }
+        if ("".equals(textFieldCompanyName.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Name.");
+            return false;
+        }
+        if (!textFieldCompanyName.getText().matches("[a-zA-Z]+")){
+            JOptionPane.showMessageDialog(this, "Enter Proper Name.");
+            return false;
+        }
+        if ("".equals(txtFieldCompanyAddress.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Address.");
+            return false;
+        }
+        
+        if ("".equals(textFieldCompanyPhone.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Mobile Number.");
+            return false;
+        }
+        
+        if ("".equals(txtFieldExp.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Mobile Number.");
+            return false;
+        }
+        
+        
+        return true;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -341,30 +375,32 @@ public class Company extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddCompanyMouseClicked
-
-        try {
-            ps = new SQLiteDataSource();
             
-            ps.setUrl("jdbc:sqlite:hospManagement.db");
-            sqliteConnection = ps.getConnection();
-            String commandCompany = "insert into company (CompId, CompName, CompAddress, CompPhone, CompExp ) values (?,?,?,?,?)";
+        if (validatedata()) {
+            try {
+                ps = new SQLiteDataSource();
 
-            PreparedStatement p2p = sqliteConnection.prepareStatement(commandCompany);
+                ps.setUrl("jdbc:sqlite:hospManagement.db");
+                sqliteConnection = ps.getConnection();
+                String commandCompany = "insert into company (CompId, CompName, CompAddress, CompPhone, CompExp ) values (?,?,?,?,?)";
 
-            p2p.setInt(1, Integer.valueOf(txtFieldCompanyId.getText()));
-            p2p.setString(2, textFieldCompanyName.getText());
-            p2p.setString(3, txtFieldCompanyAddress.getText());
-            p2p.setInt(4, Integer.valueOf(txtFieldExp.getText()));
-            p2p.setString(5, textFieldCompanyPhone.getText());
+                PreparedStatement p2p = sqliteConnection.prepareStatement(commandCompany);
 
-            boolean output = p2p.execute();
-            JOptionPane.showMessageDialog(this, "Company Successfully Added!");
-            sqliteConnection.close();
-            GetAllCompanies();
+                p2p.setInt(1, Integer.valueOf(txtFieldCompanyId.getText()));
+                p2p.setString(2, textFieldCompanyName.getText());
+                p2p.setString(3, txtFieldCompanyAddress.getText());
+                p2p.setInt(4, Integer.valueOf(txtFieldExp.getText()));
+                p2p.setString(5, textFieldCompanyPhone.getText());
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+                boolean output = p2p.execute();
+                JOptionPane.showMessageDialog(this, "Company Successfully Added!");
+                sqliteConnection.close();
+                GetAllCompanies();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
         }
     }//GEN-LAST:event_btnAddCompanyMouseClicked
 
