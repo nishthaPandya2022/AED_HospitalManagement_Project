@@ -28,6 +28,84 @@ public class UpdateDonor extends javax.swing.JFrame {
         
     }
     
+        public boolean validatedata(){
+        
+        
+        if ("".equals(txtFieldName.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Name.");
+            return false;
+        }
+        if (!txtFieldName.getText().matches("[a-zA-Z]+")){
+            JOptionPane.showMessageDialog(this, "Enter Proper Name.");
+            return false;
+        }
+        if ("".equals(txtFieldFatName.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Name.");
+            return false;
+        }
+        if (!txtFieldFatName.getText().matches("[a-zA-Z]+")){
+            JOptionPane.showMessageDialog(this, "Enter Proper Name.");
+            return false;
+        }
+        if ("".equals(txtFieldMotName.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Name.");
+            return false;
+        }
+        if (!txtFieldMotName.getText().matches("[a-zA-Z]+")){
+            JOptionPane.showMessageDialog(this, "Enter Proper Name.");
+            return false;
+        }
+        if ("".equals(txtFieldDob.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Date of Birth.");
+            return false;
+        }
+
+        if ("".equals(txtFieldMob.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Mobile Number.");
+            return false;
+        }
+        if (!txtFieldMob.getText().matches("^(\\+\\d{1,2}\\s?)?1?\\-?\\.?\\s?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$")){
+            JOptionPane.showMessageDialog(this, "Enter Mobile Number in  format 1-(xxx)-(xxx)-(XXXX)!");
+            return false;
+        }
+        if ("".equals(txtFieldGend.getText())) {
+            JOptionPane.showMessageDialog(this, "Enter Gender.");
+            return false;
+        }
+        
+        if("".equals(txtFieldEmail.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Email.");
+            return false;
+        }
+        if(!txtFieldEmail.getText().matches("^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")){
+            JOptionPane.showMessageDialog(this, "Enter proper Email");
+            return false;
+        }
+        if("".equals(txtFieldBlood.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Blood Group.");
+            return false;
+        }
+        
+        if("".equals(txtFieldCity.getText())){
+            JOptionPane.showMessageDialog(this, "Enter City.");
+            return false;
+        }
+        if(!txtFieldCity.getText().matches("[a-zA-Z]+")){
+            JOptionPane.showMessageDialog(this, "Enter proper City.");
+            return false;
+        }
+        if("".equals(txtFieldAddress.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Address.");
+            return false;
+        }
+        if(!txtFieldAddress.getText().matches("[a-zA-Z0-9 ]+")){
+            JOptionPane.showMessageDialog(this, "Enter proper Address.");
+            return false;
+        }
+        
+        return true;
+    }
+    
     static Connection sqliteConnection;
     static Statement statement;
     static SQLiteDataSource ps = null;
@@ -251,23 +329,25 @@ public class UpdateDonor extends javax.swing.JFrame {
 
     private void btnDonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonSaveActionPerformed
 
-        try {
+        if (validatedata()){
+            try {
 
-            ps = new SQLiteDataSource();
-            String id = txtFieldDonId.getText();
-            ps.setUrl("jdbc:sqlite:hospManagement.db");
-            sqliteConnection = ps.getConnection();
-            String queryUpdate = "update donor set DonName = '" + txtFieldName.getText() + "'" + ",DonFather = '" + txtFieldFatName.getText() + "'" + ",DonMother= '" + txtFieldMotName.getText() + "'" + ",Dondob = '" + txtFieldDob.getText() + "'" + ",DonMobile = '" + txtFieldMob.getText() + "'" + ",DonGend = '" + txtFieldGend.getText() + "'" + ",DonEmail = '" + txtFieldEmail.getText() + "'" + ",DonBlood = '" + txtFieldBlood.getText() + "'" +  ",DonCity = '" + txtFieldCity.getText() + "'" + ",DonAddress = '" + txtFieldAddress.getText() + "'" + "where DonId = " + id;
+                ps = new SQLiteDataSource();
+                String id = txtFieldDonId.getText();
+                ps.setUrl("jdbc:sqlite:hospManagement.db");
+                sqliteConnection = ps.getConnection();
+                String queryUpdate = "update donor set DonName = '" + txtFieldName.getText() + "'" + ",DonFather = '" + txtFieldFatName.getText() + "'" + ",DonMother= '" + txtFieldMotName.getText() + "'" + ",Dondob = '" + txtFieldDob.getText() + "'" + ",DonMobile = '" + txtFieldMob.getText() + "'" + ",DonGend = '" + txtFieldGend.getText() + "'" + ",DonEmail = '" + txtFieldEmail.getText() + "'" + ",DonBlood = '" + txtFieldBlood.getText() + "'" +  ",DonCity = '" + txtFieldCity.getText() + "'" + ",DonAddress = '" + txtFieldAddress.getText() + "'" + "where DonId = " + id;
 
-            PreparedStatement p2p = sqliteConnection.prepareStatement(queryUpdate);
-            boolean output = p2p.execute();
+                PreparedStatement p2p = sqliteConnection.prepareStatement(queryUpdate);
+                boolean output = p2p.execute();
 
-            JOptionPane.showMessageDialog(this, "Donor Successfully Updated!");
-            sqliteConnection.close();
+                JOptionPane.showMessageDialog(this, "Donor Successfully Updated!");
+                sqliteConnection.close();
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
         }
     }//GEN-LAST:event_btnDonSaveActionPerformed
 
@@ -285,7 +365,7 @@ public class UpdateDonor extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this, "Enter ID of The Donor To Be Searched....");
         }
-        else
+       else
         {
             
             String id = txtFieldDonId.getText();
