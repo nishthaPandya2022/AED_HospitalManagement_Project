@@ -85,6 +85,23 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
+    
+    private void getPatientHist(){
+        try {
+            ps = new SQLiteDataSource();
+
+            ps.setUrl("jdbc:sqlite:hospManagement.db");
+            sqliteConnection = ps.getConnection();
+
+            String command = "Select * from dummy";
+            Statement p2p = sqliteConnection.createStatement();
+            ResultSet rs = p2p.executeQuery(command);
+            tblPatientHist.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -120,8 +137,9 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
         txtPatientID = new javax.swing.JTextField();
         jButtonClear = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 51, 51));
+        setBackground(new java.awt.Color(0, 153, 204));
         setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
@@ -178,6 +196,11 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
 
         btnPatHist.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
         btnPatHist.setText("Click to get medical history of the patient");
+        btnPatHist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPatHistMouseClicked(evt);
+            }
+        });
 
         txtComboSpecimen.setFont(new java.awt.Font("Arima Koshi", 0, 12)); // NOI18N
         txtComboSpecimen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Select>", "MRI(Radiology)", "MRA(Radiology)", "X-Ray(Radiology)", "PET Scan(Radiology)", "Ultrasound(Radiology)", "Complete Blood count(Pathology)", "Urine culture", "Stool culture", "Lipid panel", "Liver panel", " " }));
@@ -251,6 +274,9 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
+        jButton1.setText("Update");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -312,7 +338,9 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
                         .addGap(283, 283, 283)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
+                        .addGap(117, 117, 117)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonClear)
                         .addGap(180, 180, 180)
                         .addComponent(jButton2)))
@@ -352,7 +380,8 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonClear)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPatHist)
@@ -479,10 +508,43 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
         txtDoctorName.setText(model.getValueAt(myIndex, 2).toString());
     }//GEN-LAST:event_tblPatientHistMouseClicked
 
+    private void btnPatHistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPatHistMouseClicked
+        // TODO add your handling code here:
+        try {
+            
+            ps = new SQLiteDataSource();
+            
+            ps.setUrl("jdbc:sqlite:hospManagement.db");
+            sqliteConnection = ps.getConnection();
+            String command = "insert into dummy (Pateint_ID, Name, Doctor_name ) values (3, Shubhda, Subhash)";
+
+            PreparedStatement p2p = sqliteConnection.prepareStatement(command);
+            System.out.println(txtBloodGroup.getText());
+            
+            p2p.setInt(1, Integer.valueOf(txtPatientID.getText()));
+            p2p.setString(2, txtPatientName.getText());
+            p2p.setString(3, txtDoctorName.getText());
+            
+            
+            
+            
+            
+            boolean output = p2p.execute();
+            //JOptionPane.showMessageDialog(this, "Tests Successfully Added!");
+            sqliteConnection.close();
+            getPatientHist();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnPatHistMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddTest;
     private javax.swing.JButton btnPatHist;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonClear;
     private javax.swing.JLabel jLabel1;

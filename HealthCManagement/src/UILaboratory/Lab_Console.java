@@ -87,7 +87,7 @@ public class Lab_Console extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(jPanel1);
 
-        jPanelRight.setBackground(new java.awt.Color(153, 255, 255));
+        jPanelRight.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanelRightLayout = new javax.swing.GroupLayout(jPanelRight);
         jPanelRight.setLayout(jPanelRightLayout);
