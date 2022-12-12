@@ -6,10 +6,14 @@ package bloodBank;
 
 import static bloodBank.AddDonor.sqliteConnection;
 import static bloodBank.ViewDonor.ps;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 import org.sqlite.SQLiteDataSource;
@@ -26,6 +30,17 @@ public class AddBlood extends javax.swing.JFrame {
     public AddBlood() {
         initComponents();
         GetAllStocks();
+    }
+    
+    public static void setFrameLocationRelativeTo(JFrame f, Component c) {
+        if (c == null) {
+            // Setting the position of the dialog on the center of the screen
+            // in 1.4 should be replaced by
+//             f.setLocationRelativeTo(null);
+            Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+            f.setLocation((int)d.getWidth()/2 - (int)f.getPreferredSize().getWidth()/2,
+                    (int)d.getHeight()/2 - (int)f.getPreferredSize().getHeight()/2);
+        }
     }
 
     /**
@@ -52,6 +67,8 @@ public class AddBlood extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(126, 200));
+        setUndecorated(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);

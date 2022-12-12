@@ -4,6 +4,9 @@
  */
 package bloodBank;
 
+import java.awt.Point;
+import javax.swing.JFrame;
+
 /**
  *
  * @author ADMIN
@@ -53,8 +56,8 @@ public class BloodHome extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bloodBank/background.jpg"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 610, 550));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bloodBank/background5.jpg"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 550));
 
         jMenuBar1.setMaximumSize(new java.awt.Dimension(345, 50));
         jMenuBar1.setMinimumSize(new java.awt.Dimension(345, 40));
@@ -139,27 +142,45 @@ public class BloodHome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        new AddDonor().setVisible(true);
+        JFrame AddDonorFrame = new AddDonor();
+        AddDonorFrame.setVisible(true);
+        Point p = this.getLocationOnScreen();
+        AddDonorFrame.setLocation(p.x + 2, p.y + 130);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        new UpdateDonor().setVisible(true);
+        JFrame UpdateDonorFrame = new UpdateDonor();
+        UpdateDonorFrame.setVisible(true);
+        Point p = this.getLocationOnScreen();
+        UpdateDonorFrame.setLocation(p.x + 2, p.y + 110);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        new ViewDonor().setVisible(true);
+        JFrame ViewDonorFrame = new ViewDonor();
+        ViewDonorFrame.setVisible(true);
+        Point p = this.getLocationOnScreen();
+        ViewDonorFrame.setLocation(p.x + 50, p.y + 110);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        new SearchDonorLocation().setVisible(true);
+        JFrame SearchDonorFrame = new SearchDonorLocation();
+        SearchDonorFrame.setVisible(true);
+        Point p = this.getLocationOnScreen();
+        SearchDonorFrame.setLocation(p.x + 80, p.y + 140);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        new CheckBlood().setVisible(true);
+        JFrame CheckBloodFrame = new CheckBlood();
+        CheckBloodFrame.setVisible(true);
+        Point p = this.getLocationOnScreen();
+        CheckBloodFrame.setLocation(p.x + 80, p.y + 110);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        new AddBlood().setVisible(true);
+        JFrame AddBloodFrame = new AddBlood();
+        AddBloodFrame.setVisible(true);
+        Point p = this.getLocationOnScreen();
+        AddBloodFrame.setLocation(p.x + 80, p.y + 130);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
