@@ -136,8 +136,8 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
         txtComboDepartment = new javax.swing.JComboBox<>();
         txtPatientID = new javax.swing.JTextField();
         jButtonClear = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        DeletejButton = new javax.swing.JButton();
+        UpdatejButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 204));
         setForeground(new java.awt.Color(255, 255, 255));
@@ -266,16 +266,21 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
-        jButton2.setText("Delete");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        DeletejButton.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
+        DeletejButton.setText("Delete");
+        DeletejButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                DeletejButtonMouseClicked(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
-        jButton1.setText("Update");
+        UpdatejButton.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
+        UpdatejButton.setText("Update");
+        UpdatejButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UpdatejButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -339,11 +344,11 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(117, 117, 117)
-                        .addComponent(jButton1)
+                        .addComponent(UpdatejButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonClear)
                         .addGap(180, 180, 180)
-                        .addComponent(jButton2)))
+                        .addComponent(DeletejButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -380,8 +385,8 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonClear)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(DeletejButton)
+                    .addComponent(UpdatejButton))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPatHist)
@@ -490,14 +495,14 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAddTestMouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void DeletejButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeletejButtonMouseClicked
         // TODO add your handling code here:
         txtPatientName.setText("");
         txtPatientID.setText("");
         txtDoctorName.setText("");
         txtBloodGroup.setText("");
         txtAge.setText("");
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_DeletejButtonMouseClicked
 
     private void tblPatientHistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPatientHistMouseClicked
         // TODO add your handling code here:
@@ -540,12 +545,41 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnPatHistMouseClicked
 
+    private void UpdatejButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdatejButtonMouseClicked
+        // TODO add your handling code here:
+        if (txtPatientID.getText().isEmpty() || txtAge.getText().isEmpty() || txtPatientName.getText().isEmpty() || txtDoctorName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Missing Information about laboratory");
+        }
+        else
+        {
+            try {
+                ps = new SQLiteDataSource();
+            
+                ps.setUrl("jdbc:sqlite:hospManagement.db");
+                sqliteConnection = ps.getConnection();
+                String id = txtPatientID.getText();
+                String queryUpdate = "update labtest set Name = '" + txtPatientName.getText() + "',Blood_Group = '" + txtBloodGroup.getText() + "',Department= '" + txtComboDepartment.getSelectedItem() + "',Age = " + txtAge.getText() + ",gender = '" + txtComboGender.getSelectedItem() + "',Tests = '" + txtComboSpecimen.getSelectedItem() + "' where Pateint_ID = " + id;
+
+                PreparedStatement p2p = sqliteConnection.prepareStatement(queryUpdate);
+                boolean output = p2p.execute();
+
+                JOptionPane.showMessageDialog(this, "Laboratory Successfully Updated!");
+                sqliteConnection.close();
+                getTest();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_UpdatejButtonMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DeletejButton;
+    private javax.swing.JButton UpdatejButton;
     private javax.swing.JButton btnAddTest;
     private javax.swing.JButton btnPatHist;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonClear;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
