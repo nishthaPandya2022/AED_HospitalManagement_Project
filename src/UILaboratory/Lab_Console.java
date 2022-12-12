@@ -9,12 +9,18 @@ import UILaboratory.Add_lab_testsUI;
 import java.sql.Connection;
 import java.sql.Statement;
 import org.sqlite.SQLiteDataSource;
+import ui.MainJFrame;
+import ui.admin.AdminJFrame;
+import ui.doctor.PatientListJPanel;
+//import ui.doctor.PatientListJPanel;
 /**
  *
  * @author shubhdashail
  */
 public class Lab_Console extends javax.swing.JFrame {
     private static LabInventory lab_invent;
+ //   private static PatientListJPanel dataSource;
+   // private static PatientListJPanel  connectio;
     static SQLiteDataSource ds = null;
     static Connection sqliteConnection;
     static Statement statement;
@@ -37,8 +43,9 @@ public class Lab_Console extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        jButtonDoc = new javax.swing.JButton();
         jButtonLab_pers = new javax.swing.JButton();
+        jButtonBacktoHome = new javax.swing.JButton();
+        jButtonBacktoMain = new javax.swing.JButton();
         jPanelRight = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,19 +54,27 @@ public class Lab_Console extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
 
-        jButtonDoc.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
-        jButtonDoc.setText("Doctor");
-        jButtonDoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDocActionPerformed(evt);
-            }
-        });
-
         jButtonLab_pers.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
-        jButtonLab_pers.setText("Lab_person");
+        jButtonLab_pers.setText("Lab_Assistant");
         jButtonLab_pers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLab_persActionPerformed(evt);
+            }
+        });
+
+        jButtonBacktoHome.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
+        jButtonBacktoHome.setText("Back to Home");
+        jButtonBacktoHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBacktoHomeActionPerformed(evt);
+            }
+        });
+
+        jButtonBacktoMain.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
+        jButtonBacktoMain.setText("Back to Main");
+        jButtonBacktoMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBacktoMainActionPerformed(evt);
             }
         });
 
@@ -71,19 +86,20 @@ public class Lab_Console extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonLab_pers)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jButtonDoc)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonBacktoHome)
+                    .addComponent(jButtonBacktoMain))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(211, 211, 211)
-                .addComponent(jButtonDoc)
-                .addGap(85, 85, 85)
+                .addGap(181, 181, 181)
                 .addComponent(jButtonLab_pers)
-                .addContainerGap(362, Short.MAX_VALUE))
+                .addGap(60, 60, 60)
+                .addComponent(jButtonBacktoHome)
+                .addGap(79, 79, 79)
+                .addComponent(jButtonBacktoMain)
+                .addContainerGap(313, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -94,7 +110,7 @@ public class Lab_Console extends javax.swing.JFrame {
         jPanelRight.setLayout(jPanelRightLayout);
         jPanelRightLayout.setHorizontalGroup(
             jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 929, Short.MAX_VALUE)
+            .addGap(0, 822, Short.MAX_VALUE)
         );
         jPanelRightLayout.setVerticalGroup(
             jPanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,15 +133,35 @@ public class Lab_Console extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDocActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDocActionPerformed
-
     private void jButtonLab_persActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLab_persActionPerformed
         // TODO add your handling code here:
         Add_lab_testsUI add_test = new Add_lab_testsUI(lab_invent);
         jSplitPane1.setRightComponent(add_test);
     }//GEN-LAST:event_jButtonLab_persActionPerformed
+
+    private void jButtonBacktoHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBacktoHomeActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        dispose();
+        AdminJFrame adminFrame = new AdminJFrame();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                adminFrame.setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButtonBacktoHomeActionPerformed
+
+    private void jButtonBacktoMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBacktoMainActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        dispose();
+        MainJFrame mainFrame = new MainJFrame();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                mainFrame.setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jButtonBacktoMainActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,7 +199,8 @@ public class Lab_Console extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonDoc;
+    private javax.swing.JButton jButtonBacktoHome;
+    private javax.swing.JButton jButtonBacktoMain;
     private javax.swing.JButton jButtonLab_pers;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelRight;
