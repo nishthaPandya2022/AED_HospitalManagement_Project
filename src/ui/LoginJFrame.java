@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import pharmacy.Medicines;
+import ui.receptionist.ReceptionistHomeJFrame;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -224,6 +225,9 @@ public class LoginJFrame extends javax.swing.JFrame {
                 }
                 else if(loginPassword.contains("Receptionist")) {
                     //receptionist
+                    this.dispose();
+                    ReceptionistHomeJFrame reception = new ReceptionistHomeJFrame();
+                    reception.setVisible(true);
                 }
             }
 
