@@ -32,6 +32,16 @@ public class AddBlood extends javax.swing.JFrame {
         GetAllStocks();
     }
     
+    public boolean validatedata(){
+        
+        
+        if ("".equals(jTextField1.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Units.");
+            return false;
+        }
+        return true;
+    }
+    
     public static void setFrameLocationRelativeTo(JFrame f, Component c) {
         if (c == null) {
             // Setting the position of the dialog on the center of the screen
@@ -154,24 +164,26 @@ public class AddBlood extends javax.swing.JFrame {
        String bloodgroup = (String) jComboBox1.getSelectedItem();
        String unit = jTextField1.getText();
        int unit1 = Integer.parseInt(unit);
-       
-       try {
-           ps = new SQLiteDataSource();
-           
-           ps.setUrl("jdbc:sqlite:hospManagement.db");
-           sqliteConnection = ps.getConnection();
-        
-           String command = "update stock set BloodUnits=BloodUnits + '"+unit1+"' where BloodGroup='"+bloodgroup+"'" ;
-           PreparedStatement p2p = sqliteConnection.prepareStatement(command);
-           boolean output = p2p.execute();
-           JOptionPane.showMessageDialog(this, "Units Successfully Added!");
-           GetAllStocks();
-           sqliteConnection.close();
-           
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
+       if (validatedata())
+       {
+        try {
+            ps = new SQLiteDataSource();
+
+            ps.setUrl("jdbc:sqlite:hospManagement.db");
+            sqliteConnection = ps.getConnection();
+
+            String command = "update stock set BloodUnits=BloodUnits + '"+unit1+"' where BloodGroup='"+bloodgroup+"'" ;
+            PreparedStatement p2p = sqliteConnection.prepareStatement(command);
+            boolean output = p2p.execute();
+            JOptionPane.showMessageDialog(this, "Units Successfully Added!");
+            GetAllStocks();
+            sqliteConnection.close();
+
+         } catch (SQLException ex) {
+             ex.printStackTrace();
+             JOptionPane.showMessageDialog(this, ex.getMessage());
+         }
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -204,24 +216,25 @@ public class AddBlood extends javax.swing.JFrame {
        String bloodgroup = (String) jComboBox1.getSelectedItem();
        String unit = jTextField1.getText();
        int unit1 = Integer.parseInt(unit);
-       
-       try {
-           ps = new SQLiteDataSource();
-           
-           ps.setUrl("jdbc:sqlite:hospManagement.db");
-           sqliteConnection = ps.getConnection();
-        
-           String command = "update stock set BloodUnits=BloodUnits - '"+unit1+"' where BloodGroup='"+bloodgroup+"'" ;
-           PreparedStatement p2p = sqliteConnection.prepareStatement(command);
-           boolean output = p2p.execute();
-           JOptionPane.showMessageDialog(this, "Units Successfully Removed!");
-           GetAllStocks();
-           sqliteConnection.close();
-           
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
+       if (validatedata()){
+        try {
+            ps = new SQLiteDataSource();
+
+            ps.setUrl("jdbc:sqlite:hospManagement.db");
+            sqliteConnection = ps.getConnection();
+
+            String command = "update stock set BloodUnits=BloodUnits - '"+unit1+"' where BloodGroup='"+bloodgroup+"'" ;
+            PreparedStatement p2p = sqliteConnection.prepareStatement(command);
+            boolean output = p2p.execute();
+            JOptionPane.showMessageDialog(this, "Units Successfully Removed!");
+            GetAllStocks();
+            sqliteConnection.close();
+
+         } catch (SQLException ex) {
+             ex.printStackTrace();
+             JOptionPane.showMessageDialog(this, ex.getMessage());
+         }
+       }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
