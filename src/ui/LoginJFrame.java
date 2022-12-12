@@ -197,6 +197,12 @@ public class LoginJFrame extends javax.swing.JFrame {
                 else if(loginPassword.contains("labassistant")) {
                     //lab will open
                 }
+                else if(loginPassword.contains("pathologist")) {
+                    //path
+                }
+                else if(loginPassword.contains("Receptionist")) {
+                    //receptionist
+                }
             }
 
             //System.out.println("listOfLoginCredentials Size(): " + listOfLoginCredentials.getAllLoginCredentials().size());

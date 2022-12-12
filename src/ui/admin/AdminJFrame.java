@@ -250,6 +250,8 @@ public class AdminJFrame extends javax.swing.JFrame {
 
     private void bInternDoctorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInternDoctorsActionPerformed
         // TODO add your handling code here:
+        AllInternDoctorsJPanel internDoctorsPanel = new AllInternDoctorsJPanel(ds, sqliteConnection);
+        jSplitPane.setRightComponent(internDoctorsPanel);
     }//GEN-LAST:event_bInternDoctorsActionPerformed
 
     private void bLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLogoutActionPerformed
@@ -261,7 +263,7 @@ public class AdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_bAddMembersMouseClicked
 
     private void bAddMembersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddMembersActionPerformed
-        AddMembers1JPanel addMembers = new AddMembers1JPanel(ds, sqliteConnection);
+        AddMembersJPanel addMembers = new AddMembersJPanel(ds, sqliteConnection);
         jSplitPane.setRightComponent(addMembers);
     }//GEN-LAST:event_bAddMembersActionPerformed
 

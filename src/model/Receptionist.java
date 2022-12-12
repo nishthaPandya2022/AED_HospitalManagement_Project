@@ -103,4 +103,9 @@ public class Receptionist {
         this.receptionistPhoneNumber = receptionistPhoneNumber;
     }
     
+    @Override
+    public String toString(){
+        return String.valueOf(receptionistID);
+    }
+    
 }

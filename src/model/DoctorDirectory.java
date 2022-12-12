@@ -26,7 +26,7 @@ public class DoctorDirectory {
         this.listOfDoctors = listOfDoctors;
     }
     
-    public void deleteEmp(Doctor doc) {
+    public void deleteDoc(Doctor doc) {
         listOfDoctors.remove(doc);
     }
 }

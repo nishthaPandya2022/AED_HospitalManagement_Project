@@ -20,7 +20,7 @@ import java.sql.Date;
  *
  * @author nishthapandya
  */
-public class AddMembers1JPanel extends javax.swing.JPanel {
+public class AddMembersJPanel extends javax.swing.JPanel {
 
 //    private static final String INSERT_DATA_INTO_HOSPITAL = "CREATE TABLE IF NOT EXISTS hospital ("
 //            + "userID VARCHAR(200) NOT NULL," + "name VARCHAR(200) NOT NULL,"
@@ -40,7 +40,7 @@ public class AddMembers1JPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddMembersJPanel
      */
-    public AddMembers1JPanel(SQLiteDataSource dataSource, Connection connection) {
+    public AddMembersJPanel(SQLiteDataSource dataSource, Connection connection) {
         initComponents();
 
         this.ds = dataSource;
