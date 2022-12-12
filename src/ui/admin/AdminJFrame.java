@@ -139,6 +139,11 @@ public class AdminJFrame extends javax.swing.JFrame {
         });
 
         bPathologist.setText("Pathologist");
+        bPathologist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bPathologistActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
@@ -292,6 +297,13 @@ public class AdminJFrame extends javax.swing.JFrame {
         AllPharmacistJPanel pharmacist = new AllPharmacistJPanel(ds, sqliteConnection);
         jSplitPane.setRightComponent(pharmacist);
     }//GEN-LAST:event_bPharmacistActionPerformed
+
+    private void bPathologistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPathologistActionPerformed
+        // TODO add your handling code here:
+        AllPathologistJPanel pathologist = new AllPathologistJPanel(ds, sqliteConnection);
+        jSplitPane.setRightComponent(pathologist);
+        
+    }//GEN-LAST:event_bPathologistActionPerformed
 
     /**
      * @param args the command line arguments
