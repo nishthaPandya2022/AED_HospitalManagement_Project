@@ -33,6 +33,35 @@ public class Medicines extends javax.swing.JFrame {
         GetAllMedicines();
         GetCompany();
     }
+    
+        public boolean validatedata(){
+        
+        
+        if ("".equals(textFieldId.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Id.");
+            return false;
+        }
+        if ("".equals(txtFieldMedName.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Name.");
+            return false;
+        }
+        if (!txtFieldMedName.getText().matches("[a-zA-Z]+")){
+            JOptionPane.showMessageDialog(this, "Enter Proper Name.");
+            return false;
+        }
+        if ("".equals(txtFieldPrice.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Price.");
+            return false;
+        }
+        
+        if ("".equals(txtFieldQuantity.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Quantity.");
+            return false;
+        }
+        
+        
+        return true;
+    }
 
      static Connection sqliteConnection;
      static Statement statement;
@@ -197,6 +226,11 @@ public class Medicines extends javax.swing.JFrame {
         btnClearMedicine.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnClearMedicineMouseClicked(evt);
+            }
+        });
+        btnClearMedicine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearMedicineActionPerformed(evt);
             }
         });
 
@@ -413,34 +447,37 @@ public class Medicines extends javax.swing.JFrame {
         System.out.print(myFabDate);
         expDate =  dateExp.getDate();
         myExpDate = new java.sql.Date(expDate.getTime());
+        
+        if (validatedata()){
 
-        try {
-            
-            ps = new SQLiteDataSource();
-            
-            ps.setUrl("jdbc:sqlite:hospManagement.db");
-            sqliteConnection = ps.getConnection();
-            String command = "insert into medicine (MedId, MedName, MedPrice, MedQty, MedFab, MedExp, MedComp ) values (?,?,?,?,?,?,?)";
+            try {
 
-            PreparedStatement p2p = sqliteConnection.prepareStatement(command);
-            
-            p2p.setInt(1, Integer.valueOf(textFieldId.getText()));
-            p2p.setString(2, txtFieldMedName.getText());
-            p2p.setDouble(3, Double.valueOf(txtFieldPrice.getText()));
-            p2p.setInt(4, Integer.valueOf(txtFieldQuantity.getText()));
-            p2p.setString(5,  ((JTextField)dateFab.getDateEditor().getUiComponent()).getText());
-            p2p.setString(6,  ((JTextField)dateExp.getDateEditor().getUiComponent()).getText());
-            p2p.setString(7, comboBoxCompany.getSelectedItem().toString());
-            
-            
-            boolean output = p2p.execute();
-            JOptionPane.showMessageDialog(this, "Medicine Successfully Added!");
-            sqliteConnection.close();
-            GetAllMedicines();
+                ps = new SQLiteDataSource();
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+                ps.setUrl("jdbc:sqlite:hospManagement.db");
+                sqliteConnection = ps.getConnection();
+                String command = "insert into medicine (MedId, MedName, MedPrice, MedQty, MedFab, MedExp, MedComp ) values (?,?,?,?,?,?,?)";
+
+                PreparedStatement p2p = sqliteConnection.prepareStatement(command);
+
+                p2p.setInt(1, Integer.valueOf(textFieldId.getText()));
+                p2p.setString(2, txtFieldMedName.getText());
+                p2p.setDouble(3, Double.valueOf(txtFieldPrice.getText()));
+                p2p.setInt(4, Integer.valueOf(txtFieldQuantity.getText()));
+                p2p.setString(5,  ((JTextField)dateFab.getDateEditor().getUiComponent()).getText());
+                p2p.setString(6,  ((JTextField)dateExp.getDateEditor().getUiComponent()).getText());
+                p2p.setString(7, comboBoxCompany.getSelectedItem().toString());
+
+
+                boolean output = p2p.execute();
+                JOptionPane.showMessageDialog(this, "Medicine Successfully Added!");
+                sqliteConnection.close();
+                GetAllMedicines();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
         }
     }//GEN-LAST:event_btnAddMedicineMouseClicked
 
@@ -544,6 +581,10 @@ public class Medicines extends javax.swing.JFrame {
         txtFieldQuantity.setText("");
        
     }//GEN-LAST:event_btnDeleteMedicine1MouseClicked
+
+    private void btnClearMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearMedicineActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnClearMedicineActionPerformed
 
     /**
      * @param args the command line arguments

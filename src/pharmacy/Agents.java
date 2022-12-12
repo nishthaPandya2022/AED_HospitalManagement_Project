@@ -146,6 +146,11 @@ public class Agents extends javax.swing.JFrame {
                 btnDeleteAgentMouseClicked(evt);
             }
         });
+        btnDeleteAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteAgentActionPerformed(evt);
+            }
+        });
 
         AgentsJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -481,6 +486,10 @@ public class Agents extends javax.swing.JFrame {
         new Selling().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblSellingMouseClicked
+
+    private void btnDeleteAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAgentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteAgentActionPerformed
 
     /**
      * @param args the command line arguments

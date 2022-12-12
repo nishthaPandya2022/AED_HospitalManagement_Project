@@ -25,6 +25,84 @@ public class AddDonor extends javax.swing.JFrame {
     public AddDonor() {
         initComponents();
     }
+    
+    public boolean validatedata(){
+        
+        
+        if ("".equals(txtFieldName.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Name.");
+            return false;
+        }
+        if (!txtFieldName.getText().matches("[a-zA-Z]+")){
+            JOptionPane.showMessageDialog(this, "Enter Proper Name.");
+            return false;
+        }
+        if ("".equals(txtFieldFatName.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Name.");
+            return false;
+        }
+        if (!txtFieldFatName.getText().matches("[a-zA-Z]+")){
+            JOptionPane.showMessageDialog(this, "Enter Proper Name.");
+            return false;
+        }
+        if ("".equals(txtFieldMotName.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Name.");
+            return false;
+        }
+        if (!txtFieldMotName.getText().matches("[a-zA-Z]+")){
+            JOptionPane.showMessageDialog(this, "Enter Proper Name.");
+            return false;
+        }
+        if ("".equals(txtFieldDob.getDate())){
+            JOptionPane.showMessageDialog(this, "Enter Date of Birth.");
+            return false;
+        }
+
+        if ("".equals(txtFieldMob.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Mobile Number.");
+            return false;
+        }
+        if (!txtFieldMob.getText().matches("^(\\+\\d{1,2}\\s?)?1?\\-?\\.?\\s?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$")){
+            JOptionPane.showMessageDialog(this, "Enter Mobile Number in  format 1-(xxx)-(xxx)-(XXXX)!");
+            return false;
+        }
+        if ("".equals(txtFieldGend.getSelectedItem())) {
+            JOptionPane.showMessageDialog(this, "Enter Gender.");
+            return false;
+        }
+        
+        if("".equals(txtFieldEmail.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Email.");
+            return false;
+        }
+        if(!txtFieldEmail.getText().matches("^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")){
+            JOptionPane.showMessageDialog(this, "Enter proper Email");
+            return false;
+        }
+        if("".equals(txtFieldBlood.getSelectedItem())){
+            JOptionPane.showMessageDialog(this, "Enter Blood Group.");
+            return false;
+        }
+        
+        if("".equals(txtFieldCity.getText())){
+            JOptionPane.showMessageDialog(this, "Enter City.");
+            return false;
+        }
+        if(!txtFieldCity.getText().matches("[a-zA-Z]+")){
+            JOptionPane.showMessageDialog(this, "Enter proper City.");
+            return false;
+        }
+        if("".equals(txtFieldAddress.getText())){
+            JOptionPane.showMessageDialog(this, "Enter Address.");
+            return false;
+        }
+        if(!txtFieldAddress.getText().matches("[a-zA-Z0-9 ]+")){
+            JOptionPane.showMessageDialog(this, "Enter proper Address.");
+            return false;
+        }
+        
+        return true;
+    }
 
     static Connection sqliteConnection;
     static Statement statement;
@@ -224,36 +302,38 @@ public class AddDonor extends javax.swing.JFrame {
 
     private void btnDonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonSaveActionPerformed
         
-        try {
-               
-            ps = new SQLiteDataSource();
-            
-            ps.setUrl("jdbc:sqlite:hospManagement.db");
-            sqliteConnection = ps.getConnection();
-            String command = "insert into donor (DonId, DonName, DonFather, DonMother, DonDob, DonMobile, DonGend, DonEmail, DonBlood, DonAddress, DonCity ) values (?,?,?,?,?,?,?,?,?,?,?)";
+        if (validatedata()){
+            try {
 
-            PreparedStatement p2p = sqliteConnection.prepareStatement(command);
-            
-            p2p.setString(1, lblDonFieldId.getText());
-            p2p.setString(2, txtFieldName.getText());
-            p2p.setString(3, txtFieldFatName.getText());
-            p2p.setString(4, txtFieldMotName.getText());
-            p2p.setString(5,  ((JTextField)txtFieldDob.getDateEditor().getUiComponent()).getText());
-            p2p.setInt(6, Integer.valueOf(txtFieldMob.getText()));
-            p2p.setString(7, txtFieldGend.getSelectedItem().toString());
-            p2p.setString(8, txtFieldEmail.getText());
-            p2p.setString(9, txtFieldBlood.getSelectedItem().toString());
-            p2p.setString(10, txtFieldCity.getText());
-            p2p.setString(11, txtFieldAddress.getText());
-            
-            
-            boolean output = p2p.execute();
-            JOptionPane.showMessageDialog(this, "Donor Successfully Added!");
-            sqliteConnection.close();
-            
-         } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+                ps = new SQLiteDataSource();
+
+                ps.setUrl("jdbc:sqlite:hospManagement.db");
+                sqliteConnection = ps.getConnection();
+                String command = "insert into donor (DonId, DonName, DonFather, DonMother, DonDob, DonMobile, DonGend, DonEmail, DonBlood, DonAddress, DonCity ) values (?,?,?,?,?,?,?,?,?,?,?)";
+
+                PreparedStatement p2p = sqliteConnection.prepareStatement(command);
+
+                p2p.setString(1, lblDonFieldId.getText());
+                p2p.setString(2, txtFieldName.getText());
+                p2p.setString(3, txtFieldFatName.getText());
+                p2p.setString(4, txtFieldMotName.getText());
+                p2p.setString(5,  ((JTextField)txtFieldDob.getDateEditor().getUiComponent()).getText());
+                p2p.setInt(6, Integer.valueOf(txtFieldMob.getText()));
+                p2p.setString(7, txtFieldGend.getSelectedItem().toString());
+                p2p.setString(8, txtFieldEmail.getText());
+                p2p.setString(9, txtFieldBlood.getSelectedItem().toString());
+                p2p.setString(10, txtFieldCity.getText());
+                p2p.setString(11, txtFieldAddress.getText());
+
+
+                boolean output = p2p.execute();
+                JOptionPane.showMessageDialog(this, "Donor Successfully Added!");
+                sqliteConnection.close();
+
+             } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
         }
     }//GEN-LAST:event_btnDonSaveActionPerformed
 
