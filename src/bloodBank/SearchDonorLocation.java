@@ -77,6 +77,11 @@ public class SearchDonorLocation extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 92, 90, -1));
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
+            }
+        });
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 89, 88, -1));
 
         SearchTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -120,24 +125,55 @@ public class SearchDonorLocation extends javax.swing.JFrame {
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
        String address = jTextField1.getText();
-       
-       try {
+       String blood = jTextField2.getText();
+       String searchBlood = "";
+        try {
            ps = new SQLiteDataSource();
-            
+           if (blood != null) 
+           {
+               searchBlood = "and DonBlood like '%"+blood+"%'";
+           }
            ps.setUrl("jdbc:sqlite:hospManagement.db");
            sqliteConnection = ps.getConnection();
         
-           String command = "Select * from donor where DonCity like '%"+address+"%' or DonAddress like '%"+address+"%'";
+           String command = "Select * from donor where DonCity like '%"+address+"%' or DonAddress like '%"+address+"%'" + searchBlood;
            Statement p2p = sqliteConnection.createStatement();
            ResultSet rs = p2p.executeQuery(command);
            SearchTable.setAutoResizeMode(SearchTable.AUTO_RESIZE_OFF);
            SearchTable.setModel(DbUtils.resultSetToTableModel(rs));
-            
+           sqliteConnection.close();
+           
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        String blood = jTextField2.getText();
+        String address = jTextField1.getText();
+        String searchAddress = "";
+       try {
+           ps = new SQLiteDataSource();
+           if (blood != null) 
+           {
+               searchAddress = "and DonCity like '%"+address+"%' or DonAddress like '%"+address+"%'";
+           }
+           ps.setUrl("jdbc:sqlite:hospManagement.db");
+           sqliteConnection = ps.getConnection();
+        
+           String command = "Select * from donor where DonBlood like '%"+blood+"%'"  + searchAddress;
+           Statement p2p = sqliteConnection.createStatement();
+           ResultSet rs = p2p.executeQuery(command);
+           SearchTable.setAutoResizeMode(SearchTable.AUTO_RESIZE_OFF);
+           SearchTable.setModel(DbUtils.resultSetToTableModel(rs));
+           sqliteConnection.close();
+           
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_jTextField2KeyReleased
 
     /**
      * @param args the command line arguments
