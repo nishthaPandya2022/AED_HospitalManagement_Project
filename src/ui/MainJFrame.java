@@ -35,18 +35,25 @@ public class MainJFrame extends javax.swing.JFrame {
     private static final String INSERT_LOGIN_ADMIN = "INSERT INTO login (loginID, userID, username, password)"
             + " VALUES('" + 1 + "','" + 1 + "','admin'," + "'admin');";
     
+    private static final String CREATE_APPOINTMENT_TABLE_SQL = "CREATE TABLE IF NOT EXISTS appointment "
+            + "(appointmentID VARCHAR(200) NOT NULL, " + "patientID VARCHAR(200) NOT NULL," 
+            + "patientName VARCHAR(200) NOT NULL,"+ "doctorID VARCHAR(200) NOT NULL,"
+            + "doctorName VARCHAR(200) NOT NULL," + "temperature VARCHAR(200) NOT NULL,"
+            + "bloodPressure VARCHAR(200) NOT NULL," + "weight VARCHAR(200) NOT NULL," 
+            + "height VARCHAR(200) NOT NULL," + "heartRate VARCHAR(200),"+"diagnosis VARCHAR(300) NOT NULL);";
+    
 //   CREATING TABLES FOR PHARMACY
     
-     private static String CREATE_MEDICINE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS medicine ("
+     private static final String CREATE_MEDICINE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS medicine ("
             + "MedId INTEGER(3) PRIMARY KEY NOT NULL," + "MedName VARCHAR(50) NOT NULL,"
             + "MedPrice INTEGER(7) NOT NULL," + "MedQty INTEGER(7) NOT NULL," + "MedFab DATE NOT NULL,"
             + "MedExp DATE NOT NULL," + "MedComp VARCHAR(50) NOT NULL)";
     
-     private static String CREATE_AGENT_TABLE_SQL = "CREATE TABLE IF NOT EXISTS agent ("
+     private static final String CREATE_AGENT_TABLE_SQL = "CREATE TABLE IF NOT EXISTS agent ("
             + "AgeId INTEGER(3) PRIMARY KEY NOT NULL," + "AgeName VARCHAR(50) NOT NULL," + "AgeAge INTEGER(3) NOT NULL,"
             + "AgePhone INTEGER(11) NOT NULL," + "AgePass VARCHAR(50) NOT NULL," + "AgeGend VARCHAR(50) NOT NULL)";
      
-     private static String CREATE_COMPANY_TABLE_SQL = "CREATE TABLE IF NOT EXISTS company ("
+     private static final String CREATE_COMPANY_TABLE_SQL = "CREATE TABLE IF NOT EXISTS company ("
             + "CompId INTEGER(3) PRIMARY KEY NOT NULL," + "CompName VARCHAR(50) NOT NULL,"
             + "CompAddress VARCHAR(200) NOT NULL," + "CompPhone INTEGER(11) NOT NULL," + "CompExp INTEGER(5) NOT NULL)";
      
@@ -171,8 +178,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private void mainPharmacyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainPharmacyActionPerformed
         // TODO add your handling code here:
         dispose();
-
-
         LoginJFrame loginFrame = new LoginJFrame();
         loginFrame.setVisible(true);
     }//GEN-LAST:event_mainPharmacyActionPerformed
@@ -242,6 +247,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
                 statement.executeUpdate(CREATE_LOGIN_TABLE_SQL);
                 statement.executeUpdate(CREATE_HOSPITAL_TABLE_SQL);
+                statement.executeUpdate(CREATE_APPOINTMENT_TABLE_SQL);
                 boolean insertDone = statement.execute(INSERT_LOGIN_ADMIN);
 //              statement.executeUpdate(CREATE_TEMP_TABLE_SQL);
                 
