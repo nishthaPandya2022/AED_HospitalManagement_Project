@@ -21,7 +21,7 @@ public class Receptionist {
     private String receptionistCity;
     private String receptionistState;
     private String receptionistZipCode;
-    private String receptionistPhoneNumber;
+    private String receptionistEmail;
 
     public int getReceptionistID() {
         return receptionistID;
@@ -95,12 +95,12 @@ public class Receptionist {
         this.receptionistZipCode = receptionistZipCode;
     }
 
-    public String getReceptionistPhoneNumber() {
-        return receptionistPhoneNumber;
+    public String getReceptionistEmail() {
+        return receptionistEmail;
     }
 
-    public void setReceptionistPhoneNumber(String receptionistPhoneNumber) {
-        this.receptionistPhoneNumber = receptionistPhoneNumber;
+    public void setReceptionistEmail(String receptionistEmail) {
+        this.receptionistEmail = receptionistEmail;
     }
     
     @Override

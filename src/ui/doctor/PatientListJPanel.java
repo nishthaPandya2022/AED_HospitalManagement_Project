@@ -49,7 +49,7 @@ public class PatientListJPanel extends javax.swing.JPanel {
                 patient.setPatientName(output.getString("name"));
                 patient.setPatientDOB(java.sql.Date.valueOf(output.getString("DOB")));
                 patient.setPatientAge(output.getString("age"));
-                patient.setPatientPhoneNumber(output.getString("phoneNumber"));
+                patient.setPatientEmail(output.getString("email"));
                 patient.setPatientAddress(output.getString("address"));
                 patient.setPatientCommunity(output.getString("community"));
                 patient.setPatientState(output.getString("state"));

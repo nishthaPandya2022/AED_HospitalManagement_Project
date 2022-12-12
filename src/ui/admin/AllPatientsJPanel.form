@@ -40,7 +40,7 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="lblPatientName" alignment="1" max="32767" attributes="0"/>
                           <Component id="lblPatientID" alignment="1" max="32767" attributes="0"/>
-                          <Component id="lblPatientPhoneNumber" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
+                          <Component id="lblPatientEmail" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
                           <Component id="lblDoctorName" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -54,7 +54,7 @@
                   <Component id="etPatientID" alignment="0" max="32767" attributes="0"/>
                   <Component id="etPatientName" alignment="0" max="32767" attributes="0"/>
                   <Component id="etDoctorName" alignment="0" max="32767" attributes="0"/>
-                  <Component id="etPatientPhoneNumber" alignment="0" pref="141" max="32767" attributes="0"/>
+                  <Component id="etPatientEmail" alignment="0" pref="141" max="32767" attributes="0"/>
                   <Component id="dateChooserPatientDOB" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtFieldPatientAge" max="32767" attributes="0"/>
               </Group>
@@ -114,8 +114,8 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblPatientState" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="etPatientState" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblPatientPhoneNumber" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                              <Component id="etPatientPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblPatientEmail" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="etPatientEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="dateChooserPatientDOB" min="-2" max="-2" attributes="0"/>
@@ -246,12 +246,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bViewPatientActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="etPatientPhoneNumber">
+    <Component class="javax.swing.JTextField" name="etPatientEmail">
     </Component>
-    <Component class="javax.swing.JLabel" name="lblPatientPhoneNumber">
+    <Component class="javax.swing.JLabel" name="lblPatientEmail">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Patient Phone Number :"/>
+        <Property name="text" type="java.lang.String" value="Patient Email :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPatientName">

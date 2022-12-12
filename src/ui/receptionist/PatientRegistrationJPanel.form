@@ -55,7 +55,7 @@
                           <Component id="etPatientCommunity" alignment="0" max="32767" attributes="0"/>
                           <Component id="etPatientCity" alignment="0" max="32767" attributes="0"/>
                           <Component id="etPatientState" alignment="0" max="32767" attributes="0"/>
-                          <Component id="etRegPatientPhoneNumber" alignment="0" pref="206" max="32767" attributes="0"/>
+                          <Component id="etRegPatientEmail" alignment="0" pref="206" max="32767" attributes="0"/>
                           <Component id="dateChooserPatientDOB" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -122,7 +122,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblPatientPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="etRegPatientPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="etRegPatientEmail" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="71" max="32767" attributes="0"/>
               <Component id="bRegisterPatient" min="-2" max="-2" attributes="0"/>
@@ -137,7 +137,7 @@
         <Property name="text" type="java.lang.String" value="Address :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="etRegPatientPhoneNumber">
+    <Component class="javax.swing.JTextField" name="etRegPatientEmail">
     </Component>
     <Component class="javax.swing.JTextField" name="etPatientZipCode">
     </Component>
@@ -162,7 +162,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblPatientPhoneNumber">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Phone Number :"/>
+        <Property name="text" type="java.lang.String" value="Email :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbGender">

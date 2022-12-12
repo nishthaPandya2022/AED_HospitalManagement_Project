@@ -52,17 +52,19 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="bInternDoctors" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="bInternDoctors" alignment="1" max="32767" attributes="0"/>
                           <Component id="bAllPatients" alignment="0" max="32767" attributes="0"/>
                           <Component id="bAllDoctors" alignment="0" max="32767" attributes="0"/>
                           <Component id="bAllReceptionist" alignment="0" max="32767" attributes="0"/>
-                          <Component id="bChemist" alignment="0" max="32767" attributes="0"/>
+                          <Component id="bLabAssistant" alignment="0" max="32767" attributes="0"/>
                           <Component id="bLogout" alignment="1" max="32767" attributes="0"/>
                           <Component id="bAllNurses" alignment="0" max="32767" attributes="0"/>
                           <Component id="bAddMembers" alignment="0" max="32767" attributes="0"/>
+                          <Component id="bPharmacist" alignment="0" max="32767" attributes="0"/>
+                          <Component id="bPathologist" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -73,19 +75,23 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="bAddMembers" min="-2" pref="33" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                       <Component id="bAllReceptionist" min="-2" pref="33" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="bInternDoctors" min="-2" pref="32" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="bAllDoctors" min="-2" pref="35" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="bAllPatients" min="-2" pref="35" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="bAllNurses" min="-2" pref="32" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="bChemist" min="-2" pref="32" max="-2" attributes="0"/>
-                      <EmptySpace pref="138" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="bLabAssistant" min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="bPharmacist" min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="bPathologist" min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace pref="117" max="32767" attributes="0"/>
                       <Component id="bLogout" min="-2" pref="32" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                   </Group>
@@ -127,12 +133,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bAllNursesActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="bChemist">
+            <Component class="javax.swing.JButton" name="bLabAssistant">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Chemist"/>
+                <Property name="text" type="java.lang.String" value="Lab Assistant"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bChemistActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bLabAssistantActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="bInternDoctors">
@@ -159,6 +165,16 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bAddMembersMouseClicked"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bAddMembersActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="bPharmacist">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pharmacist"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="bPathologist">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pathologist"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

@@ -56,7 +56,7 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
                 patient.setPatientName(output.getString("name"));
                 patient.setPatientDOB(java.sql.Date.valueOf(output.getString("DOB")));
                 patient.setPatientAge(output.getString("age"));
-                patient.setPatientPhoneNumber(output.getString("phoneNumber"));
+                patient.setPatientEmail(output.getString("email"));
                 patient.setPatientAddress(output.getString("address"));
                 patient.setPatientCommunity(output.getString("community"));
                 patient.setPatientState(output.getString("state"));
@@ -140,7 +140,7 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Enter proper state.");
             return false;
         }
-        if (!etRegPatientPhoneNumber.getText().matches("[0-9]+")) {
+        if (!etRegPatientEmail.getText().matches("[0-9]+")) {
             JOptionPane.showMessageDialog(this, "Enter proper phone number of 10 digits.");
             return false;
         }
@@ -157,7 +157,7 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         lblRegPatientAddress = new javax.swing.JLabel();
-        etRegPatientPhoneNumber = new javax.swing.JTextField();
+        etRegPatientEmail = new javax.swing.JTextField();
         etPatientZipCode = new javax.swing.JTextField();
         etPatientCity = new javax.swing.JTextField();
         etPatientState = new javax.swing.JTextField();
@@ -189,7 +189,7 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
 
         lblRegPatientState.setText("State :");
 
-        lblPatientPhoneNumber.setText("Phone Number :");
+        lblPatientPhoneNumber.setText("Email :");
 
         cbGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
         cbGender.addActionListener(new java.awt.event.ActionListener() {
@@ -260,7 +260,7 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
                             .addComponent(etPatientCommunity)
                             .addComponent(etPatientCity)
                             .addComponent(etPatientState)
-                            .addComponent(etRegPatientPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                            .addComponent(etRegPatientEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                             .addComponent(dateChooserPatientDOB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(166, 166, 166))
         );
@@ -312,7 +312,7 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPatientPhoneNumber)
-                    .addComponent(etRegPatientPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(etRegPatientEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(bRegisterPatient)
                 .addGap(34, 34, 34))
@@ -341,7 +341,7 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
                 String editRegPatientCity = etPatientCity.getText();
                 String editRegPatientState = etPatientState.getText();
                 String editRegPatientZipCode = etPatientZipCode.getText();
-                String editRegPatientPhoneNumber = etRegPatientPhoneNumber.getText();
+                String editRegPatientEmail= etRegPatientEmail.getText();
 
                 HospitalUsers hospUser = new HospitalUsers();
                 userID++;
@@ -355,7 +355,7 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
                 int age = calculateAge(localDOB);
                 hospUser.setAge(String.valueOf(age));
                 hospUser.setOrganization("Null");
-                hospUser.setEmail(editRegPatientPhoneNumber);
+                hospUser.setEmail(editRegPatientEmail);
                 hospUser.setAddress(editRegPatientAddress);
                 hospUser.setCommunity(editRegPatientCommunity);
                 hospUser.setState(editRegPatientState);
@@ -377,7 +377,7 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
             etPatientCommunity.setText("");
             etPatientState.setText("");
             etPatientZipCode.setText("");
-            etRegPatientPhoneNumber.setText("");
+            etRegPatientEmail.setText("");
         }
     }//GEN-LAST:event_bRegisterPatientActionPerformed
 
@@ -392,9 +392,9 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField etPatientState;
     private javax.swing.JTextField etPatientZipCode;
     private javax.swing.JTextField etRegBloodGroup;
+    private javax.swing.JTextField etRegPatientEmail;
     private javax.swing.JTextField etRegPatientID;
     private javax.swing.JTextField etRegPatientName;
-    private javax.swing.JTextField etRegPatientPhoneNumber;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblPatientPhoneNumber;
@@ -426,7 +426,7 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
             System.out.println("after update loginID : " + loginID);
 
             String INSERT_DATA_INTO_HOSPITAL = "INSERT INTO hospital"
-                    + "(userID, name, DOB, age, organization, phoneNumber, address, community, state, zipcode, role)"
+                    + "(userID, name, DOB, age, organization, email, address, community, state, zipcode, role)"
                     + "VALUES ('" + hospUser.getUserID() + "','" + hospUser.getName()
                     + "','" + hospUser.getDOB() + "','" + hospUser.getAge()
                     + "','" + hospUser.getOrganization() + "','" + hospUser.getEmail()

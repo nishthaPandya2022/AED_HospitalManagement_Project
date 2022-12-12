@@ -21,7 +21,7 @@ public class InternDoctor {
     private String doctorCity;
     private String doctorState;
     private String doctorZipCode;
-    private String doctorPhoneNumber;
+    private String doctorEmail;
 
     public int getDoctorID() {
         return doctorID;
@@ -95,12 +95,12 @@ public class InternDoctor {
         this.doctorZipCode = doctorZipCode;
     }
 
-    public String getDoctorPhoneNumber() {
-        return doctorPhoneNumber;
+    public String getDoctorEmail() {
+        return doctorEmail;
     }
 
-    public void setDoctorPhoneNumber(String doctorPhoneNumber) {
-        this.doctorPhoneNumber = doctorPhoneNumber;
+    public void setDoctorEmail(String doctorEmail) {
+        this.doctorEmail = doctorEmail;
     }
     
     @Override

@@ -51,10 +51,12 @@ public class AdminJFrame extends javax.swing.JFrame {
         bAllDoctors = new javax.swing.JButton();
         bAllPatients = new javax.swing.JButton();
         bAllNurses = new javax.swing.JButton();
-        bChemist = new javax.swing.JButton();
+        bLabAssistant = new javax.swing.JButton();
         bInternDoctors = new javax.swing.JButton();
         bLogout = new javax.swing.JButton();
         bAddMembers = new javax.swing.JButton();
+        bPharmacist = new javax.swing.JButton();
+        bPathologist = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
         lblWelcome = new javax.swing.JLabel();
 
@@ -96,10 +98,10 @@ public class AdminJFrame extends javax.swing.JFrame {
             }
         });
 
-        bChemist.setText("Chemist");
-        bChemist.addActionListener(new java.awt.event.ActionListener() {
+        bLabAssistant.setText("Lab Assistant");
+        bLabAssistant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bChemistActionPerformed(evt);
+                bLabAssistantActionPerformed(evt);
             }
         });
 
@@ -129,21 +131,27 @@ public class AdminJFrame extends javax.swing.JFrame {
             }
         });
 
+        bPharmacist.setText("Pharmacist");
+
+        bPathologist.setText("Pathologist");
+
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
         leftPanelLayout.setHorizontalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftPanelLayout.createSequentialGroup()
+            .addGroup(leftPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(bInternDoctors, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bAllPatients, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bAllDoctors, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bAllReceptionist, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bChemist, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bAllNurses, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bAddMembers, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bInternDoctors, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bAllPatients, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bAllDoctors, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bAllReceptionist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bLabAssistant, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bLogout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bAllNurses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bAddMembers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bPharmacist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bPathologist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         leftPanelLayout.setVerticalGroup(
@@ -151,19 +159,23 @@ public class AdminJFrame extends javax.swing.JFrame {
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(bAddMembers, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86)
+                .addGap(87, 87, 87)
                 .addComponent(bAllReceptionist, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
                 .addComponent(bInternDoctors, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addComponent(bAllDoctors, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addComponent(bAllPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addComponent(bAllNurses, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(bChemist, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(bLabAssistant, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bPharmacist, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bPathologist, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addComponent(bLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(122, 122, 122))
         );
@@ -228,8 +240,8 @@ public class AdminJFrame extends javax.swing.JFrame {
 
     private void bAllPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAllPatientsActionPerformed
         // TODO add your handling code here:
-//        AllPatientsJPanel allPatients = new AllPatientsJPanel(listOfCredentials, patientDirectory);
-//        splitPane.setRightComponent(allPatients);
+        AllPatientsJPanel allPatients = new AllPatientsJPanel(ds,sqliteConnection);
+        jSplitPane.setRightComponent(allPatients);
     }//GEN-LAST:event_bAllPatientsActionPerformed
 
     private void bAllNursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAllNursesActionPerformed
@@ -238,7 +250,7 @@ public class AdminJFrame extends javax.swing.JFrame {
 //        splitPane.setRightComponent(allCommunities);
     }//GEN-LAST:event_bAllNursesActionPerformed
 
-    private void bChemistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bChemistActionPerformed
+    private void bLabAssistantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLabAssistantActionPerformed
         // TODO add your handling code here:
 //        dispose();
 //        MainJFrame mainFrame = new MainJFrame(listOfCredentials);
@@ -247,7 +259,7 @@ public class AdminJFrame extends javax.swing.JFrame {
 //                mainFrame.setVisible(true);
 //            }
 //        });
-    }//GEN-LAST:event_bChemistActionPerformed
+    }//GEN-LAST:event_bLabAssistantActionPerformed
 
     private void bInternDoctorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInternDoctorsActionPerformed
         // TODO add your handling code here:
@@ -257,7 +269,6 @@ public class AdminJFrame extends javax.swing.JFrame {
 
     private void bLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLogoutActionPerformed
         // TODO add your handling code here:
-        
         dispose();
         MainJFrame mainFrame = new MainJFrame();
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -317,9 +328,11 @@ public class AdminJFrame extends javax.swing.JFrame {
     private javax.swing.JButton bAllNurses;
     private javax.swing.JButton bAllPatients;
     private javax.swing.JButton bAllReceptionist;
-    private javax.swing.JButton bChemist;
     private javax.swing.JButton bInternDoctors;
+    private javax.swing.JButton bLabAssistant;
     private javax.swing.JButton bLogout;
+    private javax.swing.JButton bPathologist;
+    private javax.swing.JButton bPharmacist;
     private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JLabel lblWelcome;
     private javax.swing.JPanel leftPanel;

@@ -49,7 +49,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lblDoctorPhoneNumber" alignment="1" pref="102" max="32767" attributes="0"/>
+                              <Component id="lblDoctorEmail" alignment="1" pref="102" max="32767" attributes="0"/>
                               <Component id="lblDoctorName" alignment="1" max="32767" attributes="0"/>
                               <Component id="lblID" alignment="1" max="32767" attributes="0"/>
                           </Group>
@@ -57,7 +57,7 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="etInternDoctorID" alignment="0" pref="149" max="32767" attributes="0"/>
                               <Component id="etInternDoctorName" alignment="0" max="32767" attributes="0"/>
-                              <Component id="etInternDoctorPhoneNumber" alignment="0" max="32767" attributes="0"/>
+                              <Component id="etInternDoctorEmail" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -132,8 +132,8 @@
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblDoctorCity" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="etInternDoctorPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblDoctorPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="etInternDoctorEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblDoctorEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="etInternDoctorCity" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -218,10 +218,10 @@
     </Component>
     <Component class="javax.swing.JTextField" name="etInternDoctorCity">
     </Component>
-    <Component class="javax.swing.JLabel" name="lblDoctorPhoneNumber">
+    <Component class="javax.swing.JLabel" name="lblDoctorEmail">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Phone Number :"/>
+        <Property name="text" type="java.lang.String" value="Email :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="etInternDoctorState">
@@ -304,7 +304,7 @@
         <Property name="text" type="java.lang.String" value="Name :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="etInternDoctorPhoneNumber">
+    <Component class="javax.swing.JTextField" name="etInternDoctorEmail">
     </Component>
   </SubComponents>
 </Form>
