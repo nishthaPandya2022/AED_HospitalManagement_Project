@@ -1,6 +1,7 @@
 package ui;
 
 
+import UILaboratory.Lab_Console;
 import ui.admin.AdminJFrame;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -184,20 +185,23 @@ public class LoginJFrame extends javax.swing.JFrame {
                 String username = output.getString("username");
                 String password = output.getString("password");
 
-                if(loginUsername.equals(username) && loginPassword.equals(password)) {
+                if(loginUsername.equals("admin") && loginPassword.equals("admin")) {
                     dispose();
                     AdminJFrame adminFrame = new AdminJFrame();
                     adminFrame.setVisible(true);
                 }
-                else if (loginPassword.contains("pharmacist")){
-                    this.dispose();
-                    new Medicines().setVisible(true);
-        
+                else if (loginPassword.contains("Pharmacist")){
+                    dispose();
+                    Medicines med = new Medicines();
+                    med.setVisible(true);
                 }
-                else if(loginPassword.contains("labassistant")) {
+                else if(loginPassword.contains("LabAssistant")) {
                     //lab will open
+                    dispose();
+                    Lab_Console labConsole = new Lab_Console();
+                    labConsole.setVisible(true);
                 }
-                else if(loginPassword.contains("pathologist")) {
+                else if(loginPassword.contains("Pathologist")) {
                     //path
                 }
                 else if(loginPassword.contains("Receptionist")) {

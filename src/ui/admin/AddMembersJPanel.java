@@ -122,7 +122,7 @@ public class AddMembersJPanel extends javax.swing.JPanel {
             }
         });
 
-        comboBoxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select an option", "Receptionist", "Doctor", "Intern Doctor", "Nurse", "Patient", "Lab Assistant", "Pharmacist", "Pathologist" }));
+        comboBoxRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select an option", "Receptionist", "Doctor", "Intern Doctor", "Nurse", "Patient", "LabAssistant", "Pharmacist", "Pathologist" }));
         comboBoxRole.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxRoleActionPerformed(evt);

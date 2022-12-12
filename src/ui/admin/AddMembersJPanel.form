@@ -251,7 +251,7 @@
             <StringItem index="3" value="Intern Doctor"/>
             <StringItem index="4" value="Nurse"/>
             <StringItem index="5" value="Patient"/>
-            <StringItem index="6" value="Lab Assistant"/>
+            <StringItem index="6" value="LabAssistant"/>
             <StringItem index="7" value="Pharmacist"/>
             <StringItem index="8" value="Pathologist"/>
           </StringArray>
