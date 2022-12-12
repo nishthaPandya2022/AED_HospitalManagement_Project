@@ -251,7 +251,7 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
         txtComboGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<select>", "Male", "Female" }));
 
         txtComboDepartment.setFont(new java.awt.Font("Arima Koshi", 0, 13)); // NOI18N
-        txtComboDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<select>", "General", "OBGYN", "Neurology", "Paediatric", "Cardiology", "" }));
+        txtComboDepartment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<select>", "General", "OBGYN", "Neurology", "Paediatric", "Cardiology", "Dermatology", "Radiology", " " }));
 
         jButtonClear.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
         jButtonClear.setText("Clear");
