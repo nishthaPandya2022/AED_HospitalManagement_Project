@@ -4,17 +4,35 @@
  */
 package ui.admin;
 
+import java.sql.Connection;
+import org.sqlite.SQLiteDataSource;
+
 /**
  *
  * @author nishthapandya
  */
 public class AdminJFrame extends javax.swing.JFrame {
 
+    static SQLiteDataSource ds = null;
+    static Connection sqliteConnection;
+
     /**
      * Creates new form AdminJFrame
      */
     public AdminJFrame() {
         initComponents();
+
+        try {
+            ds = new SQLiteDataSource();
+            System.out.println("ds");
+            ds.setUrl("jdbc:sqlite:hospManagement.db");
+            System.out.println("ds set");
+            sqliteConnection = ds.getConnection();
+            System.out.println("sqliteConnection set");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 
     /**
@@ -196,14 +214,14 @@ public class AdminJFrame extends javax.swing.JFrame {
 
     private void bAllReceptionistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAllReceptionistActionPerformed
         // TODO add your handling code here:
-        
-        AllReceptionstJPanel receptionistPanel = new AllReceptionstJPanel();
+
+        AllReceptionstJPanel receptionistPanel = new AllReceptionstJPanel(ds, sqliteConnection);
         jSplitPane.setRightComponent(receptionistPanel);
 
     }//GEN-LAST:event_bAllReceptionistActionPerformed
 
     private void bAllDoctorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAllDoctorsActionPerformed
-        AllDoctorsJPanel doctorsPanel = new AllDoctorsJPanel();
+        AllDoctorsJPanel doctorsPanel = new AllDoctorsJPanel(ds, sqliteConnection);
         jSplitPane.setRightComponent(doctorsPanel);
     }//GEN-LAST:event_bAllDoctorsActionPerformed
 
@@ -243,7 +261,7 @@ public class AdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_bAddMembersMouseClicked
 
     private void bAddMembersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddMembersActionPerformed
-        AddMembersJPanel addMembers = new AddMembersJPanel();
+        AddMembers1JPanel addMembers = new AddMembers1JPanel(ds, sqliteConnection);
         jSplitPane.setRightComponent(addMembers);
     }//GEN-LAST:event_bAddMembersActionPerformed
 

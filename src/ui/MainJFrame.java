@@ -23,11 +23,17 @@ public class MainJFrame extends javax.swing.JFrame {
     private static final String CREATE_LOGIN_TABLE_SQL = "CREATE TABLE IF NOT EXISTS login ("
             + "loginID VARCHAR(200) NOT NULL," + "userID VARCHAR(200) NOT NULL,"
             + "username VARCHAR(200) NOT NULL," + "password VARCHAR(200) NOT NULL)";
+    
+    private static final String CREATE_HOSPITAL_TABLE_SQL = "CREATE TABLE IF NOT EXISTS hospital ("
+            + "userID VARCHAR(200) NOT NULL," + "name VARCHAR(200) NOT NULL,"
+            + "DOB VARCHAR(200) NOT NULL," + "age VARCHAR(200) NOT NULL,"
+            + "organization VARCHAR(200) NOT NULL," + "phoneNumber VARCHAR(200) NOT NULL,"
+            + "address VARCHAR(200) NOT NULL," + "community VARCHAR(200) NOT NULL,"
+            + "state VARCHAR(200) NOT NULL," + "zipcode VARCHAR(200) NOT NULL,"
+            + "role VARCHAR(200) NOT NULL);";
 
-    private static final String CREATE_TEMP_TABLE_SQL = "CREATE TABLE IF NOT EXISTS temp (" + "root VARCHAR(300) NOT NULL,"
-            + "directory VARCHAR(300) NOT NULL," + "path VARCHAR(300) NOT NULL," + "added INT NOT NULL,"
-            + "removed INT NOT NULL," + "modified INT NOT NULL," + "hash VARCHAR(300) NOT NULL,"
-            + "dateModified VARCHAR(300) NOT NULL)";
+    private static final String INSERT_LOGIN_ADMIN = "INSERT INTO login (loginID, userID, username, password)"
+            + " VALUES('" + 1 + "','" + 1 + "','admin'," + "'admin');";
     
 //   CREATING TABLES FOR PHARMACY
     
@@ -43,18 +49,7 @@ public class MainJFrame extends javax.swing.JFrame {
      private static String CREATE_COMPANY_TABLE_SQL = "CREATE TABLE IF NOT EXISTS company ("
             + "CompId INTEGER(3) PRIMARY KEY NOT NULL," + "CompName VARCHAR(50) NOT NULL,"
             + "CompAddress VARCHAR(200) NOT NULL," + "CompPhone INTEGER(11) NOT NULL," + "CompExp INTEGER(5) NOT NULL)";
-    
-    private static final String CREATE_HOSPITAL_TABLE_SQL = "CREATE TABLE IF NOT EXISTS hospital ("
-            + "userID VARCHAR(200) NOT NULL," + "name VARCHAR(200) NOT NULL,"
-            + "DOB VARCHAR(200) NOT NULL," + "age VARCHAR(200) NOT NULL,"
-            + "organization VARCHAR(200) NOT NULL," + "phoneNumber VARCHAR(200) NOT NULL,"
-            + "address VARCHAR(200) NOT NULL," + "community VARCHAR(200) NOT NULL,"
-            + "state VARCHAR(200) NOT NULL," + "zipcode VARCHAR(200) NOT NULL,"
-            + "role VARCHAR(200) NOT NULL);";
-
-    private static final String INSERT_LOGIN_ADMIN = "INSERT INTO login (loginID, userID, username, password)"
-            + " VALUES('" + 1 + "','" + 1 + "','admin'," + "'admin');";
-
+     
     /**
      * Creates new form MainJFrame
      */
@@ -176,8 +171,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private void mainPharmacyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainPharmacyActionPerformed
         // TODO add your handling code here:
         dispose();
-        new Medicines().setVisible(true);
-        this.dispose();
+
 
         LoginJFrame loginFrame = new LoginJFrame();
         loginFrame.setVisible(true);
@@ -247,6 +241,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 statement = sqliteConnection.createStatement();
 
                 statement.executeUpdate(CREATE_LOGIN_TABLE_SQL);
+                statement.executeUpdate(CREATE_HOSPITAL_TABLE_SQL);
+                boolean insertDone = statement.execute(INSERT_LOGIN_ADMIN);
 //              statement.executeUpdate(CREATE_TEMP_TABLE_SQL);
                 
 //              PHARMACY TABLES
@@ -254,8 +250,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 statement.executeUpdate(CREATE_AGENT_TABLE_SQL);
                 statement.executeUpdate(CREATE_COMPANY_TABLE_SQL);
 //            
-                statement.executeUpdate(CREATE_HOSPITAL_TABLE_SQL);
-                boolean insertDone = statement.execute(INSERT_LOGIN_ADMIN);
+                
                 System.out.println("insertDone : " + insertDone);
 //            statement.executeUpdate(CREATE_TEMP_TABLE_SQL);
             }

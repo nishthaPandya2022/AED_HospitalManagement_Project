@@ -8,6 +8,7 @@ import org.sqlite.SQLiteDataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import pharmacy.Medicines;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -187,6 +188,14 @@ public class LoginJFrame extends javax.swing.JFrame {
                     dispose();
                     AdminJFrame adminFrame = new AdminJFrame();
                     adminFrame.setVisible(true);
+                }
+                else if (loginPassword.contains("pharmacist")){
+                    this.dispose();
+                    new Medicines().setVisible(true);
+        
+                }
+                else if(loginPassword.contains("labassistant")) {
+                    //lab will open
                 }
             }
 

@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author nishthapandya
@@ -19,7 +21,7 @@ public class HospitalUsers {
     
     String userID;
     String name;
-    String DOB;
+    Date DOB;
     String age;
     String organization;
     String phoneNumber;
@@ -45,11 +47,11 @@ public class HospitalUsers {
         this.name = name;
     }
 
-    public String getDOB() {
+    public Date getDOB() {
         return DOB;
     }
 
-    public void setDOB(String DOB) {
+    public void setDOB(Date DOB) {
         this.DOB = DOB;
     }
 
