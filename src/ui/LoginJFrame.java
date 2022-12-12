@@ -2,6 +2,7 @@ package ui;
 
 
 import UILaboratory.Lab_Console;
+import bloodBank.BloodHome;
 import ui.admin.AdminJFrame;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -63,6 +64,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         textUserName = new javax.swing.JTextField();
         labelUserName = new javax.swing.JLabel();
         buttonLogin = new javax.swing.JButton();
+        bBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,6 +93,13 @@ public class LoginJFrame extends javax.swing.JFrame {
             }
         });
 
+        bBack.setText("Back");
+        bBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -104,6 +113,10 @@ public class LoginJFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(buttonLogin)
                         .addGap(447, 447, 447))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(bBack)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap(363, Short.MAX_VALUE)
@@ -119,7 +132,9 @@ public class LoginJFrame extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(326, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
+                .addComponent(bBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 506, Short.MAX_VALUE)
                 .addComponent(labelLogInScreen)
                 .addGap(180, 180, 180)
                 .addComponent(buttonLogin)
@@ -150,7 +165,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 1017, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -186,23 +201,26 @@ public class LoginJFrame extends javax.swing.JFrame {
                 String password = output.getString("password");
 
                 if(loginUsername.equals("admin") && loginPassword.equals("admin")) {
-                    dispose();
+                    this.dispose();
                     AdminJFrame adminFrame = new AdminJFrame();
                     adminFrame.setVisible(true);
                 }
                 else if (loginPassword.contains("Pharmacist")){
-                    dispose();
+                    this.dispose();
                     Medicines med = new Medicines();
                     med.setVisible(true);
                 }
                 else if(loginPassword.contains("LabAssistant")) {
                     //lab will open
-                    dispose();
+                    this.dispose();
                     Lab_Console labConsole = new Lab_Console();
                     labConsole.setVisible(true);
                 }
                 else if(loginPassword.contains("Pathologist")) {
                     //path
+                    this.dispose();
+                    BloodHome bloodBank = new BloodHome();
+                    bloodBank.setVisible(true);
                 }
                 else if(loginPassword.contains("Receptionist")) {
                     //receptionist
@@ -265,6 +283,18 @@ public class LoginJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonLoginMouseClicked
 
+    private void bBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBackActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        dispose();
+        MainJFrame mainFrame = new MainJFrame();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                mainFrame.setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_bBackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -307,6 +337,7 @@ public class LoginJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bBack;
     private javax.swing.JButton buttonLogin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelLogInScreen;

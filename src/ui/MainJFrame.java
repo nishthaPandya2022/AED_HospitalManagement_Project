@@ -62,6 +62,15 @@ public class MainJFrame extends javax.swing.JFrame {
             + "Name VARCHAR(20) NOT NULL," + "Age INTEGER(3) NOT NULL," + "gender VARCHAR(6) NOT NULL,"
             + "Blood_Group VARCHAR(3) NOT NULL," + "Tests VARCHAR(20) NOT NULL," +
              "Department VARCHAR(50) NOT NULL)";
+    
+    private static String CREATE_DONOR_TABLE_SQL = "CREATE TABLE IF NOT EXISTS donor ("
+            + "DonId INTEGER(3) PRIMARY KEY NOT NULL," + "DonName VARCHAR(50) NOT NULL,"
+            + "DonFather VARCHAR(200) NOT NULL," + "DonMother VARCHAR(200) NOT NULL," + "DonDob DATE NOT NULL,"
+            + "DonMobile INTEGER(11) NOT NULL," + "DonGend VARCHAR(50) NOT NULL," + "DonEmail VARCHAR(100) NOT NULL,"
+            + "DonBlood VARCHAR(10) NOT NULL," + "DonCity VARCHAR(200) NOT NULL," + "DonAddress VARCHAR(100) NOT NULL)";
+     
+     private static String CREATE_STOCK_TABLE_SQL = "CREATE TABLE IF NOT EXISTS stock ("
+            + "BloodGroup VARCHAR(20) NOT NULL," + "BloodUnits INTEGER(100) NOT NULL)";
      
      
     /**
@@ -256,6 +265,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 statement.executeUpdate(CREATE_HOSPITAL_TABLE_SQL);
                 statement.executeUpdate(CREATE_APPOINTMENT_TABLE_SQL);
                 statement.executeUpdate(CREATE_LABTEST_TABLE_SQL);
+                statement.executeUpdate(CREATE_DONOR_TABLE_SQL);
+                statement.executeUpdate(CREATE_STOCK_TABLE_SQL);
                 boolean insertDone = statement.execute(INSERT_LOGIN_ADMIN);
 //              statement.executeUpdate(CREATE_TEMP_TABLE_SQL);
                 

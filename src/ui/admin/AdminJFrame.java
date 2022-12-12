@@ -6,6 +6,7 @@ package ui.admin;
 
 import java.sql.Connection;
 import org.sqlite.SQLiteDataSource;
+import ui.MainJFrame;
 
 /**
  *
@@ -256,6 +257,14 @@ public class AdminJFrame extends javax.swing.JFrame {
 
     private void bLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLogoutActionPerformed
         // TODO add your handling code here:
+        
+        dispose();
+        MainJFrame mainFrame = new MainJFrame();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                mainFrame.setVisible(true);
+            }
+        });
     }//GEN-LAST:event_bLogoutActionPerformed
 
     private void bAddMembersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bAddMembersMouseClicked
