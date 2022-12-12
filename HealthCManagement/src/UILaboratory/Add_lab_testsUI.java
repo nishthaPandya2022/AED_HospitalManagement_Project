@@ -203,7 +203,7 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
         });
 
         txtComboSpecimen.setFont(new java.awt.Font("Arima Koshi", 0, 12)); // NOI18N
-        txtComboSpecimen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Select>", "MRI(Radiology)", "MRA(Radiology)", "X-Ray(Radiology)", "PET Scan(Radiology)", "Ultrasound(Radiology)", "Complete Blood count(Pathology)", "Urine culture", "Stool culture", "Lipid panel", "Liver panel", " " }));
+        txtComboSpecimen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Select>", "MRI(Radiology)", "MRA(Radiology)", "X-Ray(Radiology)", "PET Scan(Radiology)", "Ultrasound(Radiology)", "Complete Blood count(Pathology)", "Urine culture", "Stool culture", "Lipid panel", "Liver panel", "Sonogram", " " }));
 
         tbladd_test.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         tbladd_test.setModel(new javax.swing.table.DefaultTableModel(
@@ -246,6 +246,12 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Gender:");
+
+        txtDoctorName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDoctorNameActionPerformed(evt);
+            }
+        });
 
         txtComboGender.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
         txtComboGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<select>", "Male", "Female" }));
@@ -573,6 +579,10 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_UpdatejButtonMouseClicked
+
+    private void txtDoctorNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDoctorNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDoctorNameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
