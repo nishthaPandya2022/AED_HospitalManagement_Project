@@ -22,7 +22,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private static final String CREATE_LOGIN_TABLE_SQL = "CREATE TABLE IF NOT EXISTS login ("
             + "loginID VARCHAR(200) NOT NULL," + "userID VARCHAR(200) NOT NULL,"
-            + "username VARCHAR(200) NOT NULL," + "password VARCHAR(200) NOT NULL)";
+            + "username VARCHAR(200) NOT NULL," + "password VARCHAR(200) NOT NULL, "
+            + "verifyCode VARCHAR(255)," + "status VARCHAR(255));";
     
     private static final String CREATE_HOSPITAL_TABLE_SQL = "CREATE TABLE IF NOT EXISTS hospital ("
             + "userID VARCHAR(200) NOT NULL," + "name VARCHAR(200) NOT NULL,"
@@ -36,11 +37,13 @@ public class MainJFrame extends javax.swing.JFrame {
             + " VALUES('" + 1 + "','" + 1 + "','admin'," + "'admin');";
     
     private static final String CREATE_APPOINTMENT_TABLE_SQL = "CREATE TABLE IF NOT EXISTS appointment "
-            + "(appointmentID VARCHAR(200) NOT NULL, " + "patientID VARCHAR(200) NOT NULL," 
+            + "(appointmentID VARCHAR(200) NOT NULL, " + "appointmentDate VARCHAR(200) NOT NULL,"
+            + " appointmentTime VARCHAR(200) NOT NULL,"+ "patientID VARCHAR(200) NOT NULL,"  
             + "patientName VARCHAR(200) NOT NULL,"+ "doctorID VARCHAR(200) NOT NULL,"
             + "doctorName VARCHAR(200) NOT NULL," + "temperature VARCHAR(200) NOT NULL,"
             + "bloodPressure VARCHAR(200) NOT NULL," + "weight VARCHAR(200) NOT NULL," 
-            + "height VARCHAR(200) NOT NULL," + "heartRate VARCHAR(200),"+"diagnosis VARCHAR(300) NOT NULL);";
+            + "height VARCHAR(200) NOT NULL," + "heartRate VARCHAR(200),"+"status VARCHAR(100) NOT NULL,"
+            + "diagnosis VARCHAR(300) NOT NULL);";
     
 //   CREATING TABLES FOR PHARMACY
     
@@ -69,10 +72,8 @@ public class MainJFrame extends javax.swing.JFrame {
             + "DonMobile INTEGER(11) NOT NULL," + "DonGend VARCHAR(50) NOT NULL," + "DonEmail VARCHAR(100) NOT NULL,"
             + "DonBlood VARCHAR(10) NOT NULL," + "DonCity VARCHAR(200) NOT NULL," + "DonAddress VARCHAR(100) NOT NULL)";
      
-     private static final String CREATE_STOCK_TABLE_SQL = "CREATE TABLE IF NOT EXISTS stock ("
+    private static final String CREATE_STOCK_TABLE_SQL = "CREATE TABLE IF NOT EXISTS stock ("
             + "BloodGroup VARCHAR(20) NOT NULL," + "BloodUnits INTEGER(100) NOT NULL)";
-     
-     
     /**
      * Creates new form MainJFrame
      */
@@ -181,7 +182,8 @@ public class MainJFrame extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1100, 816));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void mainHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainHospitalActionPerformed

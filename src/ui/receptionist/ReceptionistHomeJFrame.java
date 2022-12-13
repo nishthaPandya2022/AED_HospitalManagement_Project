@@ -46,23 +46,28 @@ public class ReceptionistHomeJFrame extends javax.swing.JFrame {
 
         splitPaneReceptionist = new javax.swing.JSplitPane();
         leftPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        bAddPatient = new javax.swing.JButton();
+        bBookAppointment = new javax.swing.JButton();
+        bLogOut = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Add Patient");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bAddPatient.setText("Add Patient");
+        bAddPatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bAddPatientActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Book Appointment");
+        bBookAppointment.setText("Book Appointment");
+        bBookAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBookAppointmentActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Log Out");
+        bLogOut.setText("Log Out");
 
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
@@ -71,20 +76,20 @@ public class ReceptionistHomeJFrame extends javax.swing.JFrame {
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bBookAppointment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bAddPatient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bLogOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         leftPanelLayout.setVerticalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addGap(180, 180, 180)
-                .addComponent(jButton1)
+                .addComponent(bAddPatient)
                 .addGap(45, 45, 45)
-                .addComponent(jButton2)
+                .addComponent(bBookAppointment)
                 .addGap(44, 44, 44)
-                .addComponent(jButton3)
+                .addComponent(bLogOut)
                 .addContainerGap(462, Short.MAX_VALUE))
         );
 
@@ -117,11 +122,18 @@ public class ReceptionistHomeJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bAddPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddPatientActionPerformed
         // TODO add your handling code here:
         PatientRegistrationJPanel patient = new PatientRegistrationJPanel(ds, sqliteConnection);
        splitPaneReceptionist.setRightComponent(patient);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bAddPatientActionPerformed
+
+    private void bBookAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBookAppointmentActionPerformed
+        // TODO add your handling code here:
+        
+        BookAppointmentJPanel bookAppointment = new BookAppointmentJPanel(ds, sqliteConnection);
+        splitPaneReceptionist.setRightComponent(bookAppointment);
+    }//GEN-LAST:event_bBookAppointmentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,9 +171,9 @@ public class ReceptionistHomeJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton bAddPatient;
+    private javax.swing.JButton bBookAppointment;
+    private javax.swing.JButton bLogOut;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JSplitPane splitPaneReceptionist;

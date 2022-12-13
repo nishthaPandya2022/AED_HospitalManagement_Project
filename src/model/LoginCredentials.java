@@ -14,6 +14,7 @@ public class LoginCredentials {
     String userID;
     String username;
     String password;
+    String verifyCode;
 
     public String getLoginID() {
         return loginID;
@@ -46,6 +47,15 @@ public class LoginCredentials {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getVerifyCode() {
+        return verifyCode;
+    }
+
+    public void setVerifyCode(String verifyCode) {
+        this.verifyCode = verifyCode;
+    }
+    
     
     
     

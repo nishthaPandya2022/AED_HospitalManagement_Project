@@ -65,6 +65,9 @@ public class PatientRegistrationJPanel extends javax.swing.JPanel {
 
                 patDirectory.add(patient);
             }
+            
+            output.close();
+            p2p.close();
 
             this.patientsDirectory.setPatientDirectory(patDirectory);
 

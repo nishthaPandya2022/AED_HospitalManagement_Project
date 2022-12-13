@@ -4,6 +4,7 @@
  */
 package ui.admin;
 
+import com.raven.component.Message;
 import java.sql.Connection;
 import java.time.*;
 import java.sql.PreparedStatement;
@@ -15,6 +16,10 @@ import model.HospitalUserDirectory;
 import model.HospitalUsers;
 import org.sqlite.SQLiteDataSource;
 import java.sql.Date;
+import model.LoginCredentials;
+import model.ModelMessage;
+import model.ServiceMail;
+import model.ServiceUser;
 
 /**
  *
@@ -262,20 +267,6 @@ public class AddMembersJPanel extends javax.swing.JPanel {
             hospUser.setZipcode(txtFieldZipCode.getText());
             hospUser.setRole(comboBoxRole.getSelectedItem().toString());
 
-//            
-//            try {
-//                if (service.checkDuplicateUser(user.getUserName())) {
-//                    showMessage(Message.MessageType.ERROR, "User name already exit");
-//                } else if (service.checkDuplicateEmail(user.getEmail())) {
-//                    showMessage(Message.MessageType.ERROR, "Email already exit");
-//                } else {
-//                    service.insertUser(user);
-//                    sendMain(user);
-//                }
-//            } catch (SQLException e) {
-//                showMessage(Message.MessageType.ERROR, "Error Register");
-//            }
-
             boolean dataInserted = insertDataToDB(hospUser);
             System.out.println("dataInserted : " + dataInserted);
         } catch (Exception e) {
@@ -347,21 +338,53 @@ public class AddMembersJPanel extends javax.swing.JPanel {
                     + "','" + hospUser.getState() + "','" + hospUser.getZipcode()
                     + "','" + hospUser.getRole() + "');";
 
-            String INSERT_DATA_INTO_LOGIN = "INSERT INTO login(loginID, userID, username, password)"
-                    + " VALUES ('" + loginID + "','" + hospUser.getUserID() + "','" + username + "','" + password + "');";
-
             PreparedStatement p2p = sqliteConnection.prepareStatement(INSERT_DATA_INTO_HOSPITAL);
             output = p2p.execute();
             if (output == false) {
-                PreparedStatement p3p = sqliteConnection.prepareStatement(INSERT_DATA_INTO_LOGIN);
-                boolean loginOutput = p3p.execute();
-                if (loginOutput == false) {
+                //user credentials
+                LoginCredentials loginUser = new LoginCredentials();
+                loginUser.setUsername(hospUser.getEmail());
+                loginUser.setPassword(password);
+                loginUser.setLoginID(String.valueOf(loginID));
+                loginUser.setUserID(hospUser.getUserID());
+
+                //service class called
+                ServiceUser serviceUser = new ServiceUser(sqliteConnection);
+//            serviceUser.insertUser(loginUser);
+
+                try {
+                    if (serviceUser.checkDuplicateEmail(loginUser.getUsername())) {
+                        System.out.println("ui.admin.AddMembersJPanel.insertDataToDB():checkDuplicationEMAIL ()");
+//                    showMessage(serviceUser.MessageType.ERROR, "Email already exit");
+                    } else {
+                        System.out.println("before serviceUSER.insertUSER");
+                        serviceUser.insertUser(loginUser);
+                        System.out.println("after serviceUSER.insertUSER");
+                        sendMain(loginUser, serviceUser);
+                        System.out.println("after sendMain");
+                    }
+
                     JOptionPane.showMessageDialog(this, "UserName :"
                             + username + "\n Password : " + password + "\n User added to Hospital!");
                     return false;
-                } else {
-                    System.out.println("loginOutput == false");
+                } catch (Exception e) {
+                    e.printStackTrace();
+//                showMessage(Message.MessageType.ERROR, "Error Register");
                 }
+
+                //older-code - DONOT DELETE
+                String INSERT_DATA_INTO_LOGIN = "INSERT INTO login(loginID, userID, username, password)"
+                        + " VALUES ('" + loginID + "','" + hospUser.getUserID() + "','" + username + "','" + password + "');";
+
+//                PreparedStatement p3p = sqliteConnection.prepareStatement(INSERT_DATA_INTO_LOGIN);
+//                boolean loginOutput = p3p.execute();
+//                if (loginOutput == false) {
+//                    JOptionPane.showMessageDialog(this, "UserName :"
+//                            + username + "\n Password : " + password + "\n User added to Hospital!");
+//                    return false;
+//                } else {
+//                    System.out.println("loginOutput == false");
+//                }
             } else {
                 System.out.println("hospital Output == false");
             }
@@ -382,5 +405,28 @@ public class AddMembersJPanel extends javax.swing.JPanel {
         } else {
             return 0;
         }
+    }
+
+    private void sendMain(LoginCredentials user, ServiceUser serviceUser) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ModelMessage ms = new ServiceMail().sendMain(user.getUsername(), user.getVerifyCode());
+//                ModelMessage ms = new ServiceMail().sendMain( user.getVerifyCode());
+                System.out.println("ms : " + ms.isSuccess());
+                System.out.println("ms : " + ms.getMessage());
+                if (ms.isSuccess()) {
+//                    loading.setVisible(false);
+                    CredentialsJFrame credential = new CredentialsJFrame(user, serviceUser);
+                    credential.setVisible(true);
+                } else {
+                    System.out.println("Error !");
+//                    loading.setVisible(false);
+//                    showMessage(Message.MessageType.ERROR, ms.getMessage());
+                }
+            }
+        }).start();
+
     }
 }
