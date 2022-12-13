@@ -98,6 +98,11 @@ public class BloodHome extends javax.swing.JFrame {
         jMenu2.setText("Need Blood");
 
         jMenuItem6.setText("Search Donor");
+        jMenuItem6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem6MouseClicked(evt);
+            }
+        });
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -152,14 +157,14 @@ public class BloodHome extends javax.swing.JFrame {
         JFrame AddDonorFrame = new AddDonor();
         AddDonorFrame.setVisible(true);
         Point p = this.getLocationOnScreen();
-        AddDonorFrame.setLocation(p.x + 2, p.y + 130);
+        AddDonorFrame.setLocation(p.x + 8, p.y + 120);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         JFrame UpdateDonorFrame = new UpdateDonor();
         UpdateDonorFrame.setVisible(true);
         Point p = this.getLocationOnScreen();
-        UpdateDonorFrame.setLocation(p.x + 2, p.y + 110);
+        UpdateDonorFrame.setLocation(p.x + 8, p.y + 110);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -173,7 +178,7 @@ public class BloodHome extends javax.swing.JFrame {
         JFrame SearchDonorFrame = new SearchDonorLocation();
         SearchDonorFrame.setVisible(true);
         Point p = this.getLocationOnScreen();
-        SearchDonorFrame.setLocation(p.x + 80, p.y + 140);
+        SearchDonorFrame.setLocation(p.x + 88, p.y + 140);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -199,6 +204,10 @@ public class BloodHome extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem6MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6MouseClicked
 
     /**
      * @param args the command line arguments

@@ -93,6 +93,11 @@ public class LoginJFrame extends javax.swing.JFrame {
                 buttonLoginMouseClicked(evt);
             }
         });
+        buttonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLoginActionPerformed(evt);
+            }
+        });
 
         bBack.setText("Back");
         bBack.addActionListener(new java.awt.event.ActionListener() {
@@ -299,6 +304,10 @@ public class LoginJFrame extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_bBackActionPerformed
+
+    private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonLoginActionPerformed
 
     /**
      * @param args the command line arguments
