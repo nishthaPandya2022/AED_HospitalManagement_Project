@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import pharmacy.Medicines;
+import ui.doctor.DoctorHomeJFrame;
 import ui.receptionist.ReceptionistHomeJFrame;
 
 /*
@@ -227,6 +228,11 @@ public class LoginJFrame extends javax.swing.JFrame {
                     this.dispose();
                     ReceptionistHomeJFrame reception = new ReceptionistHomeJFrame();
                     reception.setVisible(true);
+                }
+                else if(loginPassword.contains("Doctor")) {
+                    this.dispose();
+                    DoctorHomeJFrame doctor = new DoctorHomeJFrame();
+                    doctor.setVisible(true);
                 }
             }
 

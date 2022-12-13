@@ -4,17 +4,34 @@
  */
 package ui.doctor;
 
+import java.sql.Connection;
+import org.sqlite.SQLiteDataSource;
+
 /**
  *
  * @author nishthapandya
  */
 public class DoctorHomeJFrame extends javax.swing.JFrame {
 
+    static SQLiteDataSource ds = null;
+    static Connection sqliteConnection;
+
     /**
      * Creates new form DoctorHomeJFrame
      */
     public DoctorHomeJFrame() {
         initComponents();
+
+        try {
+            ds = new SQLiteDataSource();
+            System.out.println("ds");
+            ds.setUrl("jdbc:sqlite:hospManagement.db");
+            System.out.println("ds set");
+            sqliteConnection = ds.getConnection();
+            System.out.println("sqliteConnection set");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

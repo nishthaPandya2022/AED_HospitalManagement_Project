@@ -5,11 +5,14 @@
 package ui.receptionist;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import model.Appointment;
 import model.Doctor;
 import model.DoctorDirectory;
 import org.sqlite.SQLiteDataSource;
@@ -24,6 +27,9 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
     private ArrayList<Doctor> docDirectory;
     static SQLiteDataSource ds = null;
     static Connection sqliteConnection;
+    String doctorID;
+
+    String GET_ALL_APPOINTMENTS = "Select count(*) from appointment";
 
     String GET_ALL_DOCTORS_FROM_HOSPITAL = "SELECT userID, name, DOB, age, organization, email, address, community, state, zipcode, role from hospital WHERE role=\"Doctor\"";
 
@@ -63,7 +69,6 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
             this.doctorDirectory.setListOfDoctors(docDirectory);
 
 //            populateDoctorTable();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -300,6 +305,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tableAllDoctor.getModel();
         Doctor doc = (Doctor) model.getValueAt(selectedRow, 0);
 
+        doctorID = String.valueOf(doc.getDoctorID());
         etDoctorName.setText(doc.getDoctorName());
         etDoctorSpecialization.setText(doc.getDoctorSpeciality());
     }//GEN-LAST:event_bViewDoctorActionPerformed
@@ -307,8 +313,32 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
     private void bBookAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBookAppointmentActionPerformed
         // TODO add your handling code here:
 
-        if(validatedata()) {
-            
+        try {
+            PreparedStatement p2p = sqliteConnection.prepareStatement(GET_ALL_APPOINTMENTS);
+            ResultSet output = p2p.executeQuery();
+            int userID = Integer.parseInt(output.getString("count(*)"));
+            userID++;
+            if (validatedata()) {
+                Appointment appoint = new Appointment();
+                appoint.setAppointmentID(String.valueOf(userID));
+                appoint.setPatientID(etPatientID.getText());
+                appoint.setPatientName(etPatientName.getText());
+                appoint.setDoctorID(doctorID);
+                appoint.setDoctorName(etDoctorName.getText());
+                appoint.setAppointmentDate(Date.valueOf(((JTextField) dateChooserAppointment.getDateEditor().getUiComponent()).getText()));
+                appoint.setAppointmentTime(txtAppointmentTime.getText());
+                appoint.setTemperature("0");
+                appoint.setBloodPressure("0");
+                appoint.setHeight("0");
+                appoint.setWeight("0");
+                appoint.setHeartRate("0");
+                appoint.setDiagnosis("Null");
+                appoint.setAppointmentStatus("PENDING");
+                
+                JOptionPane.showMessageDialog(this, "Appointment Booked !");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_bBookAppointmentActionPerformed
 
@@ -323,6 +353,8 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "No Patient details Found !");
             } else {
                 while (output.next()) {
+
+                    etPatientID.setText(output.getString("patientID"));
                     populateDoctorTable();
                 }
             }

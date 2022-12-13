@@ -5,11 +5,15 @@
 package ui.doctor;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import model.Appointment;
+import model.AppointmentDirectory;
 import model.Patients;
 import model.PatientsDirectory;
 import org.sqlite.SQLiteDataSource;
@@ -20,13 +24,14 @@ import org.sqlite.SQLiteDataSource;
  */
 public class PatientListJPanel extends javax.swing.JPanel {
     
-    private PatientsDirectory patientsDirectory;   //private DoctorDirectory doctorDirectory;
-    private ArrayList<Patients> patDirectory;      //private ArrayList<Doctor> docDirectory;
+    private AppointmentDirectory appointmentDirectory;   //private DoctorDirectory doctorDirectory;
+    private ArrayList<Appointment> appointDirectory;      //private ArrayList<Doctor> docDirectory;
     
     static SQLiteDataSource ds = null;
     static Connection sqliteConnection;
     
-    String GET_ALL_PATIENTS_FROM_HOSPITAL = "SELECT userID, name, DOB, age, organization, email, address, community, state, zipcode, role from hospital WHERE role=\"Patient\"";
+    String GET_ALL_PATIENTS_FROM_HOSPITAL = "SELECT h.userID, h.name, h.DOB, h.age, h.organization, h.email, h.address, h.community, state, zipcode, role from hospital h, appointment appoint WHERE role=\"Patient\" AND doctorID";
+    String GET_PATIENTS_FOR_A_PARTICULAR_DOCTOR = "SELECT appointmentID, patientID, patientName, status, appointmentDate, bloodPressure, temperature, height, weight, heartRate from appointment where doctorID=?;";
 
     /**
      * Creates new form PatientListJPanel
@@ -37,29 +42,44 @@ public class PatientListJPanel extends javax.swing.JPanel {
         
         this.ds = dataSource;
         this.sqliteConnection = connection;
-        this.patientsDirectory = new PatientsDirectory();
-        patDirectory = new ArrayList<Patients>();
+        this.appointmentDirectory = new AppointmentDirectory();
+        appointDirectory = new ArrayList<Appointment>();
 
         try {
-            PreparedStatement p2p = sqliteConnection.prepareStatement(GET_ALL_PATIENTS_FROM_HOSPITAL);
+            PreparedStatement p2p = sqliteConnection.prepareStatement(GET_PATIENTS_FOR_A_PARTICULAR_DOCTOR);
             ResultSet output = p2p.executeQuery();
             while (output.next()) {
-                Patients patient = new Patients();
-                patient.setPatientID(Integer.parseInt(output.getString("userID")));
-                patient.setPatientName(output.getString("name"));
-                patient.setPatientDOB(java.sql.Date.valueOf(output.getString("DOB")));
-                patient.setPatientAge(output.getString("age"));
-                patient.setPatientEmail(output.getString("email"));
-                patient.setPatientAddress(output.getString("address"));
-                patient.setPatientCommunity(output.getString("community"));
-                patient.setPatientState(output.getString("state"));
-                patient.setPatientZipCode(output.getString("zipcode"));
+                Appointment appoint = new Appointment();
+                appoint.setAppointmentID(output.getString("appointmentID"));
+                appoint.setPatientID(output.getString("patientID"));
+                appoint.setPatientName(output.getString("patientName"));
+                appoint.setDoctorID(output.getString("doctorID"));
+                appoint.setDoctorName(output.getString("doctorName"));
+                appoint.setAppointmentDate(java.sql.Date.valueOf(output.getString("appointmentDate")));
+                appoint.setAppointmentTime(output.getString("appointmentTime"));
+                appoint.setTemperature(output.getString("temperature"));
+                appoint.setBloodPressure(output.getString("bloodPressure"));
+                appoint.setHeight(output.getString("height"));
+                appoint.setWeight(output.getString("weight"));
+                appoint.setHeartRate(output.getString("heartRate"));
+                appoint.setDiagnosis(output.getString("diagnosis"));
+                appoint.setAppointmentStatus(output.getString("status"));
+//                Patients patient = new Patients();
+//                patient.setPatientID(Integer.parseInt(output.getString("userID")));
+//                patient.setPatientName(output.getString("name"));
+//                patient.setPatientDOB(java.sql.Date.valueOf(output.getString("DOB")));
+//                patient.setPatientAge(output.getString("age"));
+//                patient.setPatientEmail(output.getString("email"));
+//                patient.setPatientAddress(output.getString("address"));
+//                patient.setPatientCommunity(output.getString("community"));
+//                patient.setPatientState(output.getString("state"));
+//                patient.setPatientZipCode(output.getString("zipcode"));
 //                patient.setPatientDocName(output.getString);
 
-                patDirectory.add(patient);
+                appointDirectory.add(appoint);
             }
 
-            this.patientsDirectory.setPatientDirectory(patDirectory);
+            this.appointmentDirectory.setListOfAppointment(appointDirectory);
 
             populatePatientTable();
 

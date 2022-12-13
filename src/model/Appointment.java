@@ -12,13 +12,6 @@ import java.util.Date;
  */
 public class Appointment {
     
-//    + "(appointmentID VARCHAR(200) NOT NULL, " + "appointmentDate VARCHAR(200) NOT NULL,"
-//            + " appointmentTime VARCHAR(200) NOT NULL,"+ "patientID VARCHAR(200) NOT NULL,"  
-//            + "patientName VARCHAR(200) NOT NULL,"+ "doctorID VARCHAR(200) NOT NULL,"
-//            + "doctorName VARCHAR(200) NOT NULL," + "temperature VARCHAR(200) NOT NULL,"
-//            + "bloodPressure VARCHAR(200) NOT NULL," + "weight VARCHAR(200) NOT NULL," 
-//            + "height VARCHAR(200) NOT NULL," + "heartRate VARCHAR(200),"+"diagnosis VARCHAR(300) NOT NULL);";
-    
     String appointmentID;
     Date appointmentDate;
     String appointmentTime;
@@ -145,7 +138,10 @@ public class Appointment {
     public void setAppointmentStatus(String appointmentStatus) {
         this.appointmentStatus = appointmentStatus;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return String.valueOf(appointmentID);
+    }
     
 }

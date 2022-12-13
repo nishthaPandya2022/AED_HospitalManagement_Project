@@ -6,6 +6,7 @@ package ui.receptionist;
 
 import java.sql.Connection;
 import org.sqlite.SQLiteDataSource;
+import ui.MainJFrame;
 
 /**
  *
@@ -68,6 +69,11 @@ public class ReceptionistHomeJFrame extends javax.swing.JFrame {
         });
 
         bLogOut.setText("Log Out");
+        bLogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bLogOutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
@@ -134,6 +140,16 @@ public class ReceptionistHomeJFrame extends javax.swing.JFrame {
         BookAppointmentJPanel bookAppointment = new BookAppointmentJPanel(ds, sqliteConnection);
         splitPaneReceptionist.setRightComponent(bookAppointment);
     }//GEN-LAST:event_bBookAppointmentActionPerformed
+
+    private void bLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLogOutActionPerformed
+        dispose();
+        MainJFrame mainFrame = new MainJFrame();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                mainFrame.setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_bLogOutActionPerformed
 
     /**
      * @param args the command line arguments
