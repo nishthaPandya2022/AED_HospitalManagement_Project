@@ -22,7 +22,7 @@ public class Patients {
     private String patientCity;
     private String patientState;
     private String patientZipCode;
-    private String patientPhoneNumber;
+    private String patientEmail;
     private String patientBloodGroup;
 
     public int getPatientID() {
@@ -104,12 +104,12 @@ public class Patients {
         this.patientZipCode = patientZipCode;
     }
 
-    public String getPatientPhoneNumber() {
-        return patientPhoneNumber;
+    public String getPatientEmail() {
+        return patientEmail;
     }
 
-    public void setPatientPhoneNumber(String patientPhoneNumber) {
-        this.patientPhoneNumber = patientPhoneNumber;
+    public void setPatientEmail(String patientEmail) {
+        this.patientEmail = patientEmail;
     }
 
     public String getPatientBloodGroup() {

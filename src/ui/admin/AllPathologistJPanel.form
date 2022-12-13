@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -28,7 +28,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
                       <Component id="bViewDoctor" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="125" max="32767" attributes="0"/>
+                      <EmptySpace pref="97" max="32767" attributes="0"/>
                       <Component id="bUpdateDoctor" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
                       <Component id="bDeleteDoctor" min="-2" max="-2" attributes="0"/>
@@ -40,23 +40,21 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="lblDocAge" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="lblDoctorSpecialization" alignment="0" max="32767" attributes="0"/>
+                  <Component id="lblDocAge" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                       <Component id="lblDoctorEmail" alignment="1" pref="102" max="32767" attributes="0"/>
                       <Component id="lblDoctorName" alignment="1" max="32767" attributes="0"/>
                       <Component id="lblID" alignment="1" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="lblDocDOB" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDocDOB" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="etDoctorID" alignment="0" pref="149" max="32767" attributes="0"/>
                   <Component id="etDoctorName" alignment="0" max="32767" attributes="0"/>
                   <Component id="etDoctorEmail" alignment="0" max="32767" attributes="0"/>
-                  <Component id="etDoctorSpecialization" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtFieldDocAge" max="32767" attributes="0"/>
-                  <Component id="dateChooserDocDOB" max="32767" attributes="0"/>
+                  <Component id="txtFieldDocAge" alignment="0" max="32767" attributes="0"/>
+                  <Component id="dateChooserDocDOB" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -116,48 +114,40 @@
                   <Component id="etDoctorCity" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblDoctorState" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="etDoctorState" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblDoctorSpecialization" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="etDoctorSpecialization" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblDoctorZipCode" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="etDoctorZipCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="lblDoctorState" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="etDoctorState" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblDocDOB" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="dateChooserDocDOB" min="-2" max="-2" attributes="0"/>
+                  <Component id="dateChooserDocDOB" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblDoctorZipCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="etDoctorZipCode" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblDocAge" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtFieldDocAge" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="67" max="32767" attributes="0"/>
+              <EmptySpace pref="86" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="etDoctorState">
-    </Component>
-    <Component class="javax.swing.JTextField" name="etDoctorSpecialization">
-    </Component>
     <Component class="javax.swing.JLabel" name="lblDoctorAddress">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Address :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="etDoctorZipCode">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblDoctorName">
+    <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Name :"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Helvetica Neue" size="18" style="0"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="All Pharmacist Details"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="bViewDoctor">
@@ -168,48 +158,24 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bViewDoctorActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblDoctorEmail">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Email :"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="etDoctorCity">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblDoctorSpecialization">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Organization :"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="etDoctorName">
-    </Component>
     <Component class="javax.swing.JLabel" name="lblDoctorCity">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="City :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="bDeleteDoctor">
+    <Component class="javax.swing.JLabel" name="lblDoctorName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Delete"/>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Name :"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bDeleteDoctorActionPerformed"/>
-      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="etDoctorCity">
     </Component>
     <Component class="javax.swing.JLabel" name="lblID">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="ID :"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="etDoctorID">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblDoctorCommunity">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Community :"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -219,39 +185,15 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tableAllDoctor">
+        <Component class="javax.swing.JTable" name="tableAllPathologist">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="6">
                 <Column editable="false" title="ID" type="java.lang.Integer"/>
                 <Column editable="false" title="Name" type="java.lang.String"/>
-                <Column editable="false" title="Organization" type="java.lang.String"/>
+                <Column editable="false" title="Email" type="java.lang.String"/>
                 <Column editable="false" title="Age" type="java.lang.String"/>
               </Table>
-            </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-              <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-              </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -260,36 +202,26 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="etDoctorAddress">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="etDoctorAddressActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="etDoctorEmail">
-    </Component>
-    <Component class="javax.swing.JButton" name="bUpdateDoctor">
+    <Component class="javax.swing.JLabel" name="lblDocDOB">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Update"/>
+        <Property name="text" type="java.lang.String" value="DOB :"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bUpdateDoctorActionPerformed"/>
-      </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblDoctorZipCode">
+    <Component class="javax.swing.JLabel" name="lblDoctorEmail">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Zip Code :"/>
+        <Property name="text" type="java.lang.String" value="Email :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="etDoctorCommunity">
+    <Component class="javax.swing.JTextField" name="txtFieldDocAge">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JTextField" name="etDoctorZipCode">
+    </Component>
+    <Component class="javax.swing.JTextField" name="etDoctorName">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDocAge">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Helvetica Neue" size="18" style="0"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="All Doctor Details"/>
+        <Property name="text" type="java.lang.String" value="Age :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDoctorState">
@@ -298,19 +230,48 @@
         <Property name="text" type="java.lang.String" value="State :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblDocDOB">
+    <Component class="javax.swing.JLabel" name="lblDoctorCommunity">
       <Properties>
-        <Property name="text" type="java.lang.String" value="DOB :"/>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Community :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblDocAge">
+    <Component class="javax.swing.JTextField" name="etDoctorEmail">
+    </Component>
+    <Component class="javax.swing.JTextField" name="etDoctorCommunity">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDoctorZipCode">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Age :"/>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Zip Code :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtFieldDocAge">
+    <Component class="javax.swing.JTextField" name="etDoctorAddress">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="etDoctorAddressActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="etDoctorState">
+    </Component>
+    <Component class="javax.swing.JButton" name="bDeleteDoctor">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bDeleteDoctorActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="etDoctorID">
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="dateChooserDocDOB">
+    </Component>
+    <Component class="javax.swing.JButton" name="bUpdateDoctor">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Update"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bUpdateDoctorActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

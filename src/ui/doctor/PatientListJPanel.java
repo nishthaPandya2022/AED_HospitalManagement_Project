@@ -5,11 +5,16 @@
 package ui.doctor;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import model.Appointment;
+import model.AppointmentDirectory;
+import model.Doctor;
 import model.Patients;
 import model.PatientsDirectory;
 import org.sqlite.SQLiteDataSource;
@@ -19,47 +24,52 @@ import org.sqlite.SQLiteDataSource;
  * @author nishthapandya
  */
 public class PatientListJPanel extends javax.swing.JPanel {
-    
-    private PatientsDirectory patientsDirectory;   //private DoctorDirectory doctorDirectory;
-    private ArrayList<Patients> patDirectory;      //private ArrayList<Doctor> docDirectory;
-    
+
+    private AppointmentDirectory appointmentDirectory;   //private DoctorDirectory doctorDirectory;
+    private ArrayList<Appointment> appointDirectory;      //private ArrayList<Doctor> docDirectory;
+
     static SQLiteDataSource ds = null;
     static Connection sqliteConnection;
-    
-    String GET_ALL_PATIENTS_FROM_HOSPITAL = "SELECT userID, name, DOB, age, organization, email, address, community, state, zipcode, role from hospital WHERE role=\"Patient\"";
+
+    Appointment appointment;
+    String GET_ALL_PATIENTS_FROM_HOSPITAL = "SELECT h.userID, h.name, h.DOB, h.age, h.organization, h.email, h.address, h.community, state, zipcode, role from hospital h, appointment appoint WHERE role=\"Patient\" AND doctorID";
+    String GET_PATIENTS_FOR_A_PARTICULAR_DOCTOR = "SELECT appointmentID, patientID, patientName, status, appointmentDate, bloodPressure, temperature, height, weight, heartRate from appointment where doctorID=?;";
 
     /**
      * Creates new form PatientListJPanel
      */
     public PatientListJPanel(SQLiteDataSource dataSource, Connection connection) {
         initComponents();
-        
-        
+
         this.ds = dataSource;
         this.sqliteConnection = connection;
-        this.patientsDirectory = new PatientsDirectory();
-        patDirectory = new ArrayList<Patients>();
+        this.appointmentDirectory = new AppointmentDirectory();
+        appointDirectory = new ArrayList<Appointment>();
 
         try {
-            PreparedStatement p2p = sqliteConnection.prepareStatement(GET_ALL_PATIENTS_FROM_HOSPITAL);
+            PreparedStatement p2p = sqliteConnection.prepareStatement(GET_PATIENTS_FOR_A_PARTICULAR_DOCTOR);
             ResultSet output = p2p.executeQuery();
             while (output.next()) {
-                Patients patient = new Patients();
-                patient.setPatientID(Integer.parseInt(output.getString("userID")));
-                patient.setPatientName(output.getString("name"));
-                patient.setPatientDOB(java.sql.Date.valueOf(output.getString("DOB")));
-                patient.setPatientAge(output.getString("age"));
-                patient.setPatientPhoneNumber(output.getString("phoneNumber"));
-                patient.setPatientAddress(output.getString("address"));
-                patient.setPatientCommunity(output.getString("community"));
-                patient.setPatientState(output.getString("state"));
-                patient.setPatientZipCode(output.getString("zipcode"));
-//                patient.setPatientDocName(output.getString);
+                Appointment appoint = new Appointment();
+                appoint.setAppointmentID(output.getString("appointmentID"));
+                appoint.setPatientID(output.getString("patientID"));
+                appoint.setPatientName(output.getString("patientName"));
+                appoint.setDoctorID(output.getString("doctorID"));
+                appoint.setDoctorName(output.getString("doctorName"));
+                appoint.setAppointmentDate(java.sql.Date.valueOf(output.getString("appointmentDate")));
+                appoint.setAppointmentTime(output.getString("appointmentTime"));
+                appoint.setTemperature(output.getString("temperature"));
+                appoint.setBloodPressure(output.getString("bloodPressure"));
+                appoint.setHeight(output.getString("height"));
+                appoint.setWeight(output.getString("weight"));
+                appoint.setHeartRate(output.getString("heartRate"));
+                appoint.setDiagnosis(output.getString("diagnosis"));
+                appoint.setAppointmentStatus(output.getString("status"));
 
-                patDirectory.add(patient);
+                appointDirectory.add(appoint);
             }
 
-            this.patientsDirectory.setPatientDirectory(patDirectory);
+            this.appointmentDirectory.setListOfAppointment(appointDirectory);
 
             populatePatientTable();
 
@@ -67,7 +77,7 @@ public class PatientListJPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
+
     public boolean validatedata() {
 
         if ("".equals(etPatientID.getText())) {
@@ -266,41 +276,40 @@ public class PatientListJPanel extends javax.swing.JPanel {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(bGetDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(bAddVitals, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(352, 352, 352))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblPatientName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblPatientDiagnosis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblPatientID, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(etPatientName)
-                                    .addComponent(etPatientID)
-                                    .addComponent(etStatus)
-                                    .addComponent(etDate)
-                                    .addComponent(etPatientDiagnosis, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(180, 180, 180)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(etBloodPressure)
-                                    .addComponent(etTemperature)
-                                    .addComponent(etHeight)
-                                    .addComponent(etWeight)
-                                    .addComponent(etHeartRate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(46, 46, 46))))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblPatientName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblPatientDiagnosis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblPatientID, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(etPatientName)
+                            .addComponent(etPatientID)
+                            .addComponent(etStatus)
+                            .addComponent(etDate)
+                            .addComponent(etPatientDiagnosis, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(180, 180, 180)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(etBloodPressure)
+                            .addComponent(etTemperature)
+                            .addComponent(etHeight)
+                            .addComponent(etWeight)
+                            .addComponent(etHeartRate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(310, 310, 310)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(bAddVitals, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bGetDetails))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,9 +318,9 @@ public class PatientListJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(26, 26, 26)
                 .addComponent(bGetDetails)
-                .addGap(36, 36, 36)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPatientID)
                     .addComponent(etPatientID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -356,15 +365,22 @@ public class PatientListJPanel extends javax.swing.JPanel {
         }
 
         DefaultTableModel model = (DefaultTableModel) tablePatientList.getModel();
+        Appointment appoint = (Appointment) model.getValueAt(selectedRow, 0);
+        appointment = new Appointment();
+        appointment = appoint;
         //TODO: Add there
-//        Encounter encounter = (Encounter) model.getValueAt(selectedRow, 0);
-//
-//        etPatientID.setText(String.valueOf(encounter.getPatientID()));
-//        etPatientName.setText(encounter.getPatientName());
-//        etStatus.setText(encounter.getStatus());
-//        etDate.setText(encounter.getDate());
 
-//        newEncounter = encounter;
+        etPatientID.setText(appoint.getPatientID());
+        etPatientName.setText(appoint.getPatientName());
+        etStatus.setText(appoint.getAppointmentStatus());
+        etDate.setText(appoint.getAppointmentDate().toString());
+        etPatientDiagnosis.setText(appoint.getDiagnosis());
+        etBloodPressure.setText(appoint.getBloodPressure());
+        etHeight.setText(appoint.getHeight());
+        etWeight.setText(appoint.getWeight());
+        etTemperature.setText(appoint.getTemperature());
+        etHeartRate.setText(appoint.getHeartRate());
+
     }//GEN-LAST:event_bGetDetailsActionPerformed
 
     private void bAddVitalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddVitalsActionPerformed
@@ -373,36 +389,42 @@ public class PatientListJPanel extends javax.swing.JPanel {
         if (validatedata()) {
             //TODO : vital signs
 
-//            VitalSigns vitalSigns = new VitalSigns();
-//
-//            vitalSigns.setBloodPressure(Float.parseFloat(etBloodPressure.getText()));
-//            vitalSigns.setHeartRate(Integer.parseInt(etHeartRate.getText()));
-//            vitalSigns.setTemperature(Float.parseFloat(etTemperature.getText()));
-//            vitalSigns.setHeight(Integer.parseInt(etHeight.getText()));
-//            vitalSigns.setWeight(Float.parseFloat(etWeight.getText()));
-//            vitalSigns.setDiagnosis(etPatientDiagnosis.getText());
-//
-//            for (Encounter encounter : encounterDirectory.getListOfEncounters()) {
-//                if ((encounter.getPatientID() == newEncounter.getDoctorID()) && (encounter.getPatientName().equals(newEncounter.getPatientName()))) {
-//
-//                    encounter.setVitalSigns(vitalSigns);
-//                    encounter.setStatus("COMPLETED");
-//
-//                    JOptionPane.showMessageDialog(this, "Patient Details Updated !");
-//
-//                    etPatientID.setText("");
-//                    etPatientName.setText("");
-//                    etStatus.setText("");
-//                    etDate.setText("");
-//                    etPatientDiagnosis.setText("");
-//                    etBloodPressure.setText("");
-//                    etHeartRate.setText("");
-//                    etTemperature.setText("");
-//                    etHeight.setText("");
-//                    etWeight.setText("");
-//                }
-//            }
+            Appointment appoint = new Appointment();
+            appoint.setAppointmentID(appointment.getAppointmentID());
+            appoint.setPatientID(appointment.getPatientID());
+            appoint.setPatientName(appointment.getPatientName());
+            appoint.setDoctorID(appointment.getDoctorID());
+            appoint.setDoctorName(appointment.getDoctorName());
+            appoint.setAppointmentDate(appointment.getAppointmentDate());
+            appoint.setAppointmentTime(appointment.getAppointmentTime());
+            appoint.setTemperature(appointment.getTemperature());
+            appoint.setBloodPressure(appointment.getBloodPressure());
+            appoint.setHeight(appointment.getHeight());
+            appoint.setWeight(appointment.getWeight());
+            appoint.setHeartRate(appointment.getHeartRate());
+            appoint.setDiagnosis(appointment.getDiagnosis());
+            appoint.setAppointmentStatus("COMPLETED");
 
+            try {
+                String updateAppointment = "Update appointment set bloodPressure=?,height=?, weight=?, heartRate=?, diagnosis=?, status=? where appointmentID=? AND doctorID=? ";
+                PreparedStatement p2p = sqliteConnection.prepareStatement(updateAppointment);
+                p2p.setString(1, appoint.getBloodPressure());
+                p2p.setString(2, appoint.getHeight());
+                p2p.setString(3, appoint.getWeight());
+                p2p.setString(4, appoint.getHeartRate());
+                p2p.setString(5, appoint.getDiagnosis());
+                p2p.setString(6, appoint.getAppointmentStatus());
+                p2p.setString(7, appoint.getAppointmentID());
+                p2p.setString(8, appoint.getDoctorID());
+                boolean output = p2p.execute();
+                if(output==false){
+                    System.out.println(" output updated !");
+                } else {
+                    System.out.println(" output not updated !");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }//GEN-LAST:event_bAddVitalsActionPerformed
@@ -441,13 +463,13 @@ public class PatientListJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tablePatientList.getModel();
         model.setRowCount(0);
 
-        for (Patients patient : patientsDirectory.getPatientDirectory()) {
+        for (Appointment patient : appointmentDirectory.getListOfAppointment()) {
             Object[] row = new Object[4];
 
             row[0] = patient;
             row[1] = patient.getPatientName();
-            row[2] = patient.getPatientDocName();
-            row[3] = patient.getPatientZipCode();
+            row[2] = patient.getAppointmentStatus();
+            row[3] = patient.getAppointmentDate() + patient.getAppointmentTime();
 
             model.addRow(row);
         }

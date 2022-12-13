@@ -51,7 +51,7 @@ public class AllPatientsJPanel extends javax.swing.JPanel {
                 patient.setPatientName(output.getString("name"));
                 patient.setPatientDOB(java.sql.Date.valueOf(output.getString("DOB")));
                 patient.setPatientAge(output.getString("age"));
-                patient.setPatientPhoneNumber(output.getString("phoneNumber"));
+                patient.setPatientEmail(output.getString("email"));
                 patient.setPatientAddress(output.getString("address"));
                 patient.setPatientCommunity(output.getString("community"));
                 patient.setPatientState(output.getString("state"));
@@ -92,8 +92,8 @@ public class AllPatientsJPanel extends javax.swing.JPanel {
         lblPatientID = new javax.swing.JLabel();
         lblDoctorName = new javax.swing.JLabel();
         bViewPatient = new javax.swing.JButton();
-        etPatientPhoneNumber = new javax.swing.JTextField();
-        lblPatientPhoneNumber = new javax.swing.JLabel();
+        etPatientEmail = new javax.swing.JTextField();
+        lblPatientEmail = new javax.swing.JLabel();
         lblPatientName = new javax.swing.JLabel();
         etPatientName = new javax.swing.JTextField();
         lblPatientState = new javax.swing.JLabel();
@@ -158,8 +158,8 @@ public class AllPatientsJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblPatientPhoneNumber.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblPatientPhoneNumber.setText("Patient Phone Number :");
+        lblPatientEmail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPatientEmail.setText("Patient Email :");
 
         lblPatientName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPatientName.setText("Patient Name :");
@@ -202,7 +202,7 @@ public class AllPatientsJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblPatientName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblPatientID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblPatientPhoneNumber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPatientEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblDoctorName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -212,7 +212,7 @@ public class AllPatientsJPanel extends javax.swing.JPanel {
                     .addComponent(etPatientID)
                     .addComponent(etPatientName)
                     .addComponent(etDoctorName)
-                    .addComponent(etPatientPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                    .addComponent(etPatientEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                     .addComponent(dateChooserPatientDOB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtFieldPatientAge))
                 .addGap(113, 113, 113)
@@ -263,8 +263,8 @@ public class AllPatientsJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblPatientState)
                                 .addComponent(etPatientState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblPatientPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(etPatientPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblPatientEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(etPatientEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(dateChooserPatientDOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -303,7 +303,7 @@ public class AllPatientsJPanel extends javax.swing.JPanel {
         etPatientID.setText(String.valueOf(patient.getPatientID()));
         etPatientName.setText(patient.getPatientName());
         etDoctorName.setText(patient.getPatientDocName());
-        etPatientPhoneNumber.setText(patient.getPatientPhoneNumber());
+        etPatientEmail.setText(patient.getPatientEmail());
         etPatientAddress.setText(patient.getPatientAddress());
         etPatientCommunity.setText(patient.getPatientCommunity());
         etPatientCity.setText(patient.getPatientCity());
@@ -320,9 +320,9 @@ public class AllPatientsJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField etPatientAddress;
     private javax.swing.JTextField etPatientCity;
     private javax.swing.JTextField etPatientCommunity;
+    private javax.swing.JTextField etPatientEmail;
     private javax.swing.JTextField etPatientID;
     private javax.swing.JTextField etPatientName;
-    private javax.swing.JTextField etPatientPhoneNumber;
     private javax.swing.JTextField etPatientState;
     private javax.swing.JTextField etPatientZipCode;
     private javax.swing.JLabel jLabel1;
@@ -333,9 +333,9 @@ public class AllPatientsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblPatientCity;
     private javax.swing.JLabel lblPatientCommunity;
     private javax.swing.JLabel lblPatientDOB;
+    private javax.swing.JLabel lblPatientEmail;
     private javax.swing.JLabel lblPatientID;
     private javax.swing.JLabel lblPatientName;
-    private javax.swing.JLabel lblPatientPhoneNumber;
     private javax.swing.JLabel lblPatientState;
     private javax.swing.JLabel lblPatientZipCode;
     private javax.swing.JTable tablePatient;

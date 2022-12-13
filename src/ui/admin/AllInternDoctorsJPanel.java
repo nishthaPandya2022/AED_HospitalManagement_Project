@@ -56,7 +56,7 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
                 System.out.println("dob : " + output.getString("DOB"));
                 doc.setDoctorDOB(java.sql.Date.valueOf(output.getString("DOB")));
                 doc.setDoctorAge(output.getString("age"));
-                doc.setDoctorPhoneNumber(output.getString("phoneNumber"));
+                doc.setDoctorEmail(output.getString("phoneNumber"));
                 doc.setDoctorAddress(output.getString("address"));
                 doc.setDoctorCommunity(output.getString("community"));
                 doc.setDoctorState(output.getString("state"));
@@ -132,7 +132,7 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Enter proper state.");
             return false;
         }
-        if (!etInternDoctorPhoneNumber.getText().matches("[0-9]+")) {
+        if (!etInternDoctorEmail.getText().matches("[0-9]+")) {
             JOptionPane.showMessageDialog(this, "Enter proper phone number of 10 digits.");
             return false;
         }
@@ -155,7 +155,7 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
         tableAllInternDoctor = new javax.swing.JTable();
         lblDoctorCity = new javax.swing.JLabel();
         etInternDoctorCity = new javax.swing.JTextField();
-        lblDoctorPhoneNumber = new javax.swing.JLabel();
+        lblDoctorEmail = new javax.swing.JLabel();
         etInternDoctorState = new javax.swing.JTextField();
         lblDocAge = new javax.swing.JLabel();
         lblInternDoctorsDetails = new javax.swing.JLabel();
@@ -172,7 +172,7 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
         bDeleteInternDoctor = new javax.swing.JButton();
         lblDoctorAddress = new javax.swing.JLabel();
         lblDoctorName = new javax.swing.JLabel();
-        etInternDoctorPhoneNumber = new javax.swing.JTextField();
+        etInternDoctorEmail = new javax.swing.JTextField();
 
         lblDoctorCommunity.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblDoctorCommunity.setText("Community :");
@@ -217,8 +217,8 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
         lblDoctorCity.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblDoctorCity.setText("City :");
 
-        lblDoctorPhoneNumber.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblDoctorPhoneNumber.setText("Phone Number :");
+        lblDoctorEmail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDoctorEmail.setText("Email :");
 
         lblDocAge.setText("Age :");
 
@@ -296,14 +296,14 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(61, 61, 61)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblDoctorPhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                                .addComponent(lblDoctorEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                                 .addComponent(lblDoctorName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(etInternDoctorID, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                                 .addComponent(etInternDoctorName)
-                                .addComponent(etInternDoctorPhoneNumber))
+                                .addComponent(etInternDoctorEmail))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(lblDoctorAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -362,8 +362,8 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
                     .addGap(27, 27, 27)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblDoctorCity)
-                        .addComponent(etInternDoctorPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblDoctorPhoneNumber)
+                        .addComponent(etInternDoctorEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblDoctorEmail)
                         .addComponent(etInternDoctorCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(18, 18, 18)
                     .addComponent(etInternDoctorState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -395,7 +395,7 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
         etInternDoctorZipCode.setText(doc.getDoctorZipCode());
         etInternDoctorState.setText(doc.getDoctorState());
         etInternDoctorAddress.setText(doc.getDoctorAddress());
-        etInternDoctorPhoneNumber.setText(doc.getDoctorPhoneNumber());
+        etInternDoctorEmail.setText(doc.getDoctorEmail());
         //        etHospitalName.setText(doc.getHospitalName());
     }//GEN-LAST:event_bViewInternDoctorActionPerformed
 
@@ -419,10 +419,10 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
 
             try {
                 String updateCommand = "Update hospital set "
-                    + "phoneNumber=?, address=?, community=?, state=?, zipcode=? where userID=? AND role=?;";
+                    + "email=?, address=?, community=?, state=?, zipcode=? where userID=? AND role=?;";
 
                 PreparedStatement p2p = sqliteConnection.prepareStatement(updateCommand);
-                p2p.setString(1,etInternDoctorPhoneNumber.getText());
+                p2p.setString(1,etInternDoctorEmail.getText());
                 p2p.setString(2, etInternDoctorAddress.getText());
                 p2p.setString(3, etInternDoctorCommunity.getText());
                 p2p.setString(4, etInternDoctorState.getText());
@@ -446,7 +446,7 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
             String editDoctorName = etInternDoctorName.getText();
             Date editDoctorDOB = java.sql.Date.valueOf(localDOB);
             String editDoctorAge = txtFieldInternDocAge.getText();
-            String editDoctorPhoneNumber = etInternDoctorPhoneNumber.getText();
+            String editDoctorEmail = etInternDoctorEmail.getText();
             String editDoctorAddress = etInternDoctorAddress.getText();
             String editDoctorCommunity = etInternDoctorCommunity.getText();
             String editDoctorCity = etInternDoctorCity.getText();
@@ -466,7 +466,7 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
                     doc.setDoctorCity(editDoctorCity);
                     doc.setDoctorState(editDoctorState);
                     doc.setDoctorZipCode(editDoctorZipCode);
-                    doc.setDoctorPhoneNumber(editDoctorPhoneNumber);
+                    doc.setDoctorEmail(editDoctorEmail);
 
                     JOptionPane.showMessageDialog(this, "Updated Intern Doctor Details!");
 
@@ -475,7 +475,7 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
                     etInternDoctorID.setText("");
                     etInternDoctorName.setText("");
                     txtFieldInternDocAge.setText("");
-                    etInternDoctorPhoneNumber.setText("");
+                    etInternDoctorEmail.setText("");
                     etInternDoctorAddress.setText("");
                     etInternDoctorCommunity.setText("");
                     etInternDoctorCity.setText("");
@@ -523,7 +523,7 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
         etInternDoctorID.setText("");
         txtFieldInternDocAge.setText("");
         etInternDoctorName.setText("");
-        etInternDoctorPhoneNumber.setText("");
+        etInternDoctorEmail.setText("");
         etInternDoctorAddress.setText("");
         etInternDoctorCommunity.setText("");
         etInternDoctorCity.setText("");
@@ -540,9 +540,9 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField etInternDoctorAddress;
     private javax.swing.JTextField etInternDoctorCity;
     private javax.swing.JTextField etInternDoctorCommunity;
+    private javax.swing.JTextField etInternDoctorEmail;
     private javax.swing.JTextField etInternDoctorID;
     private javax.swing.JTextField etInternDoctorName;
-    private javax.swing.JTextField etInternDoctorPhoneNumber;
     private javax.swing.JTextField etInternDoctorState;
     private javax.swing.JTextField etInternDoctorZipCode;
     private javax.swing.JScrollPane jScrollPane1;
@@ -551,8 +551,8 @@ public class AllInternDoctorsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblDoctorAddress;
     private javax.swing.JLabel lblDoctorCity;
     private javax.swing.JLabel lblDoctorCommunity;
+    private javax.swing.JLabel lblDoctorEmail;
     private javax.swing.JLabel lblDoctorName;
-    private javax.swing.JLabel lblDoctorPhoneNumber;
     private javax.swing.JLabel lblDoctorState;
     private javax.swing.JLabel lblDoctorZipCode;
     private javax.swing.JLabel lblID;

@@ -53,7 +53,7 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
                 System.out.println("dob : " + output.getString("DOB"));
                 recp.setReceptionistDOB(java.sql.Date.valueOf(output.getString("DOB")));
                 recp.setReceptionistAge(output.getString("age"));
-                recp.setReceptionistPhoneNumber(output.getString("phoneNumber"));
+                recp.setReceptionistEmail(output.getString("email"));
                 recp.setReceptionistAddress(output.getString("address"));
                 recp.setReceptionistCommunity(output.getString("community"));
                 recp.setReceptionistState(output.getString("state"));
@@ -129,7 +129,7 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Enter proper state.");
             return false;
         }
-        if (!etReceptionistPhoneNumber.getText().matches("[0-9]+")) {
+        if (!etReceptionistEmail.getText().matches("[0-9]+")) {
             JOptionPane.showMessageDialog(this, "Enter proper phone number of 10 digits.");
             return false;
         }
@@ -155,7 +155,7 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
         lblDocAge = new javax.swing.JLabel();
         lblDoctorName = new javax.swing.JLabel();
         lblDoctorZipCode = new javax.swing.JLabel();
-        lblDoctorPhoneNumber = new javax.swing.JLabel();
+        lblDoctorEmail = new javax.swing.JLabel();
         bUpdateReceptionist = new javax.swing.JButton();
         etReceptionistZipCode = new javax.swing.JTextField();
         dateChooserReceptionistDOB = new com.toedter.calendar.JDateChooser();
@@ -169,7 +169,7 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
         tableAllReceptionist = new javax.swing.JTable();
         etReceptionistState = new javax.swing.JTextField();
         etReceptionistID = new javax.swing.JTextField();
-        etReceptionistPhoneNumber = new javax.swing.JTextField();
+        etReceptionistEmail = new javax.swing.JTextField();
         lblDoctorCity = new javax.swing.JLabel();
 
         lblReceptionistDetails.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -202,8 +202,8 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
         lblDoctorZipCode.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblDoctorZipCode.setText("Zip Code :");
 
-        lblDoctorPhoneNumber.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblDoctorPhoneNumber.setText("Phone Number :");
+        lblDoctorEmail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDoctorEmail.setText("Email :");
 
         bUpdateReceptionist.setText("Update");
         bUpdateReceptionist.addActionListener(new java.awt.event.ActionListener() {
@@ -286,7 +286,7 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblDocAge)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblDoctorPhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                        .addComponent(lblDoctorEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                         .addComponent(lblDoctorName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(lblDocDOB))
@@ -294,7 +294,7 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(etReceptionistID, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                     .addComponent(etReceptionistName)
-                    .addComponent(etReceptionistPhoneNumber)
+                    .addComponent(etReceptionistEmail)
                     .addComponent(txtFieldReceptionistAge)
                     .addComponent(dateChooserReceptionistDOB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -342,8 +342,8 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDoctorCity)
-                    .addComponent(etReceptionistPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDoctorPhoneNumber)
+                    .addComponent(etReceptionistEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDoctorEmail)
                     .addComponent(etReceptionistCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,7 +382,7 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
         etReceptionistZipCode.setText(recp.getReceptionistZipCode());
         etReceptionistState.setText(recp.getReceptionistState());
         etReceptionistAddress.setText(recp.getReceptionistAddress());
-        etReceptionistPhoneNumber.setText(recp.getReceptionistPhoneNumber());
+        etReceptionistEmail.setText(recp.getReceptionistEmail());
     }//GEN-LAST:event_bViewReceptionistActionPerformed
 
     private void etReceptionistAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_etReceptionistAddressActionPerformed
@@ -400,7 +400,7 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
             String editDoctorName = etReceptionistName.getText();
             Date editDoctorDOB = java.sql.Date.valueOf(localDOB);
             String editDoctorAge = txtFieldReceptionistAge.getText();
-            String editDoctorPhoneNumber = etReceptionistPhoneNumber.getText();
+            String editDoctorEmail = etReceptionistEmail.getText();
             String editDoctorAddress = etReceptionistAddress.getText();
             String editDoctorCommunity = etReceptionistCommunity.getText();
             String editDoctorCity = etReceptionistCity.getText();
@@ -420,7 +420,7 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
                     doc.setReceptionistCity(editDoctorCity);
                     doc.setReceptionistState(editDoctorState);
                     doc.setReceptionistZipCode(editDoctorZipCode);
-                    doc.setReceptionistPhoneNumber(editDoctorPhoneNumber);
+                    doc.setReceptionistEmail(editDoctorEmail);
 
                     JOptionPane.showMessageDialog(this, "Updated Doctor Details!");
 
@@ -429,7 +429,7 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
                     etReceptionistID.setText("");
                     etReceptionistName.setText("");
                     txtFieldReceptionistAge.setText("");
-                    etReceptionistPhoneNumber.setText("");
+                    etReceptionistEmail.setText("");
                     etReceptionistAddress.setText("");
                     etReceptionistCommunity.setText("");
                     etReceptionistCity.setText("");
@@ -461,7 +461,7 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
         etReceptionistID.setText("");
         txtFieldReceptionistAge.setText("");
         etReceptionistName.setText("");
-        etReceptionistPhoneNumber.setText("");
+        etReceptionistEmail.setText("");
         etReceptionistAddress.setText("");
         etReceptionistCommunity.setText("");
         etReceptionistCity.setText("");
@@ -478,9 +478,9 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField etReceptionistAddress;
     private javax.swing.JTextField etReceptionistCity;
     private javax.swing.JTextField etReceptionistCommunity;
+    private javax.swing.JTextField etReceptionistEmail;
     private javax.swing.JTextField etReceptionistID;
     private javax.swing.JTextField etReceptionistName;
-    private javax.swing.JTextField etReceptionistPhoneNumber;
     private javax.swing.JTextField etReceptionistState;
     private javax.swing.JTextField etReceptionistZipCode;
     private javax.swing.JScrollPane jScrollPane1;
@@ -489,8 +489,8 @@ public class AllReceptionstJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblDoctorAddress;
     private javax.swing.JLabel lblDoctorCity;
     private javax.swing.JLabel lblDoctorCommunity;
+    private javax.swing.JLabel lblDoctorEmail;
     private javax.swing.JLabel lblDoctorName;
-    private javax.swing.JLabel lblDoctorPhoneNumber;
     private javax.swing.JLabel lblDoctorState;
     private javax.swing.JLabel lblDoctorZipCode;
     private javax.swing.JLabel lblID;

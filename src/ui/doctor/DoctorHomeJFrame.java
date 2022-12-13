@@ -4,17 +4,35 @@
  */
 package ui.doctor;
 
+import java.sql.Connection;
+import org.sqlite.SQLiteDataSource;
+import ui.MainJFrame;
+
 /**
  *
  * @author nishthapandya
  */
 public class DoctorHomeJFrame extends javax.swing.JFrame {
 
+    static SQLiteDataSource ds = null;
+    static Connection sqliteConnection;
+
     /**
      * Creates new form DoctorHomeJFrame
      */
     public DoctorHomeJFrame() {
         initComponents();
+
+        try {
+            ds = new SQLiteDataSource();
+            System.out.println("ds");
+            ds.setUrl("jdbc:sqlite:hospManagement.db");
+            System.out.println("ds set");
+            sqliteConnection = ds.getConnection();
+            System.out.println("sqliteConnection set");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -35,6 +53,11 @@ public class DoctorHomeJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("Patient List");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Log Out");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +118,20 @@ public class DoctorHomeJFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        dispose();
+        MainJFrame mainFrame = new MainJFrame();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                mainFrame.setVisible(true);
+            }
+        });
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        PatientListJPanel patient = new PatientListJPanel(ds,sqliteConnection);
+       splitPaneDoctorHome.setRightComponent(patient);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

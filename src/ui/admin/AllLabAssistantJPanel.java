@@ -2,77 +2,77 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
+
 package ui.admin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.Doctor;
 import model.DoctorDirectory;
+import model.LabAssistant;
+import model.LabAssistantDirectory;
 import org.sqlite.SQLiteDataSource;
+import static ui.admin.AllDoctorsJPanel.sqliteConnection;
 
 /**
  *
  * @author nishthapandya
  */
-public class AllDoctorsJPanel extends javax.swing.JPanel {
-
-    private DoctorDirectory doctorDirectory;
-    private ArrayList<Doctor> docDirectory;
+public class AllLabAssistantJPanel extends javax.swing.JPanel {
+    
+    private LabAssistantDirectory labAssistantDirectory;    //doctorDirectory;
+    private ArrayList<LabAssistant> labAssistDirectory;     //docDirectory
     static SQLiteDataSource ds = null;
     static Connection sqliteConnection;
 
-    String GET_ALL_DOCTORS_FROM_HOSPITAL = "SELECT userID, name, DOB, age, organization, email, address, community, state, zipcode, role from hospital WHERE role=\"Doctor\"";
+    String GET_ALL_LAB_ASSISTANT_FROM_HOSPITAL = "SELECT userID, name, DOB, age, organization, email, address, community, state, zipcode, role from hospital WHERE role=\"LabAssistant\"";
 
-    /**
-     * Creates new form AllDoctorsJPanel
-     */
-    public AllDoctorsJPanel(SQLiteDataSource dataSource, Connection connection) {
+    /** Creates new form AllLabAssistantJPanel */
+    public AllLabAssistantJPanel(SQLiteDataSource dataSource, Connection connection) {
         initComponents();
+        
         this.ds = dataSource;
         this.sqliteConnection = connection;
-        this.doctorDirectory = new DoctorDirectory();
-        docDirectory = new ArrayList<Doctor>();
+        this.labAssistantDirectory = new LabAssistantDirectory();
+        labAssistDirectory = new ArrayList<LabAssistant>();
 
         try {
-            PreparedStatement p2p = sqliteConnection.prepareStatement(GET_ALL_DOCTORS_FROM_HOSPITAL);
+            PreparedStatement p2p = sqliteConnection.prepareStatement(GET_ALL_LAB_ASSISTANT_FROM_HOSPITAL);
             ResultSet output = p2p.executeQuery();
             while (output.next()) {
-                Doctor doc = new Doctor();
-                doc.setDoctorID(Integer.parseInt(output.getString("userID")));
-                doc.setDoctorName(output.getString("name"));
+                LabAssistant doc = new LabAssistant();
+                doc.setLabAssistantID(Integer.parseInt(output.getString("userID")));
+                doc.setLabAssistantName(output.getString("name"));
 //                Date date = output.getDate("DOB");
                 System.out.println("dob : " + output.getString("DOB"));
-                doc.setDoctorDOB(java.sql.Date.valueOf(output.getString("DOB")));
-                doc.setDoctorAge(output.getString("age"));
-                doc.setDoctorSpeciality(output.getString("organization"));
-                doc.setDoctorEmail(output.getString("email"));
-                doc.setDoctorAddress(output.getString("address"));
-                doc.setDoctorCommunity(output.getString("community"));
-                doc.setDoctorState(output.getString("state"));
-                doc.setDoctorZipCode(output.getString("zipcode"));
+                doc.setLabAssistantDOB(java.sql.Date.valueOf(output.getString("DOB")));
+                doc.setLabAssistantAge(output.getString("age"));
+                doc.setLabAssistantEmail(output.getString("email"));
+                doc.setLabAssistantAddress(output.getString("address"));
+                doc.setLabAssistantCommunity(output.getString("community"));
+                doc.setLabAssistantState(output.getString("state"));
+                doc.setLabAssistantZipCode(output.getString("zipcode"));
 
-                docDirectory.add(doc);
+                labAssistDirectory.add(doc);
             }
 
-            this.doctorDirectory.setListOfDoctors(docDirectory);
+            this.labAssistantDirectory.setLabAssistantDirectory(labAssistDirectory);
 
-            populateDoctorTable();
+            populateLabAssistantTable();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
     public boolean validatedata() {
 
         if ("".equals(etDoctorID.getText())) {
@@ -81,14 +81,6 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
         }
         if (!etDoctorID.getText().matches("[0-9]+")) {
             JOptionPane.showMessageDialog(this, "Enter Proper Id.");
-            return false;
-        }
-        if ("".equals(etDoctorSpecialization.getText())) {
-            JOptionPane.showMessageDialog(this, "Enter Specializatino.");
-            return false;
-        }
-        if (!etDoctorSpecialization.getText().matches("[a-zA-Z ]+")) {
-            JOptionPane.showMessageDialog(this, "Enter Proper Specialization.");
             return false;
         }
         if ("".equals(etDoctorName.getText())) {
@@ -146,65 +138,41 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
         return true;
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        etDoctorState = new javax.swing.JTextField();
-        etDoctorSpecialization = new javax.swing.JTextField();
+        bDeleteDoctor = new javax.swing.JButton();
         lblDoctorAddress = new javax.swing.JLabel();
+        lblDocDOB = new javax.swing.JLabel();
         etDoctorZipCode = new javax.swing.JTextField();
+        lblDoctorEmail = new javax.swing.JLabel();
+        txtFieldDocAge = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableAllLabAssistant = new javax.swing.JTable();
+        lblDoctorCity = new javax.swing.JLabel();
+        etDoctorEmail = new javax.swing.JTextField();
+        etDoctorCommunity = new javax.swing.JTextField();
+        lblID = new javax.swing.JLabel();
+        dateChooserDocDOB = new com.toedter.calendar.JDateChooser();
         lblDoctorName = new javax.swing.JLabel();
         bViewDoctor = new javax.swing.JButton();
-        lblDoctorEmail = new javax.swing.JLabel();
-        etDoctorCity = new javax.swing.JTextField();
-        lblDoctorSpecialization = new javax.swing.JLabel();
-        etDoctorName = new javax.swing.JTextField();
-        lblDoctorCity = new javax.swing.JLabel();
-        bDeleteDoctor = new javax.swing.JButton();
-        lblID = new javax.swing.JLabel();
-        etDoctorID = new javax.swing.JTextField();
-        lblDoctorCommunity = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableAllDoctor = new javax.swing.JTable();
-        etDoctorAddress = new javax.swing.JTextField();
-        etDoctorEmail = new javax.swing.JTextField();
-        bUpdateDoctor = new javax.swing.JButton();
-        lblDoctorZipCode = new javax.swing.JLabel();
-        etDoctorCommunity = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        lblDoctorState = new javax.swing.JLabel();
-        lblDocDOB = new javax.swing.JLabel();
         lblDocAge = new javax.swing.JLabel();
-        txtFieldDocAge = new javax.swing.JTextField();
-        dateChooserDocDOB = new com.toedter.calendar.JDateChooser();
-
-        lblDoctorAddress.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblDoctorAddress.setText("Address :");
-
-        lblDoctorName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblDoctorName.setText("Name :");
-
-        bViewDoctor.setText("View");
-        bViewDoctor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bViewDoctorActionPerformed(evt);
-            }
-        });
-
-        lblDoctorEmail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblDoctorEmail.setText("Email :");
-
-        lblDoctorSpecialization.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblDoctorSpecialization.setText("Organization :");
-
-        lblDoctorCity.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblDoctorCity.setText("City :");
+        etDoctorName = new javax.swing.JTextField();
+        lblDoctorZipCode = new javax.swing.JLabel();
+        bUpdateDoctor = new javax.swing.JButton();
+        etDoctorState = new javax.swing.JTextField();
+        lblDoctorState = new javax.swing.JLabel();
+        lblDoctorCommunity = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        etDoctorCity = new javax.swing.JTextField();
+        etDoctorID = new javax.swing.JTextField();
+        etDoctorAddress = new javax.swing.JTextField();
 
         bDeleteDoctor.setText("Delete");
         bDeleteDoctor.addActionListener(new java.awt.event.ActionListener() {
@@ -213,13 +181,15 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblID.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblID.setText("ID :");
+        lblDoctorAddress.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDoctorAddress.setText("Address :");
 
-        lblDoctorCommunity.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblDoctorCommunity.setText("Community :");
+        lblDocDOB.setText("DOB :");
 
-        tableAllDoctor.setModel(new javax.swing.table.DefaultTableModel(
+        lblDoctorEmail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDoctorEmail.setText("Email :");
+
+        tableAllLabAssistant.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -229,7 +199,7 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Organization", "Age"
+                "ID", "Name", "Email", "Age"
             }
         ) {
             Class[] types = new Class [] {
@@ -247,13 +217,28 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tableAllDoctor);
+        jScrollPane1.setViewportView(tableAllLabAssistant);
 
-        etDoctorAddress.addActionListener(new java.awt.event.ActionListener() {
+        lblDoctorCity.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDoctorCity.setText("City :");
+
+        lblID.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblID.setText("ID :");
+
+        lblDoctorName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDoctorName.setText("Name :");
+
+        bViewDoctor.setText("View");
+        bViewDoctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                etDoctorAddressActionPerformed(evt);
+                bViewDoctorActionPerformed(evt);
             }
         });
+
+        lblDocAge.setText("Age :");
+
+        lblDoctorZipCode.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDoctorZipCode.setText("Zip Code :");
 
         bUpdateDoctor.setText("Update");
         bUpdateDoctor.addActionListener(new java.awt.event.ActionListener() {
@@ -262,19 +247,21 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblDoctorZipCode.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblDoctorZipCode.setText("Zip Code :");
-
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("All Doctor Details");
-
         lblDoctorState.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblDoctorState.setText("State :");
 
-        lblDocDOB.setText("DOB :");
+        lblDoctorCommunity.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDoctorCommunity.setText("Community :");
 
-        lblDocAge.setText("Age :");
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("All Lab Assistant Details");
+
+        etDoctorAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                etDoctorAddressActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -290,7 +277,7 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(134, 134, 134)
                         .addComponent(bViewDoctor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                         .addComponent(bUpdateDoctor)
                         .addGap(115, 115, 115)
                         .addComponent(bDeleteDoctor)
@@ -301,7 +288,6 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblDocAge)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblDoctorSpecialization, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblDoctorEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                         .addComponent(lblDoctorName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -311,7 +297,6 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
                     .addComponent(etDoctorID, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                     .addComponent(etDoctorName)
                     .addComponent(etDoctorEmail)
-                    .addComponent(etDoctorSpecialization)
                     .addComponent(txtFieldDocAge)
                     .addComponent(dateChooserDocDOB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -363,71 +348,42 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
                     .addComponent(lblDoctorEmail)
                     .addComponent(etDoctorCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDoctorState)
-                    .addComponent(etDoctorState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDoctorSpecialization)
-                    .addComponent(etDoctorSpecialization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblDoctorZipCode)
-                        .addComponent(etDoctorZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblDoctorState)
+                        .addComponent(etDoctorState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblDocDOB))
                     .addComponent(dateChooserDocDOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDoctorZipCode)
+                    .addComponent(etDoctorZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDocAge)
                     .addComponent(txtFieldDocAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void bViewDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bViewDoctorActionPerformed
-        // TODO add your handling code here:
-        int selectedRow = tableAllDoctor.getSelectedRow();
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a row to view !");
-            return;
-        }
-
-        DefaultTableModel model = (DefaultTableModel) tableAllDoctor.getModel();
-        Doctor doc = (Doctor) model.getValueAt(selectedRow, 0);
-
-        etDoctorID.setText(String.valueOf(doc.getDoctorID()));
-        etDoctorName.setText(doc.getDoctorName());
-        etDoctorCity.setText(doc.getDoctorCity());
-        dateChooserDocDOB.setDate(doc.getDoctorDOB());
-        txtFieldDocAge.setText(doc.getDoctorAge());
-        etDoctorCommunity.setText(doc.getDoctorCommunity());
-        etDoctorZipCode.setText(doc.getDoctorZipCode());
-        etDoctorState.setText(doc.getDoctorState());
-        etDoctorAddress.setText(doc.getDoctorAddress());
-        etDoctorEmail.setText(doc.getDoctorEmail());
-        etDoctorSpecialization.setText(doc.getDoctorSpeciality());
-//        etHospitalName.setText(doc.getHospitalName());
-    }//GEN-LAST:event_bViewDoctorActionPerformed
 
     private void bDeleteDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeleteDoctorActionPerformed
         // TODO add your handling code here:
 
-        int selectedRow = tableAllDoctor.getSelectedRow();
+        int selectedRow = tableAllLabAssistant.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row to delete !");
             return;
         }
 
-        DefaultTableModel model = (DefaultTableModel) tableAllDoctor.getModel();
-        Doctor doc = (Doctor) model.getValueAt(selectedRow, 0);
+        DefaultTableModel model = (DefaultTableModel) tableAllLabAssistant.getModel();
+        LabAssistant labAssistant = (LabAssistant) model.getValueAt(selectedRow, 0);
 
-        doctorDirectory.deleteDoc(doc);
+        labAssistantDirectory.deleteLabAssistant(labAssistant);
 
         try {
             String deleteStatement = "DELETE from hospital where userID=? AND role=?";
 
             PreparedStatement p2p = sqliteConnection.prepareStatement(deleteStatement);
-            p2p.setInt(1, doc.getDoctorID());
-            p2p.setString(2, "Doctor");
+            p2p.setInt(1, labAssistant.getLabAssistantID());
+            p2p.setString(2, "LabAssistant");
             boolean output = p2p.execute();
 
             if (output == false) {
@@ -438,11 +394,10 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
 
-        populateDoctorTable();
+        populateLabAssistantTable();
 
         etDoctorID.setText("");
         txtFieldDocAge.setText("");
-//        dateChooserDocDOB.setDate();
         etDoctorName.setText("");
         etDoctorEmail.setText("");
         etDoctorAddress.setText("");
@@ -450,40 +405,57 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
         etDoctorCity.setText("");
         etDoctorState.setText("");
         etDoctorZipCode.setText("");
-        etDoctorSpecialization.setText("");
     }//GEN-LAST:event_bDeleteDoctorActionPerformed
 
-    private void etDoctorAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_etDoctorAddressActionPerformed
+    private void bViewDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bViewDoctorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_etDoctorAddressActionPerformed
+        int selectedRow = tableAllLabAssistant.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to view !");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tableAllLabAssistant.getModel();
+        LabAssistant labAssistant = (LabAssistant) model.getValueAt(selectedRow, 0);
+
+        etDoctorID.setText(String.valueOf(labAssistant.getLabAssistantID()));
+        etDoctorName.setText(labAssistant.getLabAssistantName());
+        etDoctorCity.setText(labAssistant.getLabAssistantCity());
+        dateChooserDocDOB.setDate(labAssistant.getLabAssistantDOB());
+        txtFieldDocAge.setText(labAssistant.getLabAssistantAge());
+        etDoctorCommunity.setText(labAssistant.getLabAssistantCommunity());
+        etDoctorZipCode.setText(labAssistant.getLabAssistantZipCode());
+        etDoctorState.setText(labAssistant.getLabAssistantState());
+        etDoctorAddress.setText(labAssistant.getLabAssistantAddress());
+        etDoctorEmail.setText(labAssistant.getLabAssistantEmail());
+    }//GEN-LAST:event_bViewDoctorActionPerformed
 
     private void bUpdateDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUpdateDoctorActionPerformed
         // TODO add your handling code here:
 
         if (validatedata()) {
-            
+
             etDoctorID.setEditable(false);
 
-//            + "userID VARCHAR(200) NOT NULL," + "name VARCHAR(200) NOT NULL,"
-//            + "DOB VARCHAR(200) NOT NULL," + "age VARCHAR(200) NOT NULL,"
-//            + "organization VARCHAR(200) NOT NULL," + "phoneNumber VARCHAR(200) NOT NULL,"
-//            + "address VARCHAR(200) NOT NULL," + "community VARCHAR(200) NOT NULL,"
-//            + "state VARCHAR(200) NOT NULL," + "zipcode VARCHAR(200) NOT NULL,"
-//            + "role VARCHAR(200) NOT NULL);";
+            //            + "userID VARCHAR(200) NOT NULL," + "name VARCHAR(200) NOT NULL,"
+            //            + "DOB VARCHAR(200) NOT NULL," + "age VARCHAR(200) NOT NULL,"
+            //            + "organization VARCHAR(200) NOT NULL," + "phoneNumber VARCHAR(200) NOT NULL,"
+            //            + "address VARCHAR(200) NOT NULL," + "community VARCHAR(200) NOT NULL,"
+            //            + "state VARCHAR(200) NOT NULL," + "zipcode VARCHAR(200) NOT NULL,"
+            //            + "role VARCHAR(200) NOT NULL);";
 
             try {
-                String updateCommand = "Update hospital set organization=?, "
-                    + "phoneNumber=?, address=?, community=?, state=?, zipcode=? where userID=? AND role=?;";
+                String updateCommand = "Update hospital set "
+                + "email=?, address=?, community=?, state=?, zipcode=? where userID=? AND role=?;";
 
                 PreparedStatement p2p = sqliteConnection.prepareStatement(updateCommand);
-                p2p.setString(1, etDoctorSpecialization.getText());
-                p2p.setString(2,etDoctorEmail.getText());
-                p2p.setString(3, etDoctorAddress.getText());
-                p2p.setString(4, etDoctorCommunity.getText());
-                p2p.setString(5, etDoctorState.getText());
-                p2p.setString(6, etDoctorZipCode.getText());
-                p2p.setString(7, etDoctorID.getText());
-                p2p.setString(8, "Doctor");
+                p2p.setString(1,etDoctorEmail.getText());
+                p2p.setString(2, etDoctorAddress.getText());
+                p2p.setString(3, etDoctorCommunity.getText());
+                p2p.setString(4, etDoctorState.getText());
+                p2p.setString(5, etDoctorZipCode.getText());
+                p2p.setString(6, etDoctorID.getText());
+                p2p.setString(7, "Nurse");
                 boolean output = p2p.execute();
 
                 if (output == false) {
@@ -506,27 +478,25 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
             String editDoctorCity = etDoctorCity.getText();
             String editDoctorState = etDoctorState.getText();
             String editDoctorZipCode = etDoctorZipCode.getText();
-            String editDoctorSpeciality = etDoctorSpecialization.getText();
 
-            for (Doctor doc : doctorDirectory.getListOfDoctors()) {
+            for (LabAssistant labAssistant : labAssistantDirectory.getLabAssistantDirectory()) {
 
-                int id = doc.getDoctorID();
+                int id = labAssistant.getLabAssistantID();
                 if (editDoctorID == id) {
-                    doc.setDoctorID(editDoctorID);
-                    doc.setDoctorDOB(editDoctorDOB);
-                    doc.setDoctorAge(editDoctorAge);
-                    doc.setDoctorName(editDoctorName);
-                    doc.setDoctorAddress(editDoctorAddress);
-                    doc.setDoctorCommunity(editDoctorCommunity);
-                    doc.setDoctorCity(editDoctorCity);
-                    doc.setDoctorState(editDoctorState);
-                    doc.setDoctorZipCode(editDoctorZipCode);
-                    doc.setDoctorEmail(editDoctorEmail);
-                    doc.setDoctorSpeciality(editDoctorSpeciality);
+                    labAssistant.setLabAssistantID(editDoctorID);
+                    labAssistant.setLabAssistantDOB(editDoctorDOB);
+                    labAssistant.setLabAssistantAge(editDoctorAge);
+                    labAssistant.setLabAssistantName(editDoctorName);
+                    labAssistant.setLabAssistantAddress(editDoctorAddress);
+                    labAssistant.setLabAssistantCommunity(editDoctorCommunity);
+                    labAssistant.setLabAssistantCity(editDoctorCity);
+                    labAssistant.setLabAssistantState(editDoctorState);
+                    labAssistant.setLabAssistantZipCode(editDoctorZipCode);
+                    labAssistant.setLabAssistantEmail(editDoctorEmail);
 
-                    JOptionPane.showMessageDialog(this, "Updated Doctor Details!");
+                    JOptionPane.showMessageDialog(this, "Updated Lab Assistant Details!");
 
-                    populateDoctorTable();
+                    populateLabAssistantTable();
 
                     etDoctorID.setText("");
                     etDoctorName.setText("");
@@ -537,14 +507,15 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
                     etDoctorCity.setText("");
                     etDoctorState.setText("");
                     etDoctorZipCode.setText("");
-                    etDoctorSpecialization.setText("");
 
                 }
-
             }
         }
-
     }//GEN-LAST:event_bUpdateDoctorActionPerformed
+
+    private void etDoctorAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_etDoctorAddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_etDoctorAddressActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -558,7 +529,6 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField etDoctorEmail;
     private javax.swing.JTextField etDoctorID;
     private javax.swing.JTextField etDoctorName;
-    private javax.swing.JTextField etDoctorSpecialization;
     private javax.swing.JTextField etDoctorState;
     private javax.swing.JTextField etDoctorZipCode;
     private javax.swing.JLabel jLabel1;
@@ -570,26 +540,25 @@ public class AllDoctorsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblDoctorCommunity;
     private javax.swing.JLabel lblDoctorEmail;
     private javax.swing.JLabel lblDoctorName;
-    private javax.swing.JLabel lblDoctorSpecialization;
     private javax.swing.JLabel lblDoctorState;
     private javax.swing.JLabel lblDoctorZipCode;
     private javax.swing.JLabel lblID;
-    private javax.swing.JTable tableAllDoctor;
+    private javax.swing.JTable tableAllLabAssistant;
     private javax.swing.JTextField txtFieldDocAge;
     // End of variables declaration//GEN-END:variables
 
-    public void populateDoctorTable() {
+    public void populateLabAssistantTable() {
 
-        DefaultTableModel model = (DefaultTableModel) tableAllDoctor.getModel();
+        DefaultTableModel model = (DefaultTableModel) tableAllLabAssistant.getModel();
         model.setRowCount(0);
 
-        for (Doctor doc : doctorDirectory.getListOfDoctors()) {
+        for (LabAssistant doc : labAssistantDirectory.getLabAssistantDirectory()) {
             Object[] row = new Object[4];
 
             row[0] = doc;
-            row[1] = doc.getDoctorName();
-            row[2] = doc.getDoctorSpeciality();
-            row[3] = doc.getDoctorAge();
+            row[1] = doc.getLabAssistantName();
+            row[2] = doc.getLabAssistantEmail();
+            row[3] = doc.getLabAssistantAge();
 
             model.addRow(row);
         }

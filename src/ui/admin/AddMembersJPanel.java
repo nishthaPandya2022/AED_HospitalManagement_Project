@@ -4,6 +4,7 @@
  */
 package ui.admin;
 
+import com.raven.component.Message;
 import java.sql.Connection;
 import java.time.*;
 import java.sql.PreparedStatement;
@@ -15,12 +16,17 @@ import model.HospitalUserDirectory;
 import model.HospitalUsers;
 import org.sqlite.SQLiteDataSource;
 import java.sql.Date;
+import model.LoginCredentials;
+import model.ModelMessage;
+import model.ServiceMail;
+import model.ServiceUser;
 
 /**
  *
  * @author nishthapandya
  */
 public class AddMembersJPanel extends javax.swing.JPanel {
+
     private static final String GET_DATA_FROM_HOSPITAL = "SELECT * FROM hospital";
 
     private static final String GET_DATA_COUNT_FROM_HOSPITAL = "SELECT count(*) from hospital";
@@ -39,6 +45,63 @@ public class AddMembersJPanel extends javax.swing.JPanel {
         this.sqliteConnection = connection;
         hospDirectory = new HospitalUserDirectory();
 
+    }
+
+    public boolean validatedata() {
+
+        if ("".equals(txtFieldMemberName.getText())) {
+            JOptionPane.showMessageDialog(this, "Enter Name.");
+            return false;
+        }
+        if (!txtFieldMemberName.getText().matches("[a-zA-Z ]+")) {
+            JOptionPane.showMessageDialog(this, "Enter Proper Name.");
+            return false;
+        }
+        if ("".equals(txtFieldAddress.getText())) {
+            JOptionPane.showMessageDialog(this, "Enter Address.");
+            return false;
+        }
+        if (!txtFieldAddress.getText().matches("[a-zA-Z0-9 ]+")) {
+            JOptionPane.showMessageDialog(this, "Enter proper Address.");
+            return false;
+        }
+        if ("".equals(txtFieldCommunity.getText())) {
+            JOptionPane.showMessageDialog(this, "Enter Community.");
+            return false;
+        }
+        if (!txtFieldCommunity.getText().matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Enter proper community.");
+            return false;
+        }
+        if ("".equals(txtFieldZipCode.getText())) {
+            JOptionPane.showMessageDialog(this, "Enter zipcode.");
+            return false;
+        }
+        if (!txtFieldZipCode.getText().matches("[0-9]{5}(?:-[0-9]{4})?$")) {
+            JOptionPane.showMessageDialog(this, "Enter zipcode in the form of xxxxx or xxxxx-xxxx.");
+            return false;
+        }
+        if ("".equals(txtFieldCity.getText())) {
+            JOptionPane.showMessageDialog(this, "Enter City.");
+            return false;
+        }
+        if (!txtFieldCity.getText().matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Enter proper city.");
+            return false;
+        }
+        if ("".equals(txtFieldState.getText())) {
+            JOptionPane.showMessageDialog(this, "Enter State.");
+            return false;
+        }
+        if (!txtFieldState.getText().matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Enter proper state.");
+            return false;
+        }
+        if (!txtFieldEmail.getText().matches("[0-9]+")) {
+            JOptionPane.showMessageDialog(this, "Enter proper phone number of 10 digits.");
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -224,47 +287,49 @@ public class AddMembersJPanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
-        try {
-            PreparedStatement p2p = sqliteConnection.prepareStatement(GET_DATA_COUNT_FROM_HOSPITAL);
-            ResultSet output = p2p.executeQuery();
-            int userID = Integer.parseInt(output.getString("count(*)"));
-            System.out.println("GET_DATA_COUNT_FROM_HOSPITAL : " + userID);
-            String role = (String) comboBoxRole.getSelectedItem();
-            System.out.println("role : " + role);
-            System.out.println("dateChooserDOB.getDateFormatString() : " + ((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText());
+        if (validatedata()) {
+            try {
+                PreparedStatement p2p = sqliteConnection.prepareStatement(GET_DATA_COUNT_FROM_HOSPITAL);
+                ResultSet output = p2p.executeQuery();
+                int userID = Integer.parseInt(output.getString("count(*)"));
+                System.out.println("GET_DATA_COUNT_FROM_HOSPITAL : " + userID);
+                String role = (String) comboBoxRole.getSelectedItem();
+                System.out.println("role : " + role);
+                System.out.println("dateChooserDOB.getDateFormatString() : " + ((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText());
 //            System.out.println("dob : " + dateChooserDOB.getDate());
 
-            LocalDate localDOB = LocalDate.parse(((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            System.out.println(formatter.format(localDOB));
-            int age = calculateAge(localDOB);
-            System.out.println("age : " + age);
+                LocalDate localDOB = LocalDate.parse(((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                System.out.println(formatter.format(localDOB));
+                int age = calculateAge(localDOB);
+                System.out.println("age : " + age);
 
-            String organization = (String) comboBoxOrganization.getSelectedItem();
-            if (organization.equals("Select an option")) {
-                organization = "Null";
-            }
-            System.out.println("organization : " + organization);
+                String organization = (String) comboBoxOrganization.getSelectedItem();
+                if (organization.equals("Select an option")) {
+                    organization = "Null";
+                }
+                System.out.println("organization : " + organization);
 
-            HospitalUsers hospUser = hospDirectory.addNewHospitalUsers();
-            userID++;
-            hospUser.setUserID(String.valueOf(userID));
-            hospUser.setName(txtFieldMemberName.getText());
+                HospitalUsers hospUser = hospDirectory.addNewHospitalUsers();
+                userID++;
+                hospUser.setUserID(String.valueOf(userID));
+                hospUser.setName(txtFieldMemberName.getText());
 //            hospUser.setDOB(((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText());
-            hospUser.setDOB(Date.valueOf(((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText()));
-            hospUser.setAge(String.valueOf(age));
-            hospUser.setOrganization(organization);
-            hospUser.setEmail(txtFieldEmail.getText());
-            hospUser.setAddress(txtFieldAddress.getText());
-            hospUser.setCommunity(txtFieldCommunity.getText());
-            hospUser.setState(txtFieldState.getText());
-            hospUser.setZipcode(txtFieldZipCode.getText());
-            hospUser.setRole(comboBoxRole.getSelectedItem().toString());
+                hospUser.setDOB(Date.valueOf(((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText()));
+                hospUser.setAge(String.valueOf(age));
+                hospUser.setOrganization(organization);
+                hospUser.setEmail(txtFieldEmail.getText());
+                hospUser.setAddress(txtFieldAddress.getText());
+                hospUser.setCommunity(txtFieldCommunity.getText());
+                hospUser.setState(txtFieldState.getText());
+                hospUser.setZipcode(txtFieldZipCode.getText());
+                hospUser.setRole(comboBoxRole.getSelectedItem().toString());
 
-            boolean dataInserted = insertDataToDB(hospUser);
-            System.out.println("dataInserted : " + dataInserted);
-        } catch (Exception e) {
-            e.printStackTrace();
+                boolean dataInserted = insertDataToDB(hospUser);
+                System.out.println("dataInserted : " + dataInserted);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }//GEN-LAST:event_btnAddActionPerformed
@@ -332,21 +397,53 @@ public class AddMembersJPanel extends javax.swing.JPanel {
                     + "','" + hospUser.getState() + "','" + hospUser.getZipcode()
                     + "','" + hospUser.getRole() + "');";
 
-            String INSERT_DATA_INTO_LOGIN = "INSERT INTO login(loginID, userID, username, password)"
-                    + " VALUES ('" + loginID + "','" + hospUser.getUserID() + "','" + username + "','" + password + "');";
-
             PreparedStatement p2p = sqliteConnection.prepareStatement(INSERT_DATA_INTO_HOSPITAL);
             output = p2p.execute();
             if (output == false) {
-                PreparedStatement p3p = sqliteConnection.prepareStatement(INSERT_DATA_INTO_LOGIN);
-                boolean loginOutput = p3p.execute();
-                if (loginOutput == false) {
+                //user credentials
+                LoginCredentials loginUser = new LoginCredentials();
+                loginUser.setUsername(hospUser.getEmail());
+                loginUser.setPassword(password);
+                loginUser.setLoginID(String.valueOf(loginID));
+                loginUser.setUserID(hospUser.getUserID());
+
+                //service class called
+                ServiceUser serviceUser = new ServiceUser(sqliteConnection);
+//            serviceUser.insertUser(loginUser);
+
+                try {
+                    if (serviceUser.checkDuplicateEmail(loginUser.getUsername())) {
+                        System.out.println("ui.admin.AddMembersJPanel.insertDataToDB():checkDuplicationEMAIL ()");
+//                    showMessage(serviceUser.MessageType.ERROR, "Email already exit");
+                    } else {
+                        System.out.println("before serviceUSER.insertUSER");
+                        serviceUser.insertUser(loginUser);
+                        System.out.println("after serviceUSER.insertUSER");
+                        sendMain(loginUser, serviceUser);
+                        System.out.println("after sendMain");
+                    }
+
                     JOptionPane.showMessageDialog(this, "UserName :"
                             + username + "\n Password : " + password + "\n User added to Hospital!");
                     return false;
-                } else {
-                    System.out.println("loginOutput == false");
+                } catch (Exception e) {
+                    e.printStackTrace();
+//                showMessage(Message.MessageType.ERROR, "Error Register");
                 }
+
+                //older-code - DONOT DELETE
+                String INSERT_DATA_INTO_LOGIN = "INSERT INTO login(loginID, userID, username, password)"
+                        + " VALUES ('" + loginID + "','" + hospUser.getUserID() + "','" + username + "','" + password + "');";
+
+//                PreparedStatement p3p = sqliteConnection.prepareStatement(INSERT_DATA_INTO_LOGIN);
+//                boolean loginOutput = p3p.execute();
+//                if (loginOutput == false) {
+//                    JOptionPane.showMessageDialog(this, "UserName :"
+//                            + username + "\n Password : " + password + "\n User added to Hospital!");
+//                    return false;
+//                } else {
+//                    System.out.println("loginOutput == false");
+//                }
             } else {
                 System.out.println("hospital Output == false");
             }
@@ -367,5 +464,28 @@ public class AddMembersJPanel extends javax.swing.JPanel {
         } else {
             return 0;
         }
+    }
+
+    private void sendMain(LoginCredentials user, ServiceUser serviceUser) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ModelMessage ms = new ServiceMail().sendMain(user.getUsername(), user.getVerifyCode());
+//                ModelMessage ms = new ServiceMail().sendMain( user.getVerifyCode());
+                System.out.println("ms : " + ms.isSuccess());
+                System.out.println("ms : " + ms.getMessage());
+                if (ms.isSuccess()) {
+//                    loading.setVisible(false);
+                    CredentialsJFrame credential = new CredentialsJFrame(user, serviceUser);
+                    credential.setVisible(true);
+                } else {
+                    System.out.println("Error !");
+//                    loading.setVisible(false);
+//                    showMessage(Message.MessageType.ERROR, ms.getMessage());
+                }
+            }
+        }).start();
+
     }
 }
