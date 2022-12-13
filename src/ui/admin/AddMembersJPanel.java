@@ -327,11 +327,12 @@ public class AddMembersJPanel extends javax.swing.JPanel {
 
                 boolean dataInserted = insertDataToDB(hospUser);
                 System.out.println("dataInserted : " + dataInserted);
+//            sqliteConnection.close();
             } catch (Exception e) {
                 e.printStackTrace();
+
             }
         }
-
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void comboBoxRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxRoleActionPerformed
@@ -399,6 +400,7 @@ public class AddMembersJPanel extends javax.swing.JPanel {
 
             PreparedStatement p2p = sqliteConnection.prepareStatement(INSERT_DATA_INTO_HOSPITAL);
             output = p2p.execute();
+
             if (output == false) {
                 //user credentials
                 LoginCredentials loginUser = new LoginCredentials();
@@ -419,12 +421,14 @@ public class AddMembersJPanel extends javax.swing.JPanel {
                         System.out.println("before serviceUSER.insertUSER");
                         serviceUser.insertUser(loginUser);
                         System.out.println("after serviceUSER.insertUSER");
-                        sendMain(loginUser, serviceUser);
-                        System.out.println("after sendMain");
                     }
+                    sendMain(loginUser, serviceUser);
+                    System.out.println("after sendMain");
 
-                    JOptionPane.showMessageDialog(this, "UserName :"
-                            + username + "\n Password : " + password + "\n User added to Hospital!");
+//                    JOptionPane.showMessageDialog(this, "UserName :"
+//                            + login.getUsername() + "\n Password : " + login.getPassword() + "\n User added to Hospital!");
+//                    JOptionPane.showMessageDialog(this, "UserName :"
+//                            + username + "\n Password : " + password + "\n User added to Hospital!");
                     return false;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -471,7 +475,7 @@ public class AddMembersJPanel extends javax.swing.JPanel {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                ModelMessage ms = new ServiceMail().sendMain(user.getUsername(), user.getVerifyCode());
+                ModelMessage ms = new ServiceMail().sendMain(user.getUsername(), user.getVerifycode());
 //                ModelMessage ms = new ServiceMail().sendMain( user.getVerifyCode());
                 System.out.println("ms : " + ms.isSuccess());
                 System.out.println("ms : " + ms.getMessage());

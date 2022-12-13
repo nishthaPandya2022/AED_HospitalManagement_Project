@@ -44,6 +44,7 @@ public class ServiceMail {
             Transport.send(message);
             ms.setSuccess(true);
         } catch (MessagingException e) {
+            System.out.println(e);
             if (e.getMessage().equals("Invalid Addresses")) {
                 ms.setMessage("Invalid email");
             } else {

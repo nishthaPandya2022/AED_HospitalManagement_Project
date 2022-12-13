@@ -262,7 +262,7 @@ public class LoginJFrame extends javax.swing.JFrame {
             //                } else {
             //                    if (username.contains("hospital")) {
             //
-            //                        JOptionPane.showMessageDialog(this, "Hospital logged in");
+            //                        JOptionPane.showMessageDialoJOpg(this, "Hospital logged in");
             //                    }
             //                    if (username.contains("patient")) {
             //                        JOptionPane.showMessageDialog(this, "Patient logged in");
@@ -282,7 +282,7 @@ public class LoginJFrame extends javax.swing.JFrame {
             //            }
             //            else {
             //
-            //                JOptionPane.showMessageDialog(this, "Wrong Username or Password");
+//                            JOptionPane.showMessageDialog(this, "Wrong Username or Password");
             //            }
             //        }
             //        if (username.equals("admin") && password.equals("admin")) {

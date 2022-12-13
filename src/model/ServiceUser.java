@@ -30,7 +30,7 @@ public class ServiceUser {
         r.close();
         p.close();
         user.setUserID(String.valueOf(userID));
-        user.setVerifyCode(code);
+        user.setVerifycode(code);
     }
 
     private String generateVerifyCode() throws SQLException {
@@ -70,7 +70,7 @@ public class ServiceUser {
     }
 
     public void doneVerify(int userID) throws SQLException {
-        PreparedStatement p = connection.prepareStatement("update login set verifyCode='', status='Verified' where UserID=? limit 1");
+        PreparedStatement p = connection.prepareStatement("update login set verifyCode='', `status`='Verified' where loginID=?");
         p.setInt(1, userID);
         p.execute();
         p.close();
@@ -78,7 +78,7 @@ public class ServiceUser {
 
     public boolean verifyCodeWithUser(int userID, String code) throws SQLException {
         boolean verify = false;
-        PreparedStatement p = connection.prepareStatement("select userID from login where userID=? and verifyCode=? limit 1");
+        PreparedStatement p = connection.prepareStatement("select loginID from  `login` where loginID=? and verifyCode=?");
         p.setInt(1, userID);
         p.setString(2, code);
         ResultSet r = p.executeQuery();

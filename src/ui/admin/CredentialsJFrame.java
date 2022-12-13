@@ -4,7 +4,9 @@
  */
 package ui.admin;
 
+import com.raven.component.Message;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import model.LoginCredentials;
 import model.ServiceUser;
 
@@ -112,17 +114,20 @@ public class CredentialsJFrame extends javax.swing.JFrame {
         
         try {
 //                    ModelUser user = loginAndRegister.getUser();
-                    if (service.verifyCodeWithUser(Integer.valueOf(login.getUserID()), txtFieldCode.getText())) {
-                        service.doneVerify(Integer.valueOf(login.getUserID()));
+                    if (service.verifyCodeWithUser(Integer.valueOf(login.getLoginID()), txtFieldCode.getText())) {
+                        service.doneVerify(Integer.valueOf(login.getLoginID()));
                         System.out.println("Register Success !");
                         this.dispose();
-//                        showMessage(Message.MessageType.SUCCESS, "Register sucess");
+                        JOptionPane.showMessageDialog(this, "Email Verified \n UserName :"
+                            + login.getUsername() + "\n Password : " + login.getPassword() + "\n User added to Hospital!");
+//                        
 //                        verifyCode.setVisible(false);
                     } else {
                         System.out.println("Verify code incorrect !");
                         //showMessage(Message.MessageType.ERROR, "Verify code incorrect");
                     }
                 } catch (SQLException e) {
+                    e.printStackTrace();
                     System.out.println("Error !");
 //                    showMessage(Message.MessageType.ERROR, "Error");
                 }
