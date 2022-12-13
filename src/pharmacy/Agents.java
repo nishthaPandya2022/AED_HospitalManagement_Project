@@ -361,7 +361,8 @@ public class Agents extends javax.swing.JFrame {
             .addComponent(pharmacyLeftJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(872, 570));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddAgentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddAgentMouseClicked

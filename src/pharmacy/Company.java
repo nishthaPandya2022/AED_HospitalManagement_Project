@@ -41,7 +41,8 @@ public class Company extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Enter Name.");
             return false;
         }
-        if (!textFieldCompanyName.getText().matches("[a-zA-Z]+")){
+        
+        if (!textFieldCompanyName.getText().matches("^[a-zA-Z ]+")){
             JOptionPane.showMessageDialog(this, "Enter Proper Name.");
             return false;
         }
@@ -49,6 +50,11 @@ public class Company extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Enter Address.");
             return false;
         }
+        if (!txtFieldCompanyAddress.getText().matches("^[a-zA-Z ]+")){
+            JOptionPane.showMessageDialog(this, "Enter Proper Address.");
+            return false;
+        }
+        
         
         if ("".equals(textFieldCompanyPhone.getText())){
             JOptionPane.showMessageDialog(this, "Enter Mobile Number.");
@@ -56,7 +62,7 @@ public class Company extends javax.swing.JFrame {
         }
         
         if ("".equals(txtFieldExp.getText())){
-            JOptionPane.showMessageDialog(this, "Enter Mobile Number.");
+            JOptionPane.showMessageDialog(this, "Enter Experience.");
             return false;
         }
         
@@ -241,14 +247,14 @@ public class Company extends javax.swing.JFrame {
                                 .addComponent(lblAddress)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtFieldCompanyAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(96, 96, 96)
+                        .addGap(89, 89, 89)
                         .addGroup(companyJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPhone)
-                            .addComponent(lblExperience))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblExperience)
+                            .addComponent(lblPhone))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(companyJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFieldExp, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textFieldCompanyPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(textFieldCompanyPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFieldExp, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, companyJPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -269,14 +275,14 @@ public class Company extends javax.swing.JFrame {
                 .addGroup(companyJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFieldCompanyId, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCompId)
-                    .addComponent(lblPhone)
-                    .addComponent(textFieldCompanyPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFieldExp, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPhone))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(companyJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCompName)
                     .addComponent(textFieldCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblExperience)
-                    .addComponent(txtFieldExp, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldCompanyPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblExperience))
                 .addGap(15, 15, 15)
                 .addGroup(companyJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFieldCompanyAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -372,6 +378,7 @@ public class Company extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddCompanyMouseClicked
@@ -389,7 +396,7 @@ public class Company extends javax.swing.JFrame {
                 p2p.setInt(1, Integer.valueOf(txtFieldCompanyId.getText()));
                 p2p.setString(2, textFieldCompanyName.getText());
                 p2p.setString(3, txtFieldCompanyAddress.getText());
-                p2p.setInt(4, Integer.valueOf(txtFieldExp.getText()));
+                p2p.setString(4,txtFieldExp.getText());
                 p2p.setString(5, textFieldCompanyPhone.getText());
 
                 boolean output = p2p.execute();

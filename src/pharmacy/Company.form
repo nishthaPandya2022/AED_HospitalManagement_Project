@@ -6,7 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -129,15 +129,15 @@
                                       <Component id="txtFieldCompanyAddress" min="-2" pref="127" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblPhone" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblExperience" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPhone" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtFieldExp" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
-                                  <Component id="textFieldCompanyPhone" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
+                                  <Component id="textFieldCompanyPhone" min="-2" pref="127" max="-2" attributes="0"/>
+                                  <Component id="txtFieldExp" min="-2" pref="127" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -167,15 +167,15 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtFieldCompanyId" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="lblCompId" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFieldExp" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="lblPhone" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="textFieldCompanyPhone" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblCompName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="textFieldCompanyName" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="textFieldCompanyPhone" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="lblExperience" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtFieldExp" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">

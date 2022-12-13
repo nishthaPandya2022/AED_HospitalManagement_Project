@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
+import ui.MainJFrame;
 
 /**
  *
@@ -28,14 +29,8 @@ public class Medicines extends javax.swing.JFrame {
     /**
      * Creates new form Medicines
      */
-    public Medicines() {
-        initComponents();
-        GetAllMedicines();
-        GetCompany();
-    }
     
-        public boolean validatedata(){
-        
+    public boolean validatedata(){
         
         if ("".equals(textFieldId.getText())){
             JOptionPane.showMessageDialog(this, "Enter Id.");
@@ -54,14 +49,46 @@ public class Medicines extends javax.swing.JFrame {
             return false;
         }
         
+        if (!txtFieldPrice.getText().matches("[0-9]+(?:\\.[0-9]+)?")){
+            JOptionPane.showMessageDialog(this, "Enter Price in Numbers.");
+            return false;
+        }
+        
         if ("".equals(txtFieldQuantity.getText())){
             JOptionPane.showMessageDialog(this, "Enter Quantity.");
             return false;
         }
         
+        if (!txtFieldQuantity.getText().matches("^[0-9, ]*$")){
+            JOptionPane.showMessageDialog(this, "Enter Quantity in Numbers.");
+            return false;
+        }
+        
+        String s = ((JTextField)dateFab.getDateEditor().getUiComponent()).getText();
+        if (s.equals("")) {
+            JOptionPane.showMessageDialog(null, "Enter Fabrication Date" );
+            return false;
+        }
+        
+        String d = ((JTextField)dateExp.getDateEditor().getUiComponent()).getText();
+        if (d.equals("")) {
+            JOptionPane.showMessageDialog(null, "Enter Expiry Date" );
+            return false;
+     }
+        if ("".equals(comboBoxCompany.getSelectedItem().toString())) {
+            JOptionPane.showMessageDialog(null, "Select Company" );
+            return false;
+       }
         
         return true;
     }
+    public Medicines() {
+        initComponents();
+        GetAllMedicines();
+        GetCompany();
+    }
+    
+    
 
      static Connection sqliteConnection;
      static Statement statement;
@@ -72,6 +99,7 @@ public class Medicines extends javax.swing.JFrame {
      static String MedName;
      java.util.Date fabDate,expDate;
      java.sql.Date myFabDate, myExpDate;
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -108,6 +136,7 @@ public class Medicines extends javax.swing.JFrame {
         dateExp = new com.toedter.calendar.JDateChooser();
         comboBoxCompany = new javax.swing.JComboBox<>();
         btnDeleteMedicine1 = new javax.swing.JButton();
+        lblSelling1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -387,6 +416,17 @@ public class Medicines extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
         );
 
+        lblSelling1.setBackground(new java.awt.Color(255, 255, 255));
+        lblSelling1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblSelling1.setForeground(new java.awt.Color(255, 255, 255));
+        lblSelling1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSelling1.setText("LOG OUT");
+        lblSelling1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSelling1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout pharmacyLeftJPanelLayout = new javax.swing.GroupLayout(pharmacyLeftJPanel);
         pharmacyLeftJPanel.setLayout(pharmacyLeftJPanelLayout);
         pharmacyLeftJPanelLayout.setHorizontalGroup(
@@ -394,30 +434,34 @@ public class Medicines extends javax.swing.JFrame {
             .addGroup(pharmacyLeftJPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pharmacyLeftJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pharmacyLeftJPanelLayout.createSequentialGroup()
-                        .addGroup(pharmacyLeftJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblAgents, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblSelling, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lblCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pharmacyLeftJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAgents, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSelling, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSelling1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(medicineRightJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(147, 147, 147))
+                .addGap(153, 153, 153))
         );
         pharmacyLeftJPanelLayout.setVerticalGroup(
             pharmacyLeftJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pharmacyLeftJPanelLayout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addComponent(lblCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblAgents, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblSelling, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(224, 224, 224))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pharmacyLeftJPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(medicineRightJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addGroup(pharmacyLeftJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pharmacyLeftJPanelLayout.createSequentialGroup()
+                        .addGap(186, 186, 186)
+                        .addComponent(lblCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblAgents, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblSelling, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblSelling1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pharmacyLeftJPanelLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(medicineRightJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -432,23 +476,28 @@ public class Medicines extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblSellingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSellingMouseClicked
-        new Selling().setVisible(true);
+        
         this.dispose();
+        new Selling().setVisible(true);
+        
     }//GEN-LAST:event_lblSellingMouseClicked
 
     private void btnAddMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMedicineMouseClicked
 
-        fabDate =  dateFab.getDate();
-        System.out.print(fabDate);
-        myFabDate = new java.sql.Date(fabDate.getTime());
-        System.out.print(myFabDate);
-        expDate =  dateExp.getDate();
-        myExpDate = new java.sql.Date(expDate.getTime());
-        
         if (validatedata()){
+            
+            fabDate =  dateFab.getDate();
+            System.out.print(fabDate);
+            myFabDate = new java.sql.Date(fabDate.getTime());
+            System.out.print(myFabDate);
+            expDate =  dateExp.getDate();
+            myExpDate = new java.sql.Date(expDate.getTime());
+        
+        
 
             try {
 
@@ -557,13 +606,17 @@ public class Medicines extends javax.swing.JFrame {
     }//GEN-LAST:event_MedicineTableMouseClicked
 
     private void lblCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCompanyMouseClicked
-        new Company().setVisible(true);
+        
         this.dispose();
+        new Company().setVisible(true);
+        
     }//GEN-LAST:event_lblCompanyMouseClicked
 
     private void lblAgentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAgentsMouseClicked
-        new Agents().setVisible(true);
+        
         this.dispose();
+        new Agents().setVisible(true);
+        
     }//GEN-LAST:event_lblAgentsMouseClicked
 
     private void comboBoxCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCompanyActionPerformed
@@ -585,6 +638,17 @@ public class Medicines extends javax.swing.JFrame {
     private void btnClearMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearMedicineActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnClearMedicineActionPerformed
+
+    private void lblSelling1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSelling1MouseClicked
+        
+        this.dispose();
+        MainJFrame mainFrame = new MainJFrame();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                mainFrame.setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_lblSelling1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -643,6 +707,7 @@ public class Medicines extends javax.swing.JFrame {
     private javax.swing.JLabel lblPrice;
     private javax.swing.JLabel lblQuantity;
     private javax.swing.JLabel lblSelling;
+    private javax.swing.JLabel lblSelling1;
     private javax.swing.JPanel medicineRightJPanel;
     private javax.swing.JPanel pharmacyLeftJPanel;
     private javax.swing.JTextField textFieldId;

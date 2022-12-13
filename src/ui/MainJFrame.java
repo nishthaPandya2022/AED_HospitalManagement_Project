@@ -58,7 +58,7 @@ public class MainJFrame extends javax.swing.JFrame {
      
     private static final String CREATE_COMPANY_TABLE_SQL = "CREATE TABLE IF NOT EXISTS company ("
             + "CompId INTEGER(3) PRIMARY KEY NOT NULL," + "CompName VARCHAR(50) NOT NULL,"
-            + "CompAddress VARCHAR(200) NOT NULL," + "CompPhone INTEGER(11) NOT NULL," + "CompExp INTEGER(5) NOT NULL)";
+            + "CompAddress VARCHAR(200) NOT NULL," + "CompPhone VARCHAR(200) NOT NULL," + "CompExp INTEGER(5) NOT NULL)";
     
     private static final String CREATE_LABTEST_TABLE_SQL = "CREATE TABLE IF NOT EXISTS labtest ("
             + "Pateint_ID INTEGER(3) PRIMARY KEY NOT NULL," + "DoctorName VARCHAR(50) NOT NULL,"
@@ -69,7 +69,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private static final String CREATE_DONOR_TABLE_SQL = "CREATE TABLE IF NOT EXISTS donor ("
             + "DonId INTEGER(3) PRIMARY KEY NOT NULL," + "DonName VARCHAR(50) NOT NULL,"
             + "DonFather VARCHAR(200) NOT NULL," + "DonMother VARCHAR(200) NOT NULL," + "DonDob DATE NOT NULL,"
-            + "DonMobile INTEGER(11) NOT NULL," + "DonGend VARCHAR(50) NOT NULL," + "DonEmail VARCHAR(100) NOT NULL,"
+            + "DonMobile VARCHAR(14) NOT NULL," + "DonGend VARCHAR(50) NOT NULL," + "DonEmail VARCHAR(100) NOT NULL,"
             + "DonBlood VARCHAR(10) NOT NULL," + "DonCity VARCHAR(200) NOT NULL," + "DonAddress VARCHAR(100) NOT NULL)";
      
     private static final String CREATE_STOCK_TABLE_SQL = "CREATE TABLE IF NOT EXISTS stock ("
@@ -270,6 +270,14 @@ public class MainJFrame extends javax.swing.JFrame {
                 statement.executeUpdate(CREATE_DONOR_TABLE_SQL);
                 statement.executeUpdate(CREATE_STOCK_TABLE_SQL);
                 boolean insertDone = statement.execute(INSERT_LOGIN_ADMIN);
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('A+',0)");
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('A-',0)");
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('B+',0)");
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('B-',0)");
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('0+',0)");
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('O-',0)");
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('AB+',0)");
+                statement.executeUpdate("insert into stock (BloodGroup, BloodUnits) values ('AB-',0)");
 //              statement.executeUpdate(CREATE_TEMP_TABLE_SQL);
                 
 //              PHARMACY TABLES
@@ -286,10 +294,8 @@ public class MainJFrame extends javax.swing.JFrame {
         }
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainJFrame().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MainJFrame().setVisible(true);
         });
     }
 

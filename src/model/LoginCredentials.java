@@ -14,7 +14,15 @@ public class LoginCredentials {
     String userID;
     String username;
     String password;
-    String verifyCode;
+    String verifycode;
+
+    public String getVerifycode() {
+        return verifycode;
+    }
+
+    public void setVerifycode(String verifycode) {
+        this.verifycode = verifycode;
+    }
 
     public String getLoginID() {
         return loginID;

@@ -4,6 +4,7 @@
  */
 package bloodBank;
 
+import java.awt.Point;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import org.sqlite.SQLiteDataSource;
 import java.sql.ResultSet;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 import net.proteanit.sql.DbUtils;
 
@@ -353,7 +355,10 @@ public class UpdateDonor extends javax.swing.JFrame {
 
     private void btnDonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonResetActionPerformed
         setVisible(false);
-        new UpdateDonor().setVisible(true);
+        JFrame UpdateDonorFrame = new UpdateDonor();
+        UpdateDonorFrame.setVisible(true);
+        Point p = UpdateDonorFrame.getLocationOnScreen();
+        UpdateDonorFrame.setLocation(p.x + 420, p.y + 220);
     }//GEN-LAST:event_btnDonResetActionPerformed
 
     private void btnDonCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonCloseActionPerformed
