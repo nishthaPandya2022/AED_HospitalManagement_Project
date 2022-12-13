@@ -6,6 +6,7 @@ package ui.doctor;
 
 import java.sql.Connection;
 import org.sqlite.SQLiteDataSource;
+import ui.MainJFrame;
 
 /**
  *
@@ -117,10 +118,19 @@ public class DoctorHomeJFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        dispose();
+        MainJFrame mainFrame = new MainJFrame();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                mainFrame.setVisible(true);
+            }
+        });
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        PatientListJPanel patient = new PatientListJPanel(ds,sqliteConnection);
+       splitPaneDoctorHome.setRightComponent(patient);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

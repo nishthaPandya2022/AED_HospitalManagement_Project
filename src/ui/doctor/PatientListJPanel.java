@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.Appointment;
 import model.AppointmentDirectory;
+import model.Doctor;
 import model.Patients;
 import model.PatientsDirectory;
 import org.sqlite.SQLiteDataSource;
@@ -23,13 +24,14 @@ import org.sqlite.SQLiteDataSource;
  * @author nishthapandya
  */
 public class PatientListJPanel extends javax.swing.JPanel {
-    
+
     private AppointmentDirectory appointmentDirectory;   //private DoctorDirectory doctorDirectory;
     private ArrayList<Appointment> appointDirectory;      //private ArrayList<Doctor> docDirectory;
-    
+
     static SQLiteDataSource ds = null;
     static Connection sqliteConnection;
-    
+
+    Appointment appointment;
     String GET_ALL_PATIENTS_FROM_HOSPITAL = "SELECT h.userID, h.name, h.DOB, h.age, h.organization, h.email, h.address, h.community, state, zipcode, role from hospital h, appointment appoint WHERE role=\"Patient\" AND doctorID";
     String GET_PATIENTS_FOR_A_PARTICULAR_DOCTOR = "SELECT appointmentID, patientID, patientName, status, appointmentDate, bloodPressure, temperature, height, weight, heartRate from appointment where doctorID=?;";
 
@@ -38,8 +40,7 @@ public class PatientListJPanel extends javax.swing.JPanel {
      */
     public PatientListJPanel(SQLiteDataSource dataSource, Connection connection) {
         initComponents();
-        
-        
+
         this.ds = dataSource;
         this.sqliteConnection = connection;
         this.appointmentDirectory = new AppointmentDirectory();
@@ -64,17 +65,6 @@ public class PatientListJPanel extends javax.swing.JPanel {
                 appoint.setHeartRate(output.getString("heartRate"));
                 appoint.setDiagnosis(output.getString("diagnosis"));
                 appoint.setAppointmentStatus(output.getString("status"));
-//                Patients patient = new Patients();
-//                patient.setPatientID(Integer.parseInt(output.getString("userID")));
-//                patient.setPatientName(output.getString("name"));
-//                patient.setPatientDOB(java.sql.Date.valueOf(output.getString("DOB")));
-//                patient.setPatientAge(output.getString("age"));
-//                patient.setPatientEmail(output.getString("email"));
-//                patient.setPatientAddress(output.getString("address"));
-//                patient.setPatientCommunity(output.getString("community"));
-//                patient.setPatientState(output.getString("state"));
-//                patient.setPatientZipCode(output.getString("zipcode"));
-//                patient.setPatientDocName(output.getString);
 
                 appointDirectory.add(appoint);
             }
@@ -87,7 +77,7 @@ public class PatientListJPanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
+
     public boolean validatedata() {
 
         if ("".equals(etPatientID.getText())) {
@@ -375,15 +365,22 @@ public class PatientListJPanel extends javax.swing.JPanel {
         }
 
         DefaultTableModel model = (DefaultTableModel) tablePatientList.getModel();
+        Appointment appoint = (Appointment) model.getValueAt(selectedRow, 0);
+        appointment = new Appointment();
+        appointment = appoint;
         //TODO: Add there
-//        Encounter encounter = (Encounter) model.getValueAt(selectedRow, 0);
-//
-//        etPatientID.setText(String.valueOf(encounter.getPatientID()));
-//        etPatientName.setText(encounter.getPatientName());
-//        etStatus.setText(encounter.getStatus());
-//        etDate.setText(encounter.getDate());
 
-//        newEncounter = encounter;
+        etPatientID.setText(appoint.getPatientID());
+        etPatientName.setText(appoint.getPatientName());
+        etStatus.setText(appoint.getAppointmentStatus());
+        etDate.setText(appoint.getAppointmentDate().toString());
+        etPatientDiagnosis.setText(appoint.getDiagnosis());
+        etBloodPressure.setText(appoint.getBloodPressure());
+        etHeight.setText(appoint.getHeight());
+        etWeight.setText(appoint.getWeight());
+        etTemperature.setText(appoint.getTemperature());
+        etHeartRate.setText(appoint.getHeartRate());
+
     }//GEN-LAST:event_bGetDetailsActionPerformed
 
     private void bAddVitalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddVitalsActionPerformed
@@ -392,36 +389,42 @@ public class PatientListJPanel extends javax.swing.JPanel {
         if (validatedata()) {
             //TODO : vital signs
 
-//            VitalSigns vitalSigns = new VitalSigns();
-//
-//            vitalSigns.setBloodPressure(Float.parseFloat(etBloodPressure.getText()));
-//            vitalSigns.setHeartRate(Integer.parseInt(etHeartRate.getText()));
-//            vitalSigns.setTemperature(Float.parseFloat(etTemperature.getText()));
-//            vitalSigns.setHeight(Integer.parseInt(etHeight.getText()));
-//            vitalSigns.setWeight(Float.parseFloat(etWeight.getText()));
-//            vitalSigns.setDiagnosis(etPatientDiagnosis.getText());
-//
-//            for (Encounter encounter : encounterDirectory.getListOfEncounters()) {
-//                if ((encounter.getPatientID() == newEncounter.getDoctorID()) && (encounter.getPatientName().equals(newEncounter.getPatientName()))) {
-//
-//                    encounter.setVitalSigns(vitalSigns);
-//                    encounter.setStatus("COMPLETED");
-//
-//                    JOptionPane.showMessageDialog(this, "Patient Details Updated !");
-//
-//                    etPatientID.setText("");
-//                    etPatientName.setText("");
-//                    etStatus.setText("");
-//                    etDate.setText("");
-//                    etPatientDiagnosis.setText("");
-//                    etBloodPressure.setText("");
-//                    etHeartRate.setText("");
-//                    etTemperature.setText("");
-//                    etHeight.setText("");
-//                    etWeight.setText("");
-//                }
-//            }
+            Appointment appoint = new Appointment();
+            appoint.setAppointmentID(appointment.getAppointmentID());
+            appoint.setPatientID(appointment.getPatientID());
+            appoint.setPatientName(appointment.getPatientName());
+            appoint.setDoctorID(appointment.getDoctorID());
+            appoint.setDoctorName(appointment.getDoctorName());
+            appoint.setAppointmentDate(appointment.getAppointmentDate());
+            appoint.setAppointmentTime(appointment.getAppointmentTime());
+            appoint.setTemperature(appointment.getTemperature());
+            appoint.setBloodPressure(appointment.getBloodPressure());
+            appoint.setHeight(appointment.getHeight());
+            appoint.setWeight(appointment.getWeight());
+            appoint.setHeartRate(appointment.getHeartRate());
+            appoint.setDiagnosis(appointment.getDiagnosis());
+            appoint.setAppointmentStatus("COMPLETED");
 
+            try {
+                String updateAppointment = "Update appointment set bloodPressure=?,height=?, weight=?, heartRate=?, diagnosis=?, status=? where appointmentID=? AND doctorID=? ";
+                PreparedStatement p2p = sqliteConnection.prepareStatement(updateAppointment);
+                p2p.setString(1, appoint.getBloodPressure());
+                p2p.setString(2, appoint.getHeight());
+                p2p.setString(3, appoint.getWeight());
+                p2p.setString(4, appoint.getHeartRate());
+                p2p.setString(5, appoint.getDiagnosis());
+                p2p.setString(6, appoint.getAppointmentStatus());
+                p2p.setString(7, appoint.getAppointmentID());
+                p2p.setString(8, appoint.getDoctorID());
+                boolean output = p2p.execute();
+                if(output==false){
+                    System.out.println(" output updated !");
+                } else {
+                    System.out.println(" output not updated !");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }//GEN-LAST:event_bAddVitalsActionPerformed
@@ -460,13 +463,13 @@ public class PatientListJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tablePatientList.getModel();
         model.setRowCount(0);
 
-        for (Patients patient : patientsDirectory.getPatientDirectory()) {
+        for (Appointment patient : appointmentDirectory.getListOfAppointment()) {
             Object[] row = new Object[4];
 
             row[0] = patient;
             row[1] = patient.getPatientName();
-            row[2] = patient.getPatientDocName();
-            row[3] = patient.getPatientZipCode();
+            row[2] = patient.getAppointmentStatus();
+            row[3] = patient.getAppointmentDate() + patient.getAppointmentTime();
 
             model.addRow(row);
         }

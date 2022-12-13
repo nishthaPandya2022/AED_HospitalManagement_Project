@@ -47,6 +47,63 @@ public class AddMembersJPanel extends javax.swing.JPanel {
 
     }
 
+    public boolean validatedata() {
+
+        if ("".equals(txtFieldMemberName.getText())) {
+            JOptionPane.showMessageDialog(this, "Enter Name.");
+            return false;
+        }
+        if (!txtFieldMemberName.getText().matches("[a-zA-Z ]+")) {
+            JOptionPane.showMessageDialog(this, "Enter Proper Name.");
+            return false;
+        }
+        if ("".equals(txtFieldAddress.getText())) {
+            JOptionPane.showMessageDialog(this, "Enter Address.");
+            return false;
+        }
+        if (!txtFieldAddress.getText().matches("[a-zA-Z0-9 ]+")) {
+            JOptionPane.showMessageDialog(this, "Enter proper Address.");
+            return false;
+        }
+        if ("".equals(txtFieldCommunity.getText())) {
+            JOptionPane.showMessageDialog(this, "Enter Community.");
+            return false;
+        }
+        if (!txtFieldCommunity.getText().matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Enter proper community.");
+            return false;
+        }
+        if ("".equals(txtFieldZipCode.getText())) {
+            JOptionPane.showMessageDialog(this, "Enter zipcode.");
+            return false;
+        }
+        if (!txtFieldZipCode.getText().matches("[0-9]{5}(?:-[0-9]{4})?$")) {
+            JOptionPane.showMessageDialog(this, "Enter zipcode in the form of xxxxx or xxxxx-xxxx.");
+            return false;
+        }
+        if ("".equals(txtFieldCity.getText())) {
+            JOptionPane.showMessageDialog(this, "Enter City.");
+            return false;
+        }
+        if (!txtFieldCity.getText().matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Enter proper city.");
+            return false;
+        }
+        if ("".equals(txtFieldState.getText())) {
+            JOptionPane.showMessageDialog(this, "Enter State.");
+            return false;
+        }
+        if (!txtFieldState.getText().matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Enter proper state.");
+            return false;
+        }
+        if (!txtFieldEmail.getText().matches("[0-9]+")) {
+            JOptionPane.showMessageDialog(this, "Enter proper phone number of 10 digits.");
+            return false;
+        }
+        return true;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -230,47 +287,49 @@ public class AddMembersJPanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
-        try {
-            PreparedStatement p2p = sqliteConnection.prepareStatement(GET_DATA_COUNT_FROM_HOSPITAL);
-            ResultSet output = p2p.executeQuery();
-            int userID = Integer.parseInt(output.getString("count(*)"));
-            System.out.println("GET_DATA_COUNT_FROM_HOSPITAL : " + userID);
-            String role = (String) comboBoxRole.getSelectedItem();
-            System.out.println("role : " + role);
-            System.out.println("dateChooserDOB.getDateFormatString() : " + ((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText());
+        if (validatedata()) {
+            try {
+                PreparedStatement p2p = sqliteConnection.prepareStatement(GET_DATA_COUNT_FROM_HOSPITAL);
+                ResultSet output = p2p.executeQuery();
+                int userID = Integer.parseInt(output.getString("count(*)"));
+                System.out.println("GET_DATA_COUNT_FROM_HOSPITAL : " + userID);
+                String role = (String) comboBoxRole.getSelectedItem();
+                System.out.println("role : " + role);
+                System.out.println("dateChooserDOB.getDateFormatString() : " + ((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText());
 //            System.out.println("dob : " + dateChooserDOB.getDate());
 
-            LocalDate localDOB = LocalDate.parse(((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            System.out.println(formatter.format(localDOB));
-            int age = calculateAge(localDOB);
-            System.out.println("age : " + age);
+                LocalDate localDOB = LocalDate.parse(((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                System.out.println(formatter.format(localDOB));
+                int age = calculateAge(localDOB);
+                System.out.println("age : " + age);
 
-            String organization = (String) comboBoxOrganization.getSelectedItem();
-            if (organization.equals("Select an option")) {
-                organization = "Null";
-            }
-            System.out.println("organization : " + organization);
+                String organization = (String) comboBoxOrganization.getSelectedItem();
+                if (organization.equals("Select an option")) {
+                    organization = "Null";
+                }
+                System.out.println("organization : " + organization);
 
-            HospitalUsers hospUser = hospDirectory.addNewHospitalUsers();
-            userID++;
-            hospUser.setUserID(String.valueOf(userID));
-            hospUser.setName(txtFieldMemberName.getText());
+                HospitalUsers hospUser = hospDirectory.addNewHospitalUsers();
+                userID++;
+                hospUser.setUserID(String.valueOf(userID));
+                hospUser.setName(txtFieldMemberName.getText());
 //            hospUser.setDOB(((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText());
-            hospUser.setDOB(Date.valueOf(((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText()));
-            hospUser.setAge(String.valueOf(age));
-            hospUser.setOrganization(organization);
-            hospUser.setEmail(txtFieldEmail.getText());
-            hospUser.setAddress(txtFieldAddress.getText());
-            hospUser.setCommunity(txtFieldCommunity.getText());
-            hospUser.setState(txtFieldState.getText());
-            hospUser.setZipcode(txtFieldZipCode.getText());
-            hospUser.setRole(comboBoxRole.getSelectedItem().toString());
+                hospUser.setDOB(Date.valueOf(((JTextField) dateChooserDOB.getDateEditor().getUiComponent()).getText()));
+                hospUser.setAge(String.valueOf(age));
+                hospUser.setOrganization(organization);
+                hospUser.setEmail(txtFieldEmail.getText());
+                hospUser.setAddress(txtFieldAddress.getText());
+                hospUser.setCommunity(txtFieldCommunity.getText());
+                hospUser.setState(txtFieldState.getText());
+                hospUser.setZipcode(txtFieldZipCode.getText());
+                hospUser.setRole(comboBoxRole.getSelectedItem().toString());
 
-            boolean dataInserted = insertDataToDB(hospUser);
-            System.out.println("dataInserted : " + dataInserted);
-        } catch (Exception e) {
-            e.printStackTrace();
+                boolean dataInserted = insertDataToDB(hospUser);
+                System.out.println("dataInserted : " + dataInserted);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }//GEN-LAST:event_btnAddActionPerformed
