@@ -6,26 +6,26 @@
 
 This is a HealthCare Management System with four enterprise named Hospital, Pharmacy, Blood Bank and Laboratory. There are eight users of this system Doctor, Intern Doctor, Nurse, Patient, Lab Assistant, Pharmacist and Pathologist. There are six Organizations General, Radiology, Cardiology, Neurology, Pediatrics , Pharmacy, Laboratory, Pathology.
 
-SIGN UP AND LOG IN
+**SIGN UP AND LOG IN**
 
 The Admin will register the users and give their respective username and password to the user. The user will then have access to their account by logging in into the System.
 
-HOSPITAL
+**HOSPITAL**
 
 Admin will login to the Hospital Portal. There he will register the users and also manage different user by viewing, updating and deleting their profile.
 
-PHARMACY
+**PHARMACY**
 
 Pharmacist will log in. He can do three functionalities : 
 1) Add, View, Update, Delete Company
 2) Add, View, Update, Delete Medicines
 3) Generate Billing
 
-Laboratory
+**Laboratory**
 
 Lab Assistant can manage the lab tests that are being taken by the Patient and View Patient History.
 
-BLOOD BANK
+**BLOOD BANK**
 
 Blood Bank Admin can manage three portals:
 1) Add, View, Update, Delete Donor
