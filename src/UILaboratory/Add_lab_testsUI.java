@@ -93,7 +93,7 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
             ps.setUrl("jdbc:sqlite:hospManagement.db");
             sqliteConnection = ps.getConnection();
 
-            String command = "Select * from dummy";
+            String command = "Select * from appointment";
             Statement p2p = sqliteConnection.createStatement();
             ResultSet rs = p2p.executeQuery(command);
             tblPatientHist.setModel(DbUtils.resultSetToTableModel(rs));
@@ -527,7 +527,8 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
             
             ps.setUrl("jdbc:sqlite:hospManagement.db");
             sqliteConnection = ps.getConnection();
-            String command = "insert into dummy (Pateint_ID, Name, Doctor_name ) values (3, Shubhda, Subhash)";
+            String command = "SELECT patientID, patientName, doctorName "
+                          + "FROM appointment WHERE patientName > ?";
 
             PreparedStatement p2p = sqliteConnection.prepareStatement(command);
             System.out.println(txtBloodGroup.getText());
