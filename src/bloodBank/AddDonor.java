@@ -4,14 +4,17 @@
  */
 package bloodBank;
 
+import java.awt.Point;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import org.sqlite.SQLiteDataSource;
+import ui.MainJFrame;
 
 /**
  *
@@ -33,7 +36,7 @@ public class AddDonor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Enter Name.");
             return false;
         }
-        if (!txtFieldName.getText().matches("[a-zA-Z]+")){
+        if (!txtFieldName.getText().matches("^[a-zA-Z ]+")){
             JOptionPane.showMessageDialog(this, "Enter Proper Name.");
             return false;
         }
@@ -318,7 +321,7 @@ public class AddDonor extends javax.swing.JFrame {
                 p2p.setString(3, txtFieldFatName.getText());
                 p2p.setString(4, txtFieldMotName.getText());
                 p2p.setString(5,  ((JTextField)txtFieldDob.getDateEditor().getUiComponent()).getText());
-                p2p.setInt(6, Integer.valueOf(txtFieldMob.getText()));
+                p2p.setString(6,txtFieldMob.getText());
                 p2p.setString(7, txtFieldGend.getSelectedItem().toString());
                 p2p.setString(8, txtFieldEmail.getText());
                 p2p.setString(9, txtFieldBlood.getSelectedItem().toString());
@@ -343,7 +346,10 @@ public class AddDonor extends javax.swing.JFrame {
 
     private void btnDonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonResetActionPerformed
         setVisible(false);
-        new AddDonor().setVisible(true);
+        JFrame AddDonorFrame = new AddDonor();
+        AddDonorFrame.setVisible(true);
+        Point p = AddDonorFrame.getLocationOnScreen();
+        AddDonorFrame.setLocation(p.x + 80, p.y + 100);
     }//GEN-LAST:event_btnDonResetActionPerformed
 
     private void jLabel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel1ComponentShown
@@ -414,7 +420,7 @@ public class AddDonor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddDonor().setVisible(true);
+                new MainJFrame().setVisible(true);
             }
         });
     }

@@ -6,6 +6,7 @@ package bloodBank;
 
 import java.awt.Point;
 import javax.swing.JFrame;
+import ui.MainJFrame;
 
 /**
  *
@@ -97,6 +98,11 @@ public class BloodHome extends javax.swing.JFrame {
         jMenu2.setText("Need Blood");
 
         jMenuItem6.setText("Search Donor");
+        jMenuItem6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem6MouseClicked(evt);
+            }
+        });
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -132,41 +138,47 @@ public class BloodHome extends javax.swing.JFrame {
         jMenu4.setText("Exit");
 
         jMenuItem1.setText("Log Out");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem1);
 
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
-        pack();
+        setSize(new java.awt.Dimension(715, 603));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         JFrame AddDonorFrame = new AddDonor();
         AddDonorFrame.setVisible(true);
         Point p = this.getLocationOnScreen();
-        AddDonorFrame.setLocation(p.x + 2, p.y + 130);
+        AddDonorFrame.setLocation(p.x + 8, p.y + 120);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         JFrame UpdateDonorFrame = new UpdateDonor();
         UpdateDonorFrame.setVisible(true);
         Point p = this.getLocationOnScreen();
-        UpdateDonorFrame.setLocation(p.x + 2, p.y + 110);
+        UpdateDonorFrame.setLocation(p.x + 8, p.y + 110);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         JFrame ViewDonorFrame = new ViewDonor();
         ViewDonorFrame.setVisible(true);
         Point p = this.getLocationOnScreen();
-        ViewDonorFrame.setLocation(p.x + 50, p.y + 110);
+        ViewDonorFrame.setLocation(p.x + 60, p.y + 90);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         JFrame SearchDonorFrame = new SearchDonorLocation();
         SearchDonorFrame.setVisible(true);
         Point p = this.getLocationOnScreen();
-        SearchDonorFrame.setLocation(p.x + 80, p.y + 140);
+        SearchDonorFrame.setLocation(p.x + 88, p.y + 140);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -182,6 +194,20 @@ public class BloodHome extends javax.swing.JFrame {
         Point p = this.getLocationOnScreen();
         AddBloodFrame.setLocation(p.x + 80, p.y + 130);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       dispose();
+        MainJFrame mainFrame = new MainJFrame();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                mainFrame.setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem6MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6MouseClicked
 
     /**
      * @param args the command line arguments

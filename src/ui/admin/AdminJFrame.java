@@ -206,7 +206,8 @@ public class AdminJFrame extends javax.swing.JFrame {
             .addComponent(jSplitPane)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1009, 808));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAllReceptionistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bAllReceptionistMouseClicked
