@@ -97,10 +97,10 @@ public class AddMembersJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Enter proper state.");
             return false;
         }
-        if (!txtFieldEmail.getText().matches("[0-9]+")) {
-            JOptionPane.showMessageDialog(this, "Enter proper phone number of 10 digits.");
-            return false;
-        }
+//        if (!txtFieldEmail.getText().matches("")) {
+//            JOptionPane.showMessageDialog(this, "Enter proper phone number of 10 digits.");
+//            return false;
+//        }
         return true;
     }
 

@@ -2,6 +2,20 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/demo/AED_HospitalManagement_Project/src/ui/admin/CredentialsJFrame.java</file>
+            <file>file:/D:/demo/AED_HospitalManagement_Project/src/pharmacy/Login.java</file>
+            <file>file:/D:/demo/AED_HospitalManagement_Project/src/ui/MainJFrame.java</file>
+            <file>file:/D:/demo/AED_HospitalManagement_Project/src/ui/doctor/PatientListJPanel.java</file>
+            <file>file:/D:/demo/AED_HospitalManagement_Project/src/model/LoginCredentials.java</file>
+            <file>file:/D:/demo/AED_HospitalManagement_Project/src/pharmacy/Selling.java</file>
+            <file>file:/D:/demo/AED_HospitalManagement_Project/src/pharmacy/Agents.java</file>
+            <file>file:/D:/demo/AED_HospitalManagement_Project/src/ui/admin/AdminJFrame.java</file>
+            <file>file:/D:/demo/AED_HospitalManagement_Project/src/ui/LoginJFrame.java</file>
+            <file>file:/D:/demo/AED_HospitalManagement_Project/src/UILaboratory/Lab_Console.java</file>
+            <file>file:/D:/demo/AED_HospitalManagement_Project/src/UILaboratory/Add_lab_testsUI.java</file>
+            <file>file:/D:/demo/AED_HospitalManagement_Project/src/ui/admin/AddMembersJPanel.java</file>
+            <file>file:/D:/demo/AED_HospitalManagement_Project/src/bloodBank/AddDonor.java</file>
+        </group>
     </open-files>
 </project-private>

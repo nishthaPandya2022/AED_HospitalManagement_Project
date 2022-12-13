@@ -96,7 +96,7 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
             String command = "Select * from appointment";
             Statement p2p = sqliteConnection.createStatement();
             ResultSet rs = p2p.executeQuery(command);
-            tblPatientHist.setModel(DbUtils.resultSetToTableModel(rs));
+//            tblPatientHist.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -123,12 +123,9 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
         btnAddTest = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        btnPatHist = new javax.swing.JButton();
         txtComboSpecimen = new javax.swing.JComboBox<>();
         jScrollPane5 = new javax.swing.JScrollPane();
         tbladd_test = new javax.swing.JTable();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        tblPatientHist = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         txtDoctorName = new javax.swing.JTextField();
         txtBloodGroup = new javax.swing.JTextField();
@@ -194,14 +191,6 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Specimen:");
 
-        btnPatHist.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
-        btnPatHist.setText("Click to get medical history of the patient");
-        btnPatHist.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnPatHistMouseClicked(evt);
-            }
-        });
-
         txtComboSpecimen.setFont(new java.awt.Font("Arima Koshi", 0, 12)); // NOI18N
         txtComboSpecimen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Select>", "MRI(Radiology)", "MRA(Radiology)", "X-Ray(Radiology)", "PET Scan(Radiology)", "Ultrasound(Radiology)", "Complete Blood count(Pathology)", "Urine culture", "Stool culture", "Lipid panel", "Liver panel", "Sonogram", " " }));
 
@@ -223,25 +212,6 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
             }
         });
         jScrollPane5.setViewportView(tbladd_test);
-
-        tblPatientHist.setFont(new java.awt.Font("Arima Koshi", 0, 12)); // NOI18N
-        tblPatientHist.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Patient ID", "Name", "Doctor name"
-            }
-        ));
-        tblPatientHist.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblPatientHistMouseClicked(evt);
-            }
-        });
-        jScrollPane6.setViewportView(tblPatientHist);
 
         jLabel9.setFont(new java.awt.Font("Arima Koshi", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -295,9 +265,6 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -315,16 +282,10 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
                                     .addComponent(txtDoctorName))
                                 .addGap(145, 145, 145))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(171, 171, 171)
-                                        .addComponent(txtComboSpecimen, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(25, 25, 25)
-                                        .addComponent(btnAddTest)))
+                                .addGap(171, 171, 171)
+                                .addComponent(txtComboSpecimen, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(133, 133, 133)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
@@ -343,19 +304,24 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
                                         .addComponent(txtComboGender, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(44, 44, 44)
-                                        .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(btnPatHist)))
+                                        .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(283, 283, 283)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
+                        .addGap(155, 155, 155)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
                         .addComponent(UpdatejButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(46, 46, 46)
                         .addComponent(jButtonClear)
-                        .addGap(180, 180, 180)
-                        .addComponent(DeletejButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(44, 44, 44)
+                        .addComponent(DeletejButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(239, 239, 239)
+                        .addComponent(btnAddTest)))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,15 +359,11 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
                     .addComponent(jButtonClear)
                     .addComponent(DeletejButton)
                     .addComponent(UpdatejButton))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPatHist)
-                    .addComponent(btnAddTest))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(btnAddTest)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -510,48 +472,6 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
         txtAge.setText("");
     }//GEN-LAST:event_DeletejButtonMouseClicked
 
-    private void tblPatientHistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPatientHistMouseClicked
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel)tblPatientHist.getModel();
-        int myIndex = tblPatientHist.getSelectedRow();
-        txtPatientID.setText(model.getValueAt(myIndex, 0).toString());
-        txtPatientName.setText(model.getValueAt(myIndex, 1).toString());
-        txtDoctorName.setText(model.getValueAt(myIndex, 2).toString());
-    }//GEN-LAST:event_tblPatientHistMouseClicked
-
-    private void btnPatHistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPatHistMouseClicked
-        // TODO add your handling code here:
-        try {
-            
-            ps = new SQLiteDataSource();
-            
-            ps.setUrl("jdbc:sqlite:hospManagement.db");
-            sqliteConnection = ps.getConnection();
-            String command = "SELECT patientID, patientName, doctorName "
-                          + "FROM appointment WHERE patientName > ?";
-
-            PreparedStatement p2p = sqliteConnection.prepareStatement(command);
-            System.out.println(txtBloodGroup.getText());
-            
-            p2p.setInt(1, Integer.valueOf(txtPatientID.getText()));
-            p2p.setString(2, txtPatientName.getText());
-            p2p.setString(3, txtDoctorName.getText());
-            
-            
-            
-            
-            
-            boolean output = p2p.execute();
-            //JOptionPane.showMessageDialog(this, "Tests Successfully Added!");
-            sqliteConnection.close();
-            getPatientHist();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_btnPatHistMouseClicked
-
     private void UpdatejButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdatejButtonMouseClicked
         // TODO add your handling code here:
         if (txtPatientID.getText().isEmpty() || txtAge.getText().isEmpty() || txtPatientName.getText().isEmpty() || txtDoctorName.getText().isEmpty()) {
@@ -590,7 +510,6 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
     private javax.swing.JButton DeletejButton;
     private javax.swing.JButton UpdatejButton;
     private javax.swing.JButton btnAddTest;
-    private javax.swing.JButton btnPatHist;
     private javax.swing.JButton jButtonClear;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -602,8 +521,6 @@ public class Add_lab_testsUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable tblPatientHist;
     private javax.swing.JTable tbladd_test;
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtBloodGroup;
